@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-
     public function loginPage()
     {
         return view("auth.login");
@@ -22,17 +21,30 @@ class AuthController extends Controller
             'password' => 'required',
         ]);
 
-        $user = User::where('email', $request->email)->first();
-        if (!$user || !Hash::check($request->password, $user->password)) {
+        if (!Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             return redirect()->back()->with('error', 'Invalid credentials, please try again');
         }
 
         $request->session()->regenerate();
 
-        return view('pages.dashboard');
+        $user = Auth::user();
+
+        if ($user->hasRole('super_admin')) {
+            return redirect()->route('sa.dashboard')->with('success', 'Welcome Super Admin!');
+        } elseif ($user->hasRole('admin')) {
+            return redirect()->route('admin.dashboard')->with('success', 'Welcome Admin!');
+        } elseif ($user->hasRole('operator')) {
+            return redirect()->route('operator.dashboard')->with('success', 'Welcome Operator!');
+        }
+
+        Auth::logout();
+        return redirect()->route('login')->with('error', 'Role not recognized. Contact your administrator.');
     }
 
-    public function register(Request $request) {}
+    public function register(Request $request)
+    {
+        //
+    }
 
     public function logout(Request $request)
     {
@@ -40,6 +52,6 @@ class AuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect()->back()->with('success', 'Successfully logged out.');
+        return redirect()->route('login')->with('success', 'Successfully logged out.');
     }
 }

@@ -18,7 +18,17 @@
     @vite(['resources/js/app.js', 'resources/css/app.css'])
 </head>
 
-<body>
+<body class="w-full h-screen overflow-hidden font-inter bg-gray-50">
+    @include('components.sidebar')
+    <div class="w-full absolute top-0 left-0 h-48 bg-gradient-to-b from-green-600 to-green-400"></div>
+
+    <main id="content" class="relative z-10 w-full sm:max-w-[80.5%] sm:ml-[19.5%] h-full overflow-x-hidden md:px-5 max-md:px-3">
+        @include('components.navbar')
+        <section class="w-full min-h-screen">
+            @yield('content')
+        </section>
+        @include('components.footer')
+    </main>
 
     <script src="{{ asset('js/main.js') }}"></script>
 </body>
