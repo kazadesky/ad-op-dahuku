@@ -35,7 +35,7 @@
             <li class="mt-2">
                 <a href="{{ route('admin.student.index') }}"
                     class="outline-none w-full h-10 flex items-center px-3 rounded space-x-1
-                    {{ request()->routeIs('admin.student.index') ? 'bg-green-600 shadow-sm' : '' }}
+                    {{ request()->routeIs('admin.student.*') ? 'bg-green-600 shadow-sm' : '' }}
                     ">
                     <span class="material-symbols-outlined">
                         Description

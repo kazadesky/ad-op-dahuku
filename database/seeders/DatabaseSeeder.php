@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Student;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -17,6 +18,8 @@ class DatabaseSeeder extends Seeder
             RolesSeeder::class,
             DayMoonSeeder::class,
         ]);
+
+        Student::factory()->count(250)->create();
 
         $superAdminSeeder = User::factory()->create([
             'email' => 'superadmin@example.com',
