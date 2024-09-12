@@ -14,7 +14,7 @@ class StudentController extends Controller
     public function index()
     {
         $title = "Data Santri";
-        $students = Student::all();
+        $students = Student::with('classRoom')->paginate(15);
         return view("pages.students.index", compact("students", "title"));
     }
 
@@ -23,8 +23,10 @@ class StudentController extends Controller
      */
     public function create()
     {
+        $title = "Tambah Data Santri";
+        $genders = ["Laki-Laki", "Perempuan"];
         $classRoom = ClassRoom::all();
-        return view("pages.students.create", compact("classRoom"));
+        return view("pages.students.create", compact("classRoom", "title", "genders"));
     }
 
     /**
@@ -32,7 +34,29 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        return redirect()->route("")->with("success","");
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'nis' => 'required|numeric|unique:students,nis',
+            'nisn' => 'required|numeric|unique:students,nisn',
+            'class_id' => 'required',
+            'place_of_birth' => 'required|string|max:255',
+            'date_of_birth' => 'required|date',
+            'gender' => 'required',
+            'address' => 'required',
+        ]);
+
+        $student = Student::create([
+            'name' => strtoupper($request->name),
+            'nis' => $request->nis,
+            'nisn' => $request->nisn,
+            'class_id' => $request->class_id,
+            'place_of_birth' => ucwords($request->place_of_birth),
+            'date_of_birth' => $request->date_of_birth,
+            'gender' => $request->gender,
+            'address' => ucwords($request->address),
+        ]);
+
+        return redirect()->route("admin.student.index")->with("success", "Data santri dengan nama " . $student->name . " telah di tambahkan");
     }
 
     /**
@@ -58,7 +82,7 @@ class StudentController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        return redirect()->route("")->with("success","");
+        return redirect()->route("")->with("success", "");
     }
 
     /**
@@ -68,6 +92,6 @@ class StudentController extends Controller
     {
         $student = Student::findOrFail($id);
         $student->delete();
-        return redirect()->route("")->with("success","");
+        return redirect()->back()->with("success", "Data santri atas nama ".$student->name." telah dihapus.");
     }
 }

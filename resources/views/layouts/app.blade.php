@@ -24,7 +24,7 @@
 
     <main id="content" class="relative z-10 w-full sm:max-w-[80.5%] sm:ml-[19.5%] h-full overflow-x-hidden md:px-5 max-md:px-3">
         @include('components.navbar')
-        <section class="w-full min-h-screen">
+        <section class="w-full min-h-screen pb-10">
             @yield('content')
         </section>
         @include('components.footer')

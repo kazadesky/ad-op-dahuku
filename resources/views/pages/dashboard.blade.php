@@ -3,6 +3,17 @@
 
 @section('subtitle')
     @hasrole('super_admin')
+        <p class="flex items-center space-x-px capitalize text-white">
+            <span>Super Admin</span>
+            <span class="material-symbols-outlined text-[17px]">
+                chevron_right
+            </span>
+            <span>Page</span>
+            <span class="material-symbols-outlined text-[17px]">
+                chevron_right
+            </span>
+            <span class="text-gray-200">Dashboard</span>
+        </p>
     @endhasrole
 
     @hasrole('admin')
@@ -20,31 +31,49 @@
     @endhasrole
 
     @hasrole('operator')
+        <p class="flex items-center space-x-px capitalize text-white">
+            <span>Operator</span>
+            <span class="material-symbols-outlined text-[17px]">
+                chevron_right
+            </span>
+            <span>Page</span>
+            <span class="material-symbols-outlined text-[17px]">
+                chevron_right
+            </span>
+            <span class="text-gray-200">Dashboard</span>
+        </p>
     @endhasrole
 @endsection
 
 @section('content')
     @hasrole('super_admin')
-        <h1 class="text-xl font-bold">Dashboard Super Admin</h1>
-        <form action="{{ route('logout') }}" method="POST">
-            @csrf
-            <button type="submit" class="px-3 py-1 rounded shadow-sm text-white bg-red-500">Logout</button>
-        </form>
     @endhasrole
 
     @hasrole('admin')
-        <h1 class="text-xl font-bold">Dashboard Admin</h1>
-        <form action="{{ route('logout') }}" method="POST">
-            @csrf
-            <button type="submit" class="px-3 py-1 rounded shadow-sm text-white bg-red-500">Logout</button>
-        </form>
+        <div class="w-full grid md:grid-cols-3 max-md:grid-cols-1 md:gap-5 max-md:space-y-4">
+            <div class="col-span-1 shadow-lg rounded-lg bg-white p-5 min-h-44">
+                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odio perferendis ea veniam ullam minima delectus.
+                </p>
+            </div>
+            <div class="col-span-1 shadow-lg rounded-lg bg-white p-5 min-h-44">
+                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odio perferendis ea veniam ullam minima delectus.
+                </p>
+            </div>
+            <div class="col-span-1 shadow-lg rounded-lg bg-white p-5 min-h-44">
+                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odio perferendis ea veniam ullam minima delectus.
+                </p>
+            </div>
+            <div class="col-span-1 shadow-lg rounded-lg bg-white p-5 min-h-44">
+                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odio perferendis ea veniam ullam minima delectus.
+                </p>
+            </div>
+            <div class="col-span-1 shadow-lg rounded-lg bg-white p-5 min-h-44">
+                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odio perferendis ea veniam ullam minima delectus.
+                </p>
+            </div>
+        </div>
     @endhasrole
 
     @hasrole('operator')
-        <h1 class="text-xl font-bold">Dashboard Operator</h1>
-        <form action="{{ route('logout') }}" method="POST">
-            @csrf
-            <button type="submit" class="px-3 py-1 rounded shadow-sm text-white bg-red-500">Logout</button>
-        </form>
     @endhasrole
 @endsection
