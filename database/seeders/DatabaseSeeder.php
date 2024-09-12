@@ -18,6 +18,11 @@ class DatabaseSeeder extends Seeder
             DayMoonSeeder::class,
         ]);
 
+        $superAdminSeeder = User::factory()->create([
+            'email' => 'superadmin@example.com',
+        ]);
+        $superAdminSeeder->assignRole('super_admin');
+
         $adminSeeder = User::factory()->create([
             'email' => 'admin@example.com',
         ]);

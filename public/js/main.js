@@ -12,3 +12,31 @@ const passwordShow = (event) => {
         iconInput.innerText = "visibility";
     }
 };
+
+const showMenu = (event) => {
+    event.preventDefault();
+    const sidebar = document.getElementById('sidebar');
+    const dropdown = document.getElementById('dropdown-nav');
+    if(sidebar){
+        sidebar.classList.add('active');
+        dropdown.classList.add('hidden');
+    }
+}
+
+const hideMenu = () => {
+    document.getElementById('sidebar').classList.remove('active');
+}
+
+const toggleDropdown = (event) => {
+    event.preventDefault();
+    const dropdown = document.getElementById('dropdown-nav');
+    const sidebar = document.getElementById('sidebar');
+    if (dropdown.classList.contains('hidden')) {
+        dropdown.classList.remove('hidden');
+        dropdown.classList.add('flex');
+        sidebar.classList.remove('active');
+    } else {
+        dropdown.classList.remove('flex');
+        dropdown.classList.add('hidden');
+    }
+};
