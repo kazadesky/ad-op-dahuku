@@ -12,11 +12,11 @@
             <span class="material-symbols-outlined text-[17px]">
                 chevron_right
             </span>
-            <span>Data Santri</span>
+            <span>Santri</span>
             <span class="material-symbols-outlined text-[17px]">
                 chevron_right
             </span>
-            <span class="text-gray-200">Tambah</span>
+            <span class="text-gray-200">Tambah Data</span>
         </p>
     @endhasrole
 
@@ -30,11 +30,11 @@
             <span class="material-symbols-outlined text-[17px]">
                 chevron_right
             </span>
-            <span>Data Santri</span>
+            <span>Santri</span>
             <span class="material-symbols-outlined text-[17px]">
                 chevron_right
             </span>
-            <span class="text-gray-200">Tambah</span>
+            <span class="text-gray-200">Tambah Data</span>
         </p>
     @endhasrole
 
@@ -48,11 +48,11 @@
             <span class="material-symbols-outlined text-[17px]">
                 chevron_right
             </span>
-            <span>Data Santri</span>
+            <span>Santri</span>
             <span class="material-symbols-outlined text-[17px]">
                 chevron_right
             </span>
-            <span class="text-gray-200">Tambah</span>
+            <span class="text-gray-200">Tambah Data</span>
         </p>
     @endhasrole
 @endsection

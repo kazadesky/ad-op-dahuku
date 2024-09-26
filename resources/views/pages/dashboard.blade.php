@@ -2,47 +2,18 @@
 @section('title', 'Dashboard')
 
 @section('subtitle')
-    @hasrole('super_admin')
-        <p class="flex items-center space-x-px capitalize text-white">
+    <p class="flex items-center space-x-px capitalize text-white">
+        @hasrole('super_admin')
             <span>Super Admin</span>
-            <span class="material-symbols-outlined text-[17px]">
-                chevron_right
-            </span>
-            <span>Page</span>
-            <span class="material-symbols-outlined text-[17px]">
-                chevron_right
-            </span>
-            <span class="text-gray-200">Dashboard</span>
-        </p>
-    @endhasrole
-
-    @hasrole('admin')
-        <p class="flex items-center space-x-px capitalize text-white">
+        @endhasrole
+        @hasrole('admin')
             <span>Admin</span>
-            <span class="material-symbols-outlined text-[17px]">
-                chevron_right
-            </span>
-            <span>Page</span>
-            <span class="material-symbols-outlined text-[17px]">
-                chevron_right
-            </span>
-            <span class="text-gray-200">Dashboard</span>
-        </p>
-    @endhasrole
-
-    @hasrole('operator')
-        <p class="flex items-center space-x-px capitalize text-white">
+        @endhasrole
+        @hasrole('operator')
             <span>Operator</span>
-            <span class="material-symbols-outlined text-[17px]">
-                chevron_right
-            </span>
-            <span>Page</span>
-            <span class="material-symbols-outlined text-[17px]">
-                chevron_right
-            </span>
-            <span class="text-gray-200">Dashboard</span>
-        </p>
-    @endhasrole
+        @endhasrole
+        <span>/ Page / Dashboard</span>
+    </p>
 @endsection
 
 @section('content')
