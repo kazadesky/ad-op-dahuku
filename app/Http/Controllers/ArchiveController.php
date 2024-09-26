@@ -2,21 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\StudentGuardian;
+use App\Models\Archive;
 use Illuminate\Http\Request;
 
-class StudentGuardianController extends Controller
+class ArchiveController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $title = "Akun Wali Santri";
-        $studentGuardians = StudentGuardian::latest()->paginate(25);
-        return view("pages.student-guardian.index", compact(
+        $title = "Arsip Data";
+        $archives = Archive::latest()->get();
+        return view("pages.archive.index", compact(
             "title",
-            "studentGuardians",
+            "archives",
         ));
     }
 

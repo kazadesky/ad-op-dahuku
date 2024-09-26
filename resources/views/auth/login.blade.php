@@ -47,8 +47,13 @@
                 <small class="text-red-500">{{ $message }}</small>
             @enderror
         </div>
-        <button type="submit"
-            class="w-full mt-2 h-11 flex items-center justify-center uppercase font-medium bg-green-500 rounded-md shadow transition duration-300 text-white hover:bg-green-600 focus:bg-green-600 outline-none">login</button>
+        <section class="mt-2 flex flex-col items-center justify-center space-y-2">
+            <button type="submit"
+                class="w-full h-11 flex items-center justify-center uppercase font-medium bg-green-500 rounded-md shadow transition duration-300 text-white hover:bg-green-600 focus:bg-green-600 outline-none">login</button>
+            <p class="text-center">Belum mempunyai akun? <a href="{{ route('register') }}"
+                    class="outline-none underline underline-offset-2 text-green-500 transition duration-300 active:text-green-600">Register.</a>
+            </p>
+        </section>
     </form>
 @endsection
 

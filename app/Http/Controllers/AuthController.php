@@ -41,9 +41,43 @@ class AuthController extends Controller
         return redirect()->route('login')->with('error', 'Role not recognized. Contact your administrator.');
     }
 
-    public function register(Request $request)
+    public function registerPage()
     {
-        //
+        $status = ["Guru Dayah", "Guru Umum"];
+        return view('auth.register', compact('status'));
+    }
+
+    public function registerProses(Request $request)
+    {
+        $request->validate([
+            'profile' => 'required|image|mimes:png,jpg,jpeg|max:2080',
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email',
+            'nomor_telepon' => 'required|numeric',
+            'password' => 'required|confirmed',
+            'password_confirmation' => 'required',
+            'teacher_status' => 'required|in:Guru Umum,Guru Dayah',
+        ]);
+
+        $profileFile = $request->file('profile');
+        $profileName = strtolower(str_replace(' ', '_', $request->name)) . '_' . time() . '.' . $profileFile->getClientOriginalExtension();
+        $profileFile->storeAs('profile', $profileName, 'public');
+
+        $userData = [
+            'name' => ucwords($request->name),
+            'email' => $request->email,
+            'nomor_telepon' => $request->nomor_telepon,
+            'password' => Hash::make($request->password),
+            'profile' => $profileName,
+            'teacher_status' => $request->teacher_status,
+        ];
+
+        $user = User::create($userData);
+        $user->assignRole("teacher");
+
+        Auth::login($user);
+
+        return redirect()->route("teacher.dashboard");
     }
 
     public function logout(Request $request)

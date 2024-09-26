@@ -11,7 +11,10 @@ class TeacherPicketController extends Controller
      */
     public function index()
     {
-        //
+        $title = "Guru Piket";
+        return view("pages.teacher-picket.index", compact(
+            "title",
+        ));
     }
 
     /**

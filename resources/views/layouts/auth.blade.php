@@ -18,11 +18,11 @@
     @vite(['resources/js/app.js', 'resources/css/app.css'])
 </head>
 
-<body class="w-full h-screen flex items-center justify-center flex-col overflow-hidden font-inter bg-hitam">
+<body
+    class="w-full h-screen flex items-center justify-center flex-col font-inter bg-hitam {{ request()->routeIs('login') ? 'overflow-hidden' : 'overflow-x-hidden' }}">
 
-    {{-- <div class="absolute top-0 left-0 flex-none w-full h-[50%] bg-gradient-to-b from-green-600 to-green-300"></div> --}}
-
-    <section class="w-full max-md:max-w-sm sm:max-w-md flex flex-col space-y-3 items-center z-10 max-md:px-3">
+    <section
+        class="w-full max-md:max-w-sm sm:max-w-md flex flex-col space-y-3 items-center z-10 max-md:px-3 {{ request()->routeIs('register') ? 'py-5' : '' }}">
         @yield('content')
     </section>
 

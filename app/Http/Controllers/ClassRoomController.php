@@ -2,21 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\StudentGuardian;
+use App\Models\ClassRoom;
 use Illuminate\Http\Request;
 
-class StudentGuardianController extends Controller
+class ClassRoomController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $title = "Akun Wali Santri";
-        $studentGuardians = StudentGuardian::latest()->paginate(25);
-        return view("pages.student-guardian.index", compact(
+        $title = "Daftar Kelas";
+        $classRoom = ClassRoom::orderBy("id","desc")->get();
+        return view("pages.class-rooms.index", compact(
             "title",
-            "studentGuardians",
+            "classRoom",
         ));
     }
 
