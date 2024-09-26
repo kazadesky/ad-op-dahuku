@@ -22,9 +22,10 @@
             <span class="font-semibold uppercase text-[11px]">Dashboard</span>
             <li class="mt-2 mb-5">
                 <a href="{{ route('admin.dashboard') }}"
-                    class="outline-none w-full h-10 flex items-center px-3 rounded space-x-1
-                {{ request()->routeIs('admin.dashboard') ? 'bg-green-600 shadow-sm' : '' }}
-                ">
+                    class="
+                    outline-none w-full h-10 flex items-center px-3 rounded space-x-1
+                    {{ request()->routeIs('admin.dashboard') ? 'bg-green-600 shadow-sm' : '' }}
+                    ">
                     <span class="material-symbols-outlined">
                         dashboard
                     </span>
@@ -35,7 +36,8 @@
             <span class="font-semibold uppercase text-[11px]">content</span>
             <li class="mt-2">
                 <a href="{{ route('admin.student.index') }}"
-                    class="outline-none w-full h-10 flex items-center px-3 rounded space-x-1
+                    class="
+                    outline-none w-full h-10 flex items-center px-3 rounded space-x-1
                     {{ request()->routeIs('admin.student.*') ? 'bg-green-600 shadow-sm' : '' }}
                     ">
                     <span class="material-symbols-outlined">
@@ -45,13 +47,27 @@
                 </a>
             </li>
             <li>
-                <a href=""
-                    class="outline-none w-full h-10 flex items-center px-3 rounded space-x-1
+                <a href="{{ route('admin.teacher.index') }}"
+                    class="
+                    outline-none w-full h-10 flex items-center px-3 rounded space-x-1
+                    {{ request()->routeIs('admin.teacher.*') ? 'bg-green-600 shadow-sm' : '' }}
                     ">
                     <span class="material-symbols-outlined">
                         Description
                     </span>
                     <span>Data Guru</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('admin.class-room.index') }}"
+                    class="
+                    outline-none w-full h-10 flex items-center px-3 rounded space-x-1
+                    {{ request()->routeIs('admin.class-room.*') ? 'bg-green-600 shadow-sm' : '' }}
+                    ">
+                    <span class="material-symbols-outlined">
+                        list
+                    </span>
+                    <span>Daftar Kelas</span>
                 </a>
             </li>
             <li>
@@ -67,8 +83,10 @@
                 </a>
             </li>
             <li>
-                <a href=""
-                    class="outline-none w-full h-10 flex items-center px-3 rounded space-x-1
+                <a href="{{ route('admin.teacher-picket.index') }}"
+                    class="
+                    outline-none w-full h-10 flex items-center px-3 rounded space-x-1
+                    {{ request()->routeIs('admin.teacher-picket.*') ? 'bg-green-600 shadow-sm' : '' }}
                     ">
                     <span class="material-symbols-outlined">
                         List
@@ -77,8 +95,10 @@
                 </a>
             </li>
             <li>
-                <a href=""
-                    class="outline-none w-full h-10 flex items-center px-3 rounded space-x-1
+                <a href="{{ route('admin.student-guardian.index') }}"
+                    class="
+                    outline-none w-full h-10 flex items-center px-3 rounded space-x-1
+                    {{ request()->routeIs('admin.student-guardian.*') ? 'bg-green-600 shadow-sm' : '' }}
                     ">
                     <span class="material-symbols-outlined">
                         Group
@@ -87,8 +107,10 @@
                 </a>
             </li>
             <li>
-                <a href=""
-                    class="outline-none w-full h-10 flex items-center px-3 rounded space-x-1
+                <a href="{{ route('admin.archive.index') }}"
+                    class="
+                    outline-none w-full h-10 flex items-center px-3 rounded space-x-1
+                    {{ request()->routeIs('admin.archive.*') ? 'bg-green-600 shadow-sm' : '' }}
                     ">
                     <span class="material-symbols-outlined">
                         Bookmark

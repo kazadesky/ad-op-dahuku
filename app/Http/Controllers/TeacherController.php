@@ -9,9 +9,12 @@ class TeacherController extends Controller
 {
     public function index(Request $request)
     {
-        $title = "";
+        $title = "Data Guru";
         $search = $request->input("search");
-        $teachers = User::all();
-        return view("pages.teachers.index", compact("teachers"));
+        $teachers = User::role("teacher")->latest()->get();
+        return view("pages.teachers.index", compact(
+            "teachers",
+            "title",
+        ));
     }
 }

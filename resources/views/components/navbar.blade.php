@@ -15,7 +15,8 @@
                     <span class="material-symbols-outlined sm:hidden">
                         keyboard_arrow_down
                     </span>
-                    <img src="{{ asset('img/icon/user.png') }}" alt="user-icon" class="size-10">
+                    <img src="{{ !Auth::user()->profile ? asset('img/icon/user.png') : url('storage/profile/', Auth::user()->profile) }}"
+                        alt="user-icon" class="size-10 rounded-full">
                 </button>
             </li>
             <ul id="dropdown-nav"
