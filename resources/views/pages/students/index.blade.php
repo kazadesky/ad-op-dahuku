@@ -2,47 +2,18 @@
 @section('title', 'Data Santri')
 
 @section('subtitle')
-    @hasrole('super_admin')
-        <p class="flex items-center space-x-px capitalize text-white">
+    <p class="flex items-center space-x-px capitalize text-white">
+        @hasrole('super_admin')
             <span>Super Admin</span>
-            <span class="material-symbols-outlined text-[17px]">
-                chevron_right
-            </span>
-            <span>Page</span>
-            <span class="material-symbols-outlined text-[17px]">
-                chevron_right
-            </span>
-            <span class="text-gray-200">Data Santri</span>
-        </p>
-    @endhasrole
-
-    @hasrole('admin')
-        <p class="flex items-center space-x-px capitalize text-white">
+        @endhasrole
+        @hasrole('admin')
             <span>Admin</span>
-            <span class="material-symbols-outlined text-[17px]">
-                chevron_right
-            </span>
-            <span>Page</span>
-            <span class="material-symbols-outlined text-[17px]">
-                chevron_right
-            </span>
-            <span class="text-gray-200">Data Santri</span>
-        </p>
-    @endhasrole
-
-    @hasrole('operator')
-        <p class="flex items-center space-x-px capitalize text-white">
+        @endhasrole
+        @hasrole('operator')
             <span>Operator</span>
-            <span class="material-symbols-outlined text-[17px]">
-                chevron_right
-            </span>
-            <span>Page</span>
-            <span class="material-symbols-outlined text-[17px]">
-                chevron_right
-            </span>
-            <span class="text-gray-200">Data Santri</span>
-        </p>
-    @endhasrole
+        @endhasrole
+        <span>/ Page / Data Santri</span>
+    </p>
 @endsection
 
 @section('content')
@@ -50,65 +21,101 @@
     @endhasrole
 
     @hasrole('admin')
-        <div class="w-full flex items-center justify-between">
+        <div class="w-full flex items-center justify-between mb-3">
             <a href="{{ route('admin.student.create') }}"
-                class="outline-none flex items-center justify-center md:w-40 max-md:w-32 h-10 rounded-md shadow bg-blue-500 transition duration-300 hover:bg-blue-600 focus:bg-blue-600 text-white mb-3">
+                class="outline-none flex items-center justify-center md:w-40 max-md:w-32 h-10 rounded-md shadow bg-blue-500 transition duration-300 hover:bg-blue-600 focus:bg-blue-600 text-white">
                 <span class="material-symbols-outlined">
                     add
                 </span>
                 <span>Tambah</span>
             </a>
+            <form action="{{ route('admin.student.index') }}" method="GET" class="md:w-80">
+                <input type="search" name="search" class="w-full h-11 rounded px-3 outline-none transition duration-300 border-2 border-white focus:border-green-500 ring-2 ring-white focus:ring-green-200"
+                    placeholder="Cari berdasarkan nama atau nis">
+            </form>
         </div>
+        @if (session('success'))
+            <div id="banner-alert" class="w-full h-12 px-3 flex items-center bg-sky-600 rounded-md shadow mb-3 text-white">
+                <p>
+                    <strong class="max-md:hidden">Success : </strong>
+                    <span>{{ session('success') }}</span>
+                </p>
+            </div>
+        @endif
         <div class="relative overflow-x-auto bg-white shadow-lg">
-            <table class="w-full text-sm text-left rtl:text-right text-gray-500">
-                <thead class="text-xs text-gray-700 uppercase bg-gray-100">
-                    <tr>
-                        <th scope="col" class="p-3">
-                            No.
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Nama Santri
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Nis
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Kelas
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Action
-                        </th>
-                    </tr>
-                </thead>
-                @php
-                    $i = ($students->currentPage() - 1) * $students->perPage() + 1;
-                @endphp
-                <tbody>
-                    @forelse ($students as $student)
-                        <tr class="bg-white border-b text-hitam">
-                            <th class="p-4">
-                                {{ $i++ }}.
+            @if (count($students) > 0)
+                <table class="w-full text-sm text-left rtl:text-right text-gray-500">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-100">
+                        <tr>
+                            <th scope="col" class="p-3">
+                                No.
                             </th>
-                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                                {{ $student->name }}
+                            <th scope="col" class="px-6 py-3">
+                                Nama Santri
                             </th>
-                            <td class="px-6 py-4">
-                                {{ $student->nis }}
-                            </td>
-                            <td class="px-6 py-4">
-                                {{ $student->classRoom->name }}
-                            </td>
-                            <td class="px-6 py-4">
-                                <!-- Actions here -->
-                            </td>
+                            <th scope="col" class="px-6 py-3">
+                                Nis
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Kelas
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Action
+                            </th>
                         </tr>
-                    @empty
-                        <caption class="caption-bottom my-3">
-                            Belum ada data santri yang terinput.
-                        </caption>
-                    @endforelse
-                </tbody>
-            </table>
+                    </thead>
+                    @php
+                        $i = ($students->currentPage() - 1) * $students->perPage() + 1;
+                    @endphp
+                    <tbody>
+                        @forelse ($students as $student)
+                            <tr class="bg-white border-b text-hitam">
+                                <th class="p-4">
+                                    {{ $i++ }}.
+                                </th>
+                                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                                    {{ $student->name }}
+                                </th>
+                                <td class="px-6 py-4">
+                                    {{ $student->nis }}
+                                </td>
+                                <td class="px-6 py-4">
+                                    {{ $student->classRoom->name }}
+                                </td>
+                                <td class="px-6 py-2 flex items-center min-h-[1rem] space-x-2 text-white">
+                                    <a href="{{ route('admin.student.show', $student->id) }}"
+                                        class="outline-none h-9 w-11 flex items-center justify-center bg-sky-500 rounded-md transition duration-300 hover:bg-sky-600 focus:bg-sky-600">
+                                        <span class="material-symbols-outlined text-[21px]">
+                                            visibility
+                                        </span>
+                                    </a>
+                                    <a href="{{ route('admin.student.edit', $student->id) }}"
+                                        class="outline-none h-9 w-11 flex items-center justify-center bg-orange-500 rounded-md transition duration-300 hover:bg-orange-600 focus:bg-orange-600">
+                                        <span class="material-symbols-outlined text-[21px]">
+                                            border_color
+                                        </span>
+                                    </a>
+                                    <form action="{{ route('admin.student.destroy', $student->id) }}" method="POST">
+                                        @csrf
+                                        <button type="submit"
+                                            class="outline-none h-9 w-11 flex items-center justify-center bg-red-500 rounded-md transition duration-300 hover:bg-red-600 focus:bg-red-600">
+                                            <span class="material-symbols-outlined text-[21px]">
+                                                delete
+                                            </span>
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @empty
+                            <caption class="caption-bottom my-3">
+                                Belum ada data santri yang terinput.
+                            </caption>
+                        @endforelse
+                    </tbody>
+                </table>
+            @else
+                <p class="text-center text-hitam">Data yang anda cari tidak ada.</p>
+            @endif
         </div>
 
         <section class="w-full h-10 mt-3">

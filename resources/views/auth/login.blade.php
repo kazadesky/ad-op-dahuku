@@ -6,7 +6,8 @@
         <h1 class="font-poppins text-3xl uppercase font-bold text-white">Login</h1>
         <p class="text-gray-200 text-sm capitalize mt-1">Sistem informasi pondok darul huda kutacane</p>
     </div>
-    <form action="{{ route('login.proses') }}" method="POST" class="w-full mt-2 rounded-lg shadow-lg p-5 border bg-white text-hitam">
+    <form action="{{ route('login.proses') }}" method="POST"
+        class="w-full mt-2 rounded-lg shadow-lg p-5 border bg-white text-hitam">
         @if (session('error'))
             <section id="alert-danger" class="w-full h-12 flex items-center px-3 bg-red-400 text-white mb-3">
                 <p>{{ session('error') }}</p>
@@ -54,7 +55,7 @@
 @push('script')
     <script>
         const alertDanger = document.querySelector('#alert-danger');
-        setInterval(() => {
+        setTimeout(() => {
             alertDanger.classList.add('hidden');
         }, 5000);
     </script>

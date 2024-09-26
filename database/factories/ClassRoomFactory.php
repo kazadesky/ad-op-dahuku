@@ -12,7 +12,8 @@ class ClassRoomFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->randomElement(['Class A', 'Class B', 'Class C', 'Class D']),
+            // Menentukan nama kelas hanya dari empat opsi ini
+            'name' => $this->faker->unique()->randomElement(['Class A', 'Class B', 'Class C', 'Class D']),
         ];
     }
 }

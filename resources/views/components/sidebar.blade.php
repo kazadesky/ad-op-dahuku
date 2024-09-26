@@ -7,7 +7,8 @@
         <h1 class="font-poppins uppercase font-medium text-lg max-md:text-base">Darul Huda Kutacane</h1>
     </section>
 
-    <button type="button" onclick="hideMenu()" class="md:hidden outline-none absolute top-2 right-0 -ml-10 bg-hitam size-10 rounded-full flex items-center justify-center">
+    <button type="button" onclick="hideMenu()"
+        class="md:hidden outline-none absolute top-2 right-0 -ml-10 bg-hitam size-10 rounded-full flex items-center justify-center">
         <span class="material-symbols-outlined">
             close
         </span>
@@ -54,8 +55,10 @@
                 </a>
             </li>
             <li>
-                <a href=""
-                    class="outline-none w-full h-10 flex items-center px-3 rounded space-x-1
+                <a href="{{ route('admin.monthly-payment.index') }}"
+                    class="
+                    outline-none w-full h-10 flex items-center px-3 rounded space-x-1
+                    {{ request()->routeIs('admin.monthly-payment.*') ? 'bg-green-600 shadow-sm' : '' }}
                     ">
                     <span class="material-symbols-outlined">
                         Edit_Note

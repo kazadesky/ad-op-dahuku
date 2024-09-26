@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\MonthlyPaymentController;
 use App\Http\Controllers\StudentController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,6 +18,7 @@ Route::middleware("auth")->group(function () {
     Route::prefix("admin")->name("admin.")->middleware("role:admin")->group(function () {
         Route::get("dashboard", [DashboardController::class, 'dashboardAdmin'])->name('dashboard');
         Route::resource("student", StudentController::class);
+        Route::resource("monthly-payment", MonthlyPaymentController::class);
     });
 
     Route::prefix("operator")->name("operator.")->middleware("role:operator")->group(function () {
