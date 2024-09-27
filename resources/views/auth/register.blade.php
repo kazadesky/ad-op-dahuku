@@ -2,17 +2,23 @@
 @section('title', 'Register')
 
 @section('content')
-    <div class="w-full text-center pt-20">
+    <div class="w-full text-center max-md:pt-12">
         <h1 class="font-poppins text-3xl uppercase font-bold text-white">Register</h1>
         <p class="text-gray-200 text-sm capitalize mt-1">Sistem informasi pondok darul huda kutacane</p>
     </div>
     <form action="{{ route('register.proses') }}" method="POST" enctype="multipart/form-data"
         class="w-full mt-2 rounded-lg shadow-lg p-5 border bg-white text-hitam">
         @csrf
+        <div id="preview-figure" class="hidden mb-3 w-full flex-col items-center space-y-2">
+            <figure class="size-28 overflow-hidden rounded">
+                <img id="preview" src="" alt="Gambar Profil" class="w-full">
+            </figure>
+            <figcaption class="text-center font-medium text-sm">Preview Foto Profil</figcaption>
+        </div>
         <div class="mb-4">
-            <label for="profile" class="block mb-2 font-medium">Photo Profil</label>
-            <input type="file" name="profile" id="profile"
-                class="outline-none w-full rounded-md h-12 border-2 transition duration-300 focus:border-green-500 focus:shadow-sm focus:ring-2 focus:ring-green-300 file:outline-none file:h-full file:border-none file:cursor-pointer file:hover:bg-gray-200 file:transition file:duration-300 file:active:bg-gray-200 file:rounded @error('profile') border-red-500 @enderror"
+            <label for="profile" class="block mb-2 font-medium">Foto Profil</label>
+            <input type="file" name="profile" onchange="profilePreview(event)" id="profile"
+                class="outline-none w-full rounded-md h-12 border-2 transition duration-300 focus:border-green-500 focus:shadow-sm focus:ring-2 focus:ring-green-300 file:outline-none file:h-full file:border-none file:cursor-pointer file:hover:bg-gray-200 file:transition file:duration-300 file:active:bg-gray-200 file:rounded-l-md @error('profile') border-red-500 @enderror"
                 value="{{ old('profile') }}">
             @error('profile')
                 <small class="text-red-500">{{ $message }}</small>

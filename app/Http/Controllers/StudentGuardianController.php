@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Student;
 use App\Models\StudentGuardian;
 use Illuminate\Http\Request;
 
@@ -13,7 +14,7 @@ class StudentGuardianController extends Controller
     public function index()
     {
         $title = "Akun Wali Santri";
-        $studentGuardians = StudentGuardian::latest()->paginate(25);
+        $studentGuardians = StudentGuardian::with("student")->latest()->paginate(25);
         return view("pages.student-guardian.index", compact(
             "title",
             "studentGuardians",
@@ -25,7 +26,12 @@ class StudentGuardianController extends Controller
      */
     public function create()
     {
-        //
+        $title = "Tambah Akun";
+        $students = Student::with("student")->latest()->get();
+        return view("pages.student-guardian.create", compact([
+            "title",
+            "students",
+        ]));
     }
 
     /**
@@ -33,7 +39,19 @@ class StudentGuardianController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $fields = $request->validate([
+            "name" => "required|string|max:255",
+            "nis" => "required|numeric",
+            "nisn" => "required|numeric",
+            "student_id" => "required",
+            "password" => "required|confirmed",
+            "password_confirmation" => "required",
+        ]);
+
+        $fields["name"] = ucwords($request->name);
+        $studentGuardiant = StudentGuardian::create($fields);
+
+        return redirect()->route("admin.student-guardian.index")->with("success", "Akun atas nama " . $studentGuardiant . " berhasil ditambahkan.");
     }
 
     /**
@@ -41,7 +59,12 @@ class StudentGuardianController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $title = "Detail Akun";
+        $studentGuardian = StudentGuardian::with("student")->findOrFail($id);
+        return view("pages.student-guardian.show", compact([
+            "title",
+            "studentGuardian",
+        ]));
     }
 
     /**
@@ -49,7 +72,12 @@ class StudentGuardianController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $title = "Edit Akun";
+        $studentGuardian = StudentGuardian::with("student")->findOrFail($id);
+        return view("pages.student-guardian.edit", compact([
+            "title",
+            "studentGuardian",
+        ]));
     }
 
     /**
@@ -57,7 +85,20 @@ class StudentGuardianController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $fields = $request->validate([
+            "name" => "required|string|max:255",
+            "nis" => "required|numeric",
+            "nisn" => "required|numeric",
+            "student_id" => "required",
+            "password" => "required|confirmed",
+            "password_confirmation" => "required",
+        ]);
+
+        $fields["name"] = ucwords($request->name);
+        $studentGuardian = StudentGuardian::with("student")->findOrFail($id);
+        $studentGuardian->update($fields);
+
+        return redirect()->route("")->with("success", "Akun atas nama " . $studentGuardian->name . " telah diupdate.");
     }
 
     /**
@@ -65,6 +106,9 @@ class StudentGuardianController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $studentGuardian = StudentGuardian::findOrFail($id);
+        $studentGuardian->delete();
+
+        return redirect()->route("admin.student-guardian.index")->with("success", "Akun atas nama " . $studentGuardian->name . " telah dihapus.");
     }
 }

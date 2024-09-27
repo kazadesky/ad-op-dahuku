@@ -21,20 +21,24 @@ class AuthController extends Controller
             'password' => 'required',
         ]);
 
-        if (!Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+        $checkAuth = User::where('email', $request->email)->first();
+
+        if (!$checkAuth || !Hash::check($request->password, $checkAuth->password)) {
             return redirect()->back()->with('error', 'Invalid credentials, please try again');
         }
 
         $request->session()->regenerate();
 
-        $user = Auth::user();
+        Auth::login($checkAuth);
 
-        if ($user->hasRole('super_admin')) {
-            return redirect()->route('sa.dashboard')->with('success', 'Welcome Super Admin!');
-        } elseif ($user->hasRole('admin')) {
-            return redirect()->route('admin.dashboard')->with('success', 'Welcome Admin!');
-        } elseif ($user->hasRole('operator')) {
-            return redirect()->route('operator.dashboard')->with('success', 'Welcome Operator!');
+        if ($checkAuth->hasRole('super_admin')) {
+            return redirect()->route('sa.dashboard');
+        } elseif ($checkAuth->hasRole('admin')) {
+            return redirect()->route('admin.dashboard');
+        } elseif ($checkAuth->hasRole('operator')) {
+            return redirect()->route('operator.dashboard');
+        } elseif ($checkAuth->hasRole('teacher')) {
+            return redirect()->route('teacher.dashboard');
         }
 
         Auth::logout();

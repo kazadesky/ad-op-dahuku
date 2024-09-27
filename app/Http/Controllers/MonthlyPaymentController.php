@@ -42,7 +42,6 @@ class MonthlyPaymentController extends Controller
                     ->paginate(25);
             }
         } else {
-            // Jika bulan dan tahun tidak terisi
             if ($search) {
                 $payments = MonthlyPayment::with("student", "moon")
                     ->whereHas('student', function ($query) use ($search) {
@@ -74,12 +73,16 @@ class MonthlyPaymentController extends Controller
     {
         $title = "Tambah Pembayaran";
         $moons = Moon::all();
-        $year = date('Y');
+        $month = Carbon::now()->month;
+        $years = range(2020, 2032);
+        $year = Carbon::now()->year;
         $students = Student::orderBy("name", "ASC")->get();
         $status = ["Cicil", "Lunas"];
         return view("pages.monthly-payment.create", compact(
             "title",
             "moons",
+            "month",
+            "years",
             "year",
             "students",
             "status",
@@ -121,13 +124,17 @@ class MonthlyPaymentController extends Controller
         $payment = MonthlyPayment::findOrFail($id);
         $title = "Edit Pembayaran";
         $moons = Moon::all();
-        $year = date('Y');
+        $month = Carbon::now()->month;
+        $years = range(2020, 2032);
+        $year = Carbon::now()->year;
         $students = Student::orderBy("name", "ASC")->get();
         $status = ["Cicil", "Lunas"];
         return view("pages.monthly-payment.edit", compact(
             "payment",
             "title",
             "moons",
+            "month",
+            "years",
             "year",
             "students",
             "status",

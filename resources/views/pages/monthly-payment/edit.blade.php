@@ -53,10 +53,9 @@
                     </label>
                     <select name="moon_id" id="moon_id" size="-1"
                         class="outline-none w-full rounded-md md:h-12 max-md:h-11 px-3 border-2 transition duration-300 focus:border-green-500 focus:shadow-sm focus:ring-2 focus:ring-green-300 @error('name') border-red-500 @enderror">
-                        <option hidden>pilih bulan</option>
                         @foreach ($moons as $moon)
-                            <option value="{{ $moon->id }}" {{ $moon->id === $payment->moon_id ? 'selected' : '' }}>
-                                {{ $moon->name }}</option>
+                            <option value="{{ $moon->id }}" {{ $moon->id === $payment->moon_id ? 'selected' : '' }}>{{ $moon->name }}
+                            </option>
                         @endforeach
                     </select>
                 </div>
@@ -72,10 +71,13 @@
                         <span>Tahun</span>
                         <span class="float-end max-md:hidden">:</span>
                     </label>
-                    <input type="number" min="2020" max="2030" step="1" value="{{ $year }}"
-                        name="year" id="year"
-                        class="outline-none w-full rounded-md md:h-12 max-md:h-11 px-3 border-2 transition duration-300 focus:border-green-500 focus:shadow-sm focus:ring-2 focus:ring-green-300 @error('year') border-red-500 @enderror"
-                        placeholder="2024" value="{{ old('year', $payment->year) }}">
+                    <select name="year" id="year" size="-1"
+                        class="outline-none w-full rounded-md md:h-12 max-md:h-11 px-3 border-2 transition duration-300 focus:border-green-500 focus:shadow-sm focus:ring-2 focus:ring-green-300 @error('year') border-red-500 @enderror">
+                        @foreach ($years as $ye)
+                            <option value="{{ $ye }}" {{ $ye === $payment->year ? 'selected' : '' }}>{{ $ye }}
+                            </option>
+                        @endforeach
+                    </select>
                 </div>
                 @error('year')
                     <div class="w-full md:pl-40">
@@ -131,7 +133,7 @@
                     <span>Kembali</span>
                 </a>
                 <button type="submit"
-                    class="outline-none w-full h-11 flex items-center justify-center font-medium bg-green-600 rounded shadow-sm transition duration-300 hover:bg-green-700 focus:bg-green-700 max-md:mb-3">Tambah</button>
+                    class="outline-none w-full h-11 flex items-center justify-center font-medium bg-green-600 rounded shadow-sm transition duration-300 hover:bg-green-700 focus:bg-green-700 max-md:mb-3">Update</button>
             </section>
         </form>
     @endhasrole

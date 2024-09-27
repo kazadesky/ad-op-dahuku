@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Daftar Kelas')
+@section('title', 'Daftar Pelajaran')
 
 @section('subtitle')
     <p class="flex items-center space-x-px capitalize text-white">
@@ -12,7 +12,7 @@
         @hasrole('operator')
             <span>Operator</span>
         @endhasrole
-        <span>/ Page / Daftar Kelas</span>
+        <span>/ Page / Daftar Pelajaran</span>
     </p>
 @endsection
 
@@ -21,15 +21,15 @@
     @endhasrole
 
     @hasrole('admin')
-        <div class="w-full flex items-center justify-between mb-3">
-            <a href="{{ route('admin.class-room.create') }}"
+        {{-- <div class="w-full flex items-center justify-between mb-3">
+            <a href="{{ route('admin.lesson.create') }}"
                 class="outline-none flex items-center justify-center md:w-36 max-md:w-30 h-10 rounded-md shadow bg-blue-500 transition duration-300 hover:bg-blue-600 focus:bg-blue-600 text-white">
                 <span class="material-symbols-outlined">
                     add
                 </span>
                 <span>Tambah</span>
             </a>
-        </div>
+        </div> --}}
         @if (session('success'))
             <div id="banner-alert" class="w-full h-12 px-3 flex items-center bg-sky-600 rounded-md shadow mb-3 text-white">
                 <p>
@@ -46,7 +46,7 @@
                             No.
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Nama Kelas
+                            Nama Pelajaran
                         </th>
                         <th scope="col" class="px-6 py-3">
                             Action
@@ -57,22 +57,22 @@
                     $i = 1;
                 @endphp
                 <tbody>
-                    @forelse ($classRoom as $room)
+                    @forelse ($lessons as $lesson)
                         <tr class="bg-white border-b text-hitam">
                             <th class="p-4">
                                 {{ $loop->iteration }}.
                             </th>
                             <td class="px-6 py-4">
-                                {{ $room->name }}
+                                {{ $lesson->name }}
                             </td>
                             <td class="px-6 py-2 flex items-center min-h-[1rem] space-x-2 text-white">
-                                <a href="{{ route('admin.class-room.edit', $room->id) }}"
+                                <a href="{{ route('admin.lesson.edit', $lesson->id) }}"
                                     class="outline-none h-9 w-11 flex items-center justify-center bg-orange-500 rounded-md transition duration-300 hover:bg-orange-600 focus:bg-orange-600">
                                     <span class="material-symbols-outlined text-[21px]">
                                         border_color
                                     </span>
                                 </a>
-                                <form action="{{ route('admin.class-room.destroy', $room->id) }}" method="POST">
+                                <form action="{{ route('admin.lesson.destroy', $lesson->id) }}" method="POST">
                                     @csrf
                                     <button type="submit"
                                         class="outline-none h-9 w-11 flex items-center justify-center bg-red-500 rounded-md transition duration-300 hover:bg-red-600 focus:bg-red-600">
@@ -85,7 +85,7 @@
                         </tr>
                     @empty
                         <caption class="caption-bottom my-3">
-                            Belum ada kelas yang terdaftar.
+                            Belum ada mata pelajaran yang terdaftar.
                         </caption>
                     @endforelse
                 </tbody>

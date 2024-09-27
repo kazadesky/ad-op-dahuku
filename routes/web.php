@@ -4,6 +4,7 @@ use App\Http\Controllers\ArchiveController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ClassRoomController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\LessonController;
 use App\Http\Controllers\MonthlyPaymentController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\StudentGuardianController;
@@ -24,16 +25,15 @@ Route::middleware("auth")->group(function () {
 
     Route::prefix("admin")->name("admin.")->middleware("role:admin")->group(function () {
         Route::get("dashboard", [DashboardController::class, 'index'])->name('dashboard');
-        Route::get("teacher", [TeacherController::class, 'index'])->name("teacher.index");
+        Route::patch("teacher-picket/{id}/action", [TeacherPicketController::class, 'action'])->name("teacher-picket.action");
 
-        Route::resources([
-            "student" => StudentController::class,
-            "monthly-payment" => MonthlyPaymentController::class,
-            "teacher-picket" => TeacherPicketController::class,
-            "student-guardian" => StudentGuardianController::class,
-            "class-room" => ClassRoomController::class,
-        ]);
-
+        Route::resource("student", StudentController::class);
+        Route::resource("teacher", TeacherController::class)->only(['index', 'edit', 'update']);
+        Route::resource("monthly-payment", MonthlyPaymentController::class);
+        Route::resource("teacher-picket", TeacherPicketController::class);
+        Route::resource("student-guardian", StudentGuardianController::class);
+        Route::resource("class-room", ClassRoomController::class)->except("show");
+        Route::resource("lesson", LessonController::class)->only('index');
         Route::resource("archive", ArchiveController::class)->only(['index', 'post']);
     });
 

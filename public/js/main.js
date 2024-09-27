@@ -28,6 +28,18 @@ const passwordConfirmShow = (event) => {
     }
 };
 
+const profilePreview = (event) => {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+    reader.onload = function (event) {
+        document.getElementById('preview').src = event.target.result;
+        const previewFigure = document.getElementById('preview-figure')
+        previewFigure.classList.remove("hidden");
+        previewFigure.classList.add("flex");
+    };
+    reader.readAsDataURL(file);
+}
+
 const showMenu = (event) => {
     event.preventDefault();
     const sidebar = document.getElementById('sidebar');

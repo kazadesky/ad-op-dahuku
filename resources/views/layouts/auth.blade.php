@@ -19,10 +19,10 @@
 </head>
 
 <body
-    class="w-full h-screen flex items-center justify-center flex-col font-inter bg-hitam {{ request()->routeIs('login') ? 'overflow-hidden' : 'overflow-x-hidden' }}">
+    class="w-full flex items-center flex-col font-inter bg-hitam {{ request()->routeIs('login') ? 'overflow-hidden justify-center h-screen' : 'overflow-x-hidden min-h-screen' }}">
 
     <section
-        class="w-full max-md:max-w-sm sm:max-w-md flex flex-col space-y-3 items-center z-10 max-md:px-3 {{ request()->routeIs('register') ? 'py-5' : '' }}">
+        class="w-full max-md:max-w-sm sm:max-w-md z-10 max-md:px-3 {{ request()->routeIs('register') ? 'md:py-10' : 'flex flex-col space-y-3 items-center' }}">
         @yield('content')
     </section>
 
