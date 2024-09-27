@@ -25,7 +25,7 @@ return new class extends Migration
                 ->constrained('users')
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
-            $table->boolean('action')->default(false);
+            $table->boolean('action')->default(false)->nullable();
             $table->timestamps();
         });
     }

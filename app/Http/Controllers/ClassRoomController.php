@@ -13,7 +13,7 @@ class ClassRoomController extends Controller
     public function index()
     {
         $title = "Daftar Kelas";
-        $classRoom = ClassRoom::orderBy("id","desc")->get();
+        $classRoom = ClassRoom::latest()->get();
         return view("pages.class-rooms.index", compact(
             "title",
             "classRoom",
@@ -25,7 +25,10 @@ class ClassRoomController extends Controller
      */
     public function create()
     {
-        //
+        $title = "Tambah Kelas";
+        return view("pages.class-rooms.create", compact(
+            "title",
+        ));
     }
 
     /**
@@ -33,7 +36,14 @@ class ClassRoomController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            "name" => "required|string|max:255",
+        ]);
+
+        $classRoom = ClassRoom::create([
+            "name" => ucwords($request->name),
+        ]);
+        return redirect()->route("admin.class-room.index")->with("success", "Kelas " . $classRoom->name . " telah ditambahkan.");
     }
 
     /**
@@ -49,7 +59,12 @@ class ClassRoomController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $title = "Edit Kelas";
+        $classRoom = ClassRoom::findOrFail($id);
+        return view("pages.class-rooms.edit", compact(
+            "title",
+            "classRoom",
+        ));
     }
 
     /**
@@ -57,7 +72,14 @@ class ClassRoomController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            "name" => "required|string|max:255",
+        ]);
+
+        $classRoom = ClassRoom::findOrFail($id);
+        $classRoom->update(["name" => ucwords($request->name)]);
+
+        return redirect()->route("admin.class-room.index")->with("success", "Kelas " . $classRoom->name . " telah diupdate.");
     }
 
     /**
@@ -65,6 +87,8 @@ class ClassRoomController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $classRoom = ClassRoom::findOrFail($id);
+        $classRoom->delete();
+        return redirect()->route("admin.class-room.index")->with("success", "Kelas " . $classRoom->name . " telah dihapus.");
     }
 }

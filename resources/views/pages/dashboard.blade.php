@@ -12,6 +12,9 @@
         @hasrole('operator')
             <span>Operator</span>
         @endhasrole
+        @hasrole('teacher')
+            <span>Teacher</span>
+        @endhasrole
         <span>/ Page / Dashboard</span>
     </p>
 @endsection

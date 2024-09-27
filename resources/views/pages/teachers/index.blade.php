@@ -47,10 +47,15 @@
                         <th scope="col" class="px-6 py-3">
                             Status Guru
                         </th>
+                        <th scope="col" class="px-6 py-3">
+                            Status Akun
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Action
+                        </th>
                     </tr>
                 </thead>
                 @php
-                    // $i = ($teachers->currentPage() - 1) * $teachers->perPage() + 1;
                     $i = 1;
                 @endphp
                 <tbody>
@@ -60,7 +65,8 @@
                                 {{ $loop->iteration }}.
                             </th>
                             <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                                <img src="{{ url('storage/profile/', $teacher->profile) }}" alt="profile {{ $teacher->name }}" class="size-20">
+                                <img src="{{ url('storage/profile/', $teacher->profile) }}" alt="profile {{ $teacher->name }}"
+                                    class="size-20">
                             </th>
                             <td class="px-6 py-4">
                                 {{ $teacher->name }}
@@ -71,6 +77,17 @@
                             <td class="px-6 py-4">
                                 {{ $teacher->teacher_status }}
                             </td>
+                            <td class="px-6 py-4">
+                                {{ $teacher->hasRole('teacher') ? 'Guru' : '-' }}
+                            </td>
+                            <td class="px-6 py-4">
+                                <a href="{{ route('admin.teacher.edit', $teacher->id) }}"
+                                    class="outline-none text-white size-10 rounded flex items-center justify-center bg-orange-500 transition duration-300 hover:bg-orange-600 focus:bg-orange-600 active:bg-orange-700">
+                                    <span class="material-symbols-outlined text-xl">
+                                        edit_square
+                                    </span>
+                                </a>
+                            </td>
                         </tr>
                     @empty
                         <caption class="caption-bottom my-3">
@@ -80,10 +97,6 @@
                 </tbody>
             </table>
         </div>
-
-        {{-- <section class="w-full h-10 mt-3">
-            {{ $students->links() }}
-        </section> --}}
     @endhasrole
 
     @hasrole('operator')

@@ -71,6 +71,18 @@
                 </a>
             </li>
             <li>
+                <a href="{{ route('admin.lesson.index') }}"
+                    class="
+                    outline-none w-full h-10 flex items-center px-3 rounded space-x-1
+                    {{ request()->routeIs('admin.lesson.*') ? 'bg-green-600 shadow-sm' : '' }}
+                    ">
+                    <span class="material-symbols-outlined">
+                        local_library
+                    </span>
+                    <span>Mata Pelajaran</span>
+                </a>
+            </li>
+            <li>
                 <a href="{{ route('admin.monthly-payment.index') }}"
                     class="
                     outline-none w-full h-10 flex items-center px-3 rounded space-x-1
