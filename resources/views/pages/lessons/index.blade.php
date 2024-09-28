@@ -21,7 +21,7 @@
     @endhasrole
 
     @hasrole('admin')
-        {{-- <div class="w-full flex items-center justify-between mb-3">
+        <div class="w-full flex items-center justify-between mb-3">
             <a href="{{ route('admin.lesson.create') }}"
                 class="outline-none flex items-center justify-center md:w-36 max-md:w-30 h-10 rounded-md shadow bg-blue-500 transition duration-300 hover:bg-blue-600 focus:bg-blue-600 text-white">
                 <span class="material-symbols-outlined">
@@ -29,7 +29,7 @@
                 </span>
                 <span>Tambah</span>
             </a>
-        </div> --}}
+        </div>
         @if (session('success'))
             <div id="banner-alert" class="w-full h-12 px-3 flex items-center bg-sky-600 rounded-md shadow mb-3 text-white">
                 <p>
@@ -74,6 +74,7 @@
                                 </a>
                                 <form action="{{ route('admin.lesson.destroy', $lesson->id) }}" method="POST">
                                     @csrf
+                                    @method("DELETE")
                                     <button type="submit"
                                         class="outline-none h-9 w-11 flex items-center justify-center bg-red-500 rounded-md transition duration-300 hover:bg-red-600 focus:bg-red-600">
                                         <span class="material-symbols-outlined text-[21px]">

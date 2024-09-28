@@ -57,7 +57,7 @@ class AuthController extends Controller
             'profile' => 'required|image|mimes:png,jpg,jpeg|max:2080',
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
-            'nomor_telepon' => 'required|numeric',
+            'nomor_telepon' => 'required|numeric|min:10',
             'password' => 'required|confirmed',
             'password_confirmation' => 'required',
             'teacher_status' => 'required|in:Guru Umum,Guru Dayah',

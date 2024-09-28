@@ -15,6 +15,24 @@
     </button>
 
     @hasrole('super_admin')
+        <ul class="flex flex-col w-full">
+            <span class="font-semibold uppercase text-[11px]">Dashboard</span>
+            <li class="mt-2 mb-5">
+                <a href="{{ route('sa.dashboard') }}"
+                    class="
+                outline-none w-full h-10 flex items-center px-3 rounded space-x-1
+                {{ request()->routeIs('sa.dashboard') ? 'bg-green-600 shadow-sm' : '' }}
+                ">
+                    <span class="material-symbols-outlined">
+                        dashboard
+                    </span>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+
+            <span class="font-semibold uppercase text-[11px]">content</span>
+            <li class="mt-2"></li>
+        </ul>
     @endhasrole
 
     @hasrole('admin')
@@ -55,7 +73,7 @@
                     <span class="material-symbols-outlined">
                         Description
                     </span>
-                    <span>Data Guru</span>
+                    <span>Daftar Guru</span>
                 </a>
             </li>
             <li>
@@ -83,6 +101,30 @@
                 </a>
             </li>
             <li>
+                <a href="{{ route('admin.time.index') }}"
+                    class="
+                    outline-none w-full h-10 flex items-center px-3 rounded space-x-1
+                    {{ request()->routeIs('admin.time.*') ? 'bg-green-600 shadow-sm' : '' }}
+                    ">
+                    <span class="material-symbols-outlined">
+                        schedule
+                    </span>
+                    <span>Jam Masuk</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('admin.lesson-timetable.index') }}"
+                    class="
+                    outline-none w-full h-10 flex items-center px-3 rounded space-x-1
+                    {{ request()->routeIs('admin.lesson-timetable.*') ? 'bg-green-600 shadow-sm' : '' }}
+                    ">
+                    <span class="material-symbols-outlined">
+                        date_range
+                    </span>
+                    <span>Jadwal Pelajaran</span>
+                </a>
+            </li>
+            <li>
                 <a href="{{ route('admin.monthly-payment.index') }}"
                     class="
                     outline-none w-full h-10 flex items-center px-3 rounded space-x-1
@@ -104,6 +146,18 @@
                         List
                     </span>
                     <span>Guru Piket</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('admin.teacher-presence.index') }}"
+                    class="
+                    outline-none w-full h-10 flex items-center px-3 rounded space-x-1
+                    {{ request()->routeIs('admin.teacher-presence.*') ? 'bg-green-600 shadow-sm' : '' }}
+                    ">
+                    <span class="material-symbols-outlined">
+                        co_present
+                    </span>
+                    <span>Absensi Guru</span>
                 </a>
             </li>
             <li>
@@ -134,5 +188,101 @@
     @endhasrole
 
     @hasrole('operator')
+        <ul class="flex flex-col w-full">
+            <span class="font-semibold uppercase text-[11px]">Dashboard</span>
+            <li class="mt-2 mb-5">
+                <a href="{{ route('operator.dashboard') }}"
+                    class="
+                    outline-none w-full h-10 flex items-center px-3 rounded space-x-1
+                    {{ request()->routeIs('operator.dashboard') ? 'bg-green-600 shadow-sm' : '' }}
+                    ">
+                    <span class="material-symbols-outlined">
+                        dashboard
+                    </span>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+
+            <span class="font-semibold uppercase text-[11px]">content</span>
+            <li class="mt-2"></li>
+        </ul>
+    @endhasrole
+
+    @hasrole('teacher')
+        <ul class="flex flex-col w-full">
+            <span class="font-semibold uppercase text-[11px]">Dashboard</span>
+            <li class="mt-2 mb-5">
+                <a href="{{ route('teacher.dashboard') }}"
+                    class="
+                    outline-none w-full h-10 flex items-center px-3 rounded space-x-1
+                    {{ request()->routeIs('teacher.dashboard') ? 'bg-green-600 shadow-sm' : '' }}
+                    ">
+                    <span class="material-symbols-outlined">
+                        dashboard
+                    </span>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+
+            @php
+                $user = Auth::user();
+                $action = \App\Models\TeacherPicket::with('teacher', 'substitute', 'day')
+                    ->where('teacher_id', $user->id)
+                    ->orWhere('substitute_picket_teacher_id', $user->id)
+                    ->first();
+            @endphp
+
+            <span class="font-semibold uppercase text-[11px]">content</span>
+            @if ($action)
+                <li class="mt-2">
+                    <a href="{{ route('teacher.teacher-presence.index') }}"
+                        class="
+                        outline-none w-full h-10 flex items-center px-3 rounded space-x-1
+                        {{ request()->routeIs('teacher.teacher-presence.*') ? 'bg-green-600 shadow-sm' : '' }}
+                        ">
+                        <span class="material-symbols-outlined">
+                            co_present
+                        </span>
+                        <span>Absensi Guru</span>
+                    </a>
+                </li>
+            @endif
+            <li>
+                <a href="{{ route('teacher.student-achievement.index') }}"
+                    class="
+                    outline-none w-full h-10 flex items-center px-3 rounded space-x-1
+                    {{ request()->routeIs('teacher.student-achievement.*') ? 'bg-green-600 shadow-sm' : '' }}
+                    ">
+                    <span class="material-symbols-outlined">
+                        note_alt
+                    </span>
+                    <span>Pencapaian Santri</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('teacher.student-misconduct.index') }}"
+                    class="
+                    outline-none w-full h-10 flex items-center px-3 rounded space-x-1
+                    {{ request()->routeIs('teacher.student-misconduct.*') ? 'bg-green-600 shadow-sm' : '' }}
+                    ">
+                    <span class="material-symbols-outlined">
+                        note_alt
+                    </span>
+                    <span>Pelanggaran Santri</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('teacher.archive.index') }}"
+                    class="
+                    outline-none w-full h-10 flex items-center px-3 rounded space-x-1
+                    {{ request()->routeIs('teacher.archive.*') ? 'bg-green-600 shadow-sm' : '' }}
+                    ">
+                    <span class="material-symbols-outlined">
+                        Bookmark
+                    </span>
+                    <span>Arsip Data</span>
+                </a>
+            </li>
+        </ul>
     @endhasrole
 </aside>

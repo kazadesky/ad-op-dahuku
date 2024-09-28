@@ -21,7 +21,7 @@ class TeacherPicket extends Model
         return $this->belongsTo(User::class, 'teacher_id');
     }
 
-    public function subtitute(): BelongsTo
+    public function substitute(): BelongsTo
     {
         return $this->belongsTo(User::class, 'subtitute_picket_teacher_id');
     }

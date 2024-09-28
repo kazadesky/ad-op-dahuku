@@ -67,7 +67,7 @@
             <section class="w-full mb-4">
                 <div class="flex max-md:flex-col max-md:space-y-1 md:space-x-4 md:items-center">
                     <label for="substitute_picket_teacher_id" class="font-medium md:w-40">
-                        <span>Guru Pengganti</span>
+                        <span>Piket Pengganti</span>
                         <span class="float-end max-md:hidden">:</span>
                     </label>
                     <select name="substitute_picket_teacher_id" id="substitute_picket_teacher_id"

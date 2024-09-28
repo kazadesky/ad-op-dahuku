@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Jadwal Pembelajaran')
+@section('title', 'Daftar Jam Masuk')
 
 @section('subtitle')
     <p class="flex items-center space-x-px capitalize text-white">
@@ -12,7 +12,7 @@
         @hasrole('operator')
             <span>Operator</span>
         @endhasrole
-        <span>/ Page / Jadwal Pembelajaran</span>
+        <span>/ Page / Jam Masuk</span>
     </p>
 @endsection
 
@@ -22,7 +22,7 @@
 
     @hasrole('admin')
         <div class="w-full flex items-center justify-between mb-3">
-            <a href="{{ route('admin.lesson-timetable.create') }}"
+            <a href="{{ route('admin.time.create') }}"
                 class="outline-none flex items-center justify-center md:w-36 max-md:w-30 h-10 rounded-md shadow bg-blue-500 transition duration-300 hover:bg-blue-600 focus:bg-blue-600 text-white">
                 <span class="material-symbols-outlined">
                     add
@@ -46,54 +46,39 @@
                             No.
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Nama Guru
+                            Jam Masuk
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Mata Pelajaran
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Kelas
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Hari
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Jadwal
+                            Jam Keluar
                         </th>
                         <th scope="col" class="px-6 py-3">
                             Action
                         </th>
                     </tr>
                 </thead>
+                @php
+                    $i = 1;
+                @endphp
                 <tbody>
-                    @forelse ($timetables as $timetable)
+                    @forelse ($times as $time)
                         <tr class="bg-white border-b text-hitam">
                             <th class="p-4">
                                 {{ $loop->iteration }}.
                             </th>
                             <td class="px-6 py-4">
-                                {{ $timetable->teacher->name }}
+                                {{ $time->start }}
                             </td>
                             <td class="px-6 py-4">
-                                {{ $timetable->lesson->name }}
-                            </td>
-                            <td class="px-6 py-4">
-                                {{ $timetable->classRoom->name }}
-                            </td>
-                            <td class="px-6 py-4">
-                                {{ $timetable->day->name }}
-                            </td>
-                            <td class="px-6 py-4">
-                                {{ $timetable->time->start }} - {{ $timetable->time->finish }}
+                                {{ $time->finish }}
                             </td>
                             <td class="px-6 py-2 flex items-center min-h-[1rem] space-x-2 text-white">
-                                <a href="{{ route('admin.lesson-timetable.edit', $timetable->id) }}"
+                                <a href="{{ route('admin.time.edit', $time->id) }}"
                                     class="outline-none h-9 w-11 flex items-center justify-center bg-orange-500 rounded-md transition duration-300 hover:bg-orange-600 focus:bg-orange-600">
                                     <span class="material-symbols-outlined text-[21px]">
                                         border_color
                                     </span>
                                 </a>
-                                <form action="{{ route('admin.lesson-timetable.destroy', $timetable->id) }}" method="POST">
+                                <form action="{{ route('admin.time.destroy', $time->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit"
@@ -107,7 +92,7 @@
                         </tr>
                     @empty
                         <caption class="caption-bottom my-3">
-                            Belum ada jadwal pelajaran yang terdaftar.
+                            Belum ada mata pelajaran yang terdaftar.
                         </caption>
                     @endforelse
                 </tbody>

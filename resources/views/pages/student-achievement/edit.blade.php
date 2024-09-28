@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Detail Absensi Guru')
+@section('title', 'Edit Pencapaian Santri')
 
 @section('subtitle')
     <p class="flex items-center space-x-px capitalize text-white">
@@ -13,8 +13,23 @@
             <span>Operator</span>
         @endhasrole
         @hasrole('teacher')
-            <span>Teacher</span>
+            <span>Operator</span>
         @endhasrole
-        <span>/ Page / Absensi Guru / Detail</span>
+        <span>/ Page / Pencapaian Santri / Edit</span>
     </p>
+@endsection
+
+@section('content')
+    @hasrole('super_admin')
+    @endhasrole
+
+    @hasrole('admin')
+
+    @endhasrole
+
+    @hasrole('operator')
+    @endhasrole
+
+    @hasrole('teacher')
+    @endhasrole
 @endsection

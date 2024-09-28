@@ -28,8 +28,9 @@ return new class extends Migration
             $table->foreignId('day_id')
                 ->constrained('days')
                 ->cascadeOnDelete();
-            $table->time('start');
-            $table->time('finish');
+            $table->foreignId('time_id')
+                ->constrained('times')
+                ->cascadeOnDelete();
             $table->timestamps();
         });
     }
