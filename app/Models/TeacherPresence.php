@@ -14,9 +14,11 @@ class TeacherPresence extends Model
         'teacher_id',
         'lesson_id',
         'class_id',
-        'lesson_timetable_id',
+        'day_id',
+        'time_id',
         'status',
-        'subtitute_teahcer_id',
+        'substitute_teacher_id',
+        'update_value',
     ];
 
     public function teacherPicket(): BelongsTo
@@ -38,12 +40,22 @@ class TeacherPresence extends Model
         return $this->belongsTo(ClassRoom::class, 'class_id');
     }
 
-    public function timetable(): BelongsTo
+    public function day(): BelongsTo
     {
-        return $this->belongsTo(LessonTimetable::class, 'lesson_timetable_id');
+        return $this->belongsTo(Day::class, 'day_id');
     }
 
-    public function subtituteTeacher(): BelongsTo
+    public function time(): BelongsTo
+    {
+        return $this->belongsTo(Time::class, 'time_id');
+    }
+
+    public function substituteTeacher(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'subtitute_teacher_id');
+    }
+
+    public function updateValue(): BelongsTo
     {
         return $this->belongsTo(User::class, 'subtitute_teacher_id');
     }

@@ -97,6 +97,7 @@
                                     </a>
                                     <form action="{{ route('admin.student.destroy', $student->id) }}" method="POST">
                                         @csrf
+                                        @method("DELETE")
                                         <button type="submit"
                                             class="outline-none h-9 w-11 flex items-center justify-center bg-red-500 rounded-md transition duration-300 hover:bg-red-600 focus:bg-red-600">
                                             <span class="material-symbols-outlined text-[21px]">

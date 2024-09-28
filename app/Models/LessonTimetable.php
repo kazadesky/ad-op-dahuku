@@ -14,8 +14,7 @@ class LessonTimetable extends Model
         'lesson_id',
         'class_id',
         'day_id',
-        'start',
-        'finish',
+        'time_id'
     ];
 
     public function teacher(): BelongsTo
@@ -36,5 +35,10 @@ class LessonTimetable extends Model
     public function day(): BelongsTo
     {
         return $this->belongsTo(Day::class, 'day_id');
+    }
+
+    public function time(): BelongsTo
+    {
+        return $this->belongsTo(Time::class, 'time_id');
     }
 }

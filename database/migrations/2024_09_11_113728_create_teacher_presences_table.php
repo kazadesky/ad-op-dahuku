@@ -29,12 +29,21 @@ return new class extends Migration
                 ->constrained('class_rooms')
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
-            $table->foreignId('lesson_timetable_id')
-                ->constrained('lesson_timetables')
+            $table->foreignId('day_id')
+                ->constrained('days')
+                ->cascadeOnUpdate()
+                ->cascadeOnDelete();
+            $table->foreignId('time_id')
+                ->constrained('times')
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
             $table->enum('status', ['Hadir', 'Tidak Hadir', 'Izin']);
             $table->foreignId('substitute_teacher_id')
+                ->nullable()
+                ->constrained('users')
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
+            $table->foreignId('update_value')
                 ->nullable()
                 ->constrained('users')
                 ->cascadeOnDelete()
