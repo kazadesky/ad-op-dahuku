@@ -34,14 +34,7 @@
                     placeholder="Cari berdasarkan nama atau nis">
             </form>
         </div>
-        @if (session('success'))
-            <div id="banner-alert" class="w-full h-12 px-3 flex items-center bg-sky-600 rounded-md shadow mb-3 text-white">
-                <p>
-                    <strong class="max-md:hidden">Success : </strong>
-                    <span>{{ session('success') }}</span>
-                </p>
-            </div>
-        @endif
+        @include('components.alert')
         <div class="relative overflow-x-auto bg-white shadow-lg">
             @if (count($students) > 0)
                 <table class="w-full text-sm text-left rtl:text-right text-gray-500">

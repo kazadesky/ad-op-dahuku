@@ -56,7 +56,7 @@
                 <a href="{{ route('admin.student.index') }}"
                     class="
                     outline-none w-full h-10 flex items-center px-3 rounded space-x-1
-                    {{ request()->routeIs('admin.student.*') ? 'bg-green-600 shadow-sm' : '' }}
+                    {{ request()->routeIs(['admin.student.*', 'admin.student-achievement.edit']) ? 'bg-green-600 shadow-sm' : '' }}
                     ">
                     <span class="material-symbols-outlined">
                         Description
@@ -133,7 +133,7 @@
                     <span class="material-symbols-outlined">
                         Edit_Note
                     </span>
-                    <span>Pembayaran Bulanan</span>
+                    <span>Pembayaran</span>
                 </a>
             </li>
             <li>

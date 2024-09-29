@@ -22,40 +22,46 @@
 
     @hasrole('admin')
         @include('components.modal-filter')
-        <div class="w-full flex items-center justify-between mb-3">
-            <section class="flex items-center space-x-3">
+        <div class="w-full flex items-center justify-between mb-3 max-md:text-sm">
+            <section class="flex items-center md:space-x-3 max-md:space-x-2">
                 <a href="{{ route('admin.monthly-payment.create') }}"
-                    class="outline-none flex items-center justify-center md:w-32 max-md:w-28 h-10 rounded-md shadow bg-blue-500 transition duration-300 hover:bg-blue-600 focus:bg-blue-600 text-white">
+                    class="outline-none flex items-center justify-center md:w-32 md:h-10 max-md:size-10 md:rounded-md max-md:rounded-lg shadow bg-blue-500 transition duration-300 hover:bg-blue-600 focus:bg-blue-600 text-white">
                     <span class="material-symbols-outlined">
                         add
                     </span>
-                    <span>Tambah</span>
+                    <span class="max-md:hidden">Tambah</span>
                 </a>
                 <button type="button" onclick="modalGetPayment(event)"
-                    class="outline-none flex items-center justify-center md:w-32 max-md:w-28 h-10 rounded-md shadow bg-violet-500 transition duration-300 hover:bg-violet-600 focus:bg-violet-600 text-white">
+                    class="outline-none flex items-center justify-center md:w-32 md:h-10 max-md:size-10 md:rounded-md max-md:rounded-lg shadow bg-violet-500 transition duration-300 hover:bg-violet-600 focus:bg-violet-600 text-white">
                     <span class="material-symbols-outlined">
                         filter_alt
                     </span>
-                    <span>Filter</span>
+                    <span class="max-md:hidden">Filter</span>
                 </button>
                 <button type="button" onclick=""
-                    class="outline-none flex items-center justify-center md:w-32 max-md:w-28 h-10 rounded-md shadow bg-red-500 transition duration-300 hover:bg-red-600 focus:bg-red-600 text-white">
+                    class="outline-none flex items-center justify-center md:w-32 md:h-10 max-md:size-10 md:rounded-md max-md:rounded-lg shadow bg-red-500 transition duration-300 hover:bg-red-600 focus:bg-red-600 text-white">
                     <span class="material-symbols-outlined">
                         download
                     </span>
-                    <span>PDF</span>
+                    <span class="max-md:hidden">PDF</span>
                 </button>
             </section>
             <form action="{{ route('admin.monthly-payment.index') }}" method="GET" class="md:w-80">
                 <input type="hidden" name="month" value="{{ request('month') }}">
                 <input type="hidden" name="year" value="{{ request('year') }}">
                 <input type="search" name="search"
-                    class="w-full h-11 rounded px-3 outline-none transition duration-300 border-2 border-white focus:border-green-500 ring-2 ring-white focus:ring-green-200"
+                    class="w-full md:h-11 max-md:h-10 max-md:hidden rounded px-3 outline-none transition duration-300 border-2 border-white focus:border-green-500 ring-2 ring-white focus:ring-green-200"
                     placeholder="Cari berdasarkan nama santri">
             </form>
+            <button type="button" onclick=""
+                class="outline-none flex items-center justify-center md:w-32 md:h-10 max-md:size-10 md:rounded-md max-md:rounded-lg shadow bg-white transition duration-300 md:hidden hover:bg-gray-200 focus:bg-gray-200 text-hitam">
+                <span class="material-symbols-outlined">
+                    search
+                </span>
+            </button>
         </div>
         @if (session('success'))
-            <div id="banner-alert" class="w-full h-12 px-3 flex items-center bg-sky-600 rounded-md shadow mb-3 text-white">
+            <div id="banner-alert" class="w-full h-12 px-3 flex items-center bg-sky-600 rounded-md shadow mb-3 text-white max-md:text-sm">
                 <p>
                     <strong class="max-md:hidden">Success : </strong>
                     <span>{{ session('success') }}</span>
@@ -116,7 +122,7 @@
                                 </td>
                                 <td class="px-6 py-2 flex items-center min-h-[1rem] space-x-2 text-white">
                                     <a href="{{ route('admin.monthly-payment.edit', $payment->id) }}"
-                                        class="outline-none h-9 w-11 flex items-center justify-center rounded-md transition duration-300 {{ $payment->status === 'Lunas' ? 'bg-orange-300 hover:bg-orange-400 focus:bg-orange-400' : 'bg-orange-500 hover:bg-orange-600 focus:bg-orange-600' }}">
+                                        class="outline-none size-10 flex items-center justify-center rounded-md transition duration-300 {{ $payment->status === 'Lunas' ? 'bg-orange-300 hover:bg-orange-400 focus:bg-orange-400' : 'bg-orange-500 hover:bg-orange-600 focus:bg-orange-600' }}">
                                         <span class="material-symbols-outlined text-[21px]">
                                             border_color
                                         </span>

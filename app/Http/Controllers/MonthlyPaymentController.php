@@ -15,7 +15,7 @@ class MonthlyPaymentController extends Controller
      */
     public function index(Request $request)
     {
-        $title = "Pembayaran Bulanan";
+        $title = "Pembayaran";
         $currentMonth = Carbon::now()->month;
         $currentYear = Carbon::now()->year;
 
@@ -71,7 +71,7 @@ class MonthlyPaymentController extends Controller
      */
     public function create()
     {
-        $title = "Tambah Pembayaran";
+        $title = "Tambah";
         $moons = Moon::all();
         $month = Carbon::now()->month;
         $years = range(2020, 2032);
@@ -122,7 +122,7 @@ class MonthlyPaymentController extends Controller
     public function edit(string $id)
     {
         $payment = MonthlyPayment::findOrFail($id);
-        $title = "Edit Pembayaran";
+        $title = "Edit";
         $moons = Moon::all();
         $month = Carbon::now()->month;
         $years = range(2020, 2032);

@@ -195,10 +195,7 @@
                                 Jadwal Kelas
                             </th>
                             <th scope="col" class="px-6 py-3">
-                                Hari
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                Tanggal
+                                Hari, Tanggal
                             </th>
                             <th scope="col" class="px-6 py-3">
                                 Status
@@ -230,10 +227,7 @@
                                     {{ $presence->time->start }} - {{ $presence->time->finish }}
                                 </td>
                                 <td class="px-6 py-4">
-                                    {{ $presence->day->name }}
-                                </td>
-                                <td class="px-6 py-4">
-                                    {{ \Carbon\Carbon::parse($presence->created_at)->format("d-m-Y") }}
+                                    {{ $presence->day->name }}, {{ \Carbon\Carbon::parse($presence->created_at)->format("d-m-Y") }}
                                 </td>
                                 <td class="px-6 py-4">
                                     {{ $presence->status }}

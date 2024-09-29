@@ -18,7 +18,7 @@ class TeacherPresence extends Model
         'time_id',
         'status',
         'substitute_teacher_id',
-        'update_value',
+        'updated_by',
     ];
 
     public function teacherPicket(): BelongsTo
@@ -55,8 +55,8 @@ class TeacherPresence extends Model
         return $this->belongsTo(User::class, 'subtitute_teacher_id');
     }
 
-    public function updateValue(): BelongsTo
+    public function updatedBy(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'subtitute_teacher_id');
+        return $this->belongsTo(User::class, 'updated_by');
     }
 }

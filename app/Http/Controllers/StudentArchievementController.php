@@ -15,11 +15,11 @@ class StudentArchievementController extends Controller
     public function index()
     {
         $title = "Pencapaian Santri";
-        $archievements = StudentAchievement::with("teacher", "student")->latest()->get();
+        $achievements = StudentAchievement::with("teacher", "student", "updatedBy")->latest()->get();
 
         return view("pages.student-achievement.index", compact([
             "title",
-            "archievements",
+            "achievements",
         ]));
     }
 
@@ -43,7 +43,6 @@ class StudentArchievementController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            "teacher_id" => "required",
             "student_id" => "required",
             "achievement" => "required|string",
         ]);
@@ -54,7 +53,7 @@ class StudentArchievementController extends Controller
             "achievement" => ucfirst($request->achievement),
         ]);
 
-        return redirect()->route("")->with("success", "Pencapaian atas nama " . $achievement->student->name . " telah ditambahkan.");
+        return redirect()->route("teacher.student-achievement.index")->with("success", "Pencapaian atas nama " . $achievement->student->name . " telah ditambahkan.");
     }
 
     /**
@@ -68,15 +67,17 @@ class StudentArchievementController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(string $id, $studentId)
     {
         $title = "Edit Pencapaian";
-        $achievement = StudentAchievement::with("teacher", "student")->findOrFail($id);
+        $achievement = StudentAchievement::with("teacher", "student", "updatedBy")->findOrFail($id);
+        $student = Student::with("classRoom")->findOrFail($studentId);
         $students = Student::with("classRoom")->orderBy("name", "asc")->get();
 
         return view("pages.student-achievement.edit", compact([
             "title",
             "achievement",
+            "student",
             "students",
         ]));
     }
@@ -84,22 +85,39 @@ class StudentArchievementController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $id, $studentId)
     {
+        $user = Auth::user();
+
         $request->validate([
-            "teacher_id" => "required" . Auth::user()->id,
-            "student_id" => "required",
             "achievement" => "required|string",
         ]);
 
-        $achievement = StudentAchievement::with("student", "teacher")->findOrFail($id);
-        $achievement->update([
-            "teacher_id" => Auth::user()->id,
-            "student_id" => $request->student_id,
-            "achievement" => ucfirst($request->achievement),
-        ]);
+        $achievement = StudentAchievement::with("student", "teacher", "updatedBy")->findOrFail($id);
+        $student = Student::with("classRoom")->findOrFail($studentId);
 
-        return redirect()->route("")->with("success", "Pencapaian atas nama " . $achievement->student->name . " telah diupdate.");
+        $role = $user->roles->pluck('name')->first();
+
+        if ($role == 'admin') {
+            $achievement->update([
+                "teacher_id" => $achievement->teacher_id,
+                "student_id" => $achievement->student_id,
+                "achievement" => ucfirst($request->achievement),
+                "updated_by" => $user->id,
+            ]);
+
+            return redirect()->route("admin.student.show", $student->id)
+                ->with("success", "Pencapaian atas nama " . $achievement->student->name . " telah diupdate.");
+        } elseif ($role == 'teacher') {
+            $achievement->update([
+                "teacher_id" => $user->id,
+                "student_id" => $achievement->student_id,
+                "achievement" => ucfirst($request->achievement),
+            ]);
+
+            return redirect()->route("teacher.student-achievement.index")
+                ->with("success", "Pencapaian atas nama " . $achievement->student->name . " telah diupdate.");
+        }
     }
 
     /**
@@ -110,6 +128,6 @@ class StudentArchievementController extends Controller
         $achievement = StudentAchievement::with("student", "teacher")->findOrFail($id);
         $achievement->delete();
 
-        return redirect()->route("")->with("success", "Pencapaian atas nama " . $achievement->student->name . " telah dihapus.");
+        return redirect()->route("teacher.student-achievement.index")->with("success", "Pencapaian atas nama " . $achievement->student->name . " telah dihapus.");
     }
 }

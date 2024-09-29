@@ -39,7 +39,7 @@ class TeacherPresenceController extends Controller
         if ($role == 'admin') {
             if ($month && $year) {
                 if ($search) {
-                    $presences = TeacherPresence::with("teacherPicket", "teacher", "lesson", "day", "time", "classRoom", "time", "substituteTeacher")
+                    $presences = TeacherPresence::with("teacherPicket", "teacher", "lesson", "day", "time", "classRoom", "updatedBy", "substituteTeacher")
                         ->whereHas("teacher", function ($query) use ($search) {
                             $query->where("name", "like", "%" . $search . "%");
                         })
@@ -48,7 +48,7 @@ class TeacherPresenceController extends Controller
                         ->latest()
                         ->paginate(25);
                 } else {
-                    $presences = TeacherPresence::with("teacherPicket", "teacher", "lesson", "day", "time", "classRoom", "time", "substituteTeacher")
+                    $presences = TeacherPresence::with("teacherPicket", "teacher", "lesson", "day", "time", "classRoom", "updatedBy", "substituteTeacher")
                         ->whereMonth('created_at', $month)
                         ->whereYear('created_at', $year)
                         ->latest()
@@ -56,7 +56,7 @@ class TeacherPresenceController extends Controller
                 }
             } else {
                 if ($search) {
-                    $presences = TeacherPresence::with("teacherPicket", "teacher", "lesson", "day", "time", "classRoom", "time", "substituteTeacher")
+                    $presences = TeacherPresence::with("teacherPicket", "teacher", "lesson", "day", "time", "classRoom", "updatedBy", "substituteTeacher")
                         ->whereHas("teacher", function ($query) use ($search) {
                             $query->where("name", "like", "%" . $search . "%");
                         })
@@ -65,7 +65,7 @@ class TeacherPresenceController extends Controller
                         ->latest()
                         ->paginate(25);
                 } else {
-                    $presences = TeacherPresence::with("teacherPicket", "teacher", "lesson", "day", "time", "classRoom", "time", "substituteTeacher")
+                    $presences = TeacherPresence::with("teacherPicket", "teacher", "lesson", "day", "time", "classRoom", "updatedBy", "substituteTeacher")
                         ->whereMonth('created_at', $currentMonth)
                         ->whereYear('created_at', $currentYear)
                         ->latest()
@@ -80,7 +80,7 @@ class TeacherPresenceController extends Controller
             ));
         } elseif ($role == 'teacher') {
             if ($search) {
-                $presences = TeacherPresence::with("teacherPicket", "teacher", "lesson", "day", "time", "classRoom", "time", "substituteTeacher")
+                $presences = TeacherPresence::with("teacherPicket", "teacher", "lesson", "day", "time", "classRoom", "updatedBy", "substituteTeacher")
                     ->whereHas("teacher", function ($query) use ($search) {
                         $query->where("name", "like", "%" . $search . "%");
                     })
@@ -88,7 +88,7 @@ class TeacherPresenceController extends Controller
                     ->latest()
                     ->paginate(50);
             } else {
-                $presences = TeacherPresence::with("teacherPicket", "teacher", "lesson", "day", "time", "classRoom", "time", "substituteTeacher")
+                $presences = TeacherPresence::with("teacherPicket", "teacher", "lesson", "day", "time", "classRoom", "updatedBy", "substituteTeacher")
                     ->where("teacher_picket_id", $user->id)
                     ->latest()
                     ->paginate(50);
@@ -173,7 +173,7 @@ class TeacherPresenceController extends Controller
     public function show(string $id)
     {
         $title = "Detail Absensi";
-        $presence = TeacherPresence::with("teacherPicket", "teacher", "lesson", "classRoom", "day", "time", "substituteTeacher")->findOrFail($id);
+        $presence = TeacherPresence::with("teacherPicket", "teacher", "lesson", "classRoom", "day", "time", "substituteTeacher", "updatedBy")->findOrFail($id);
         return view("pages.teacher-presence.show", compact("title", "presence"));
     }
 
@@ -183,7 +183,7 @@ class TeacherPresenceController extends Controller
     public function edit(string $id)
     {
         $title = "Tambah Absensi";
-        $presence = TeacherPresence::with("teacherPicket", "teacher", "lesson", "classRoom", "day", "time", "substituteTeacher")->findOrFail($id);
+        $presence = TeacherPresence::with("teacherPicket", "teacher", "lesson", "classRoom", "day", "time", "substituteTeacher", "updatedBy")->findOrFail($id);
         $teachers = User::role("teacher")->orderBy("name", "asc")->get();
         $lessons = Lesson::orderBy("name", "asc")->get();
         $classRooms = ClassRoom::orderBy("name", "asc")->get();
@@ -233,7 +233,7 @@ class TeacherPresenceController extends Controller
                 "time_id" => $request->time_id,
                 "status" => $request->status,
                 "substitute_teacher_id" => $request->substitute_teacher_id,
-                "update_value" => $user->id,
+                "updated_by" => $user->id,
             ]);
 
             return redirect()->route("admin.teacher-presence.index")->with("success", "");
@@ -257,7 +257,7 @@ class TeacherPresenceController extends Controller
      */
     public function destroy(string $id)
     {
-        $presence = TeacherPresence::with("teacherPicket", "teacher", "lesson", "classRoom", "day", "time", "substituteTeacher")->findOrFail($id);
+        $presence = TeacherPresence::with("teacherPicket", "teacher", "lesson", "classRoom", "day", "time", "substituteTeacher", "updatedBy")->findOrFail($id);
         $presence->delete();
 
         return redirect()->back()->with("success", "");

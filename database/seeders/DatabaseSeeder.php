@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use App\Models\Student;
-use App\Models\ClassRoom;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -16,11 +15,8 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             RolesSeeder::class,
-            DayMoonSeeder::class,
+            RandomSeeder::class,
         ]);
-
-        // Membuat hanya 4 kelas (Class A, Class B, Class C, Class D)
-        ClassRoom::factory()->count(4)->create();
 
         // Membuat 250 siswa dan secara otomatis mengaitkan mereka dengan kelas secara acak
         Student::factory()->count(250)->create();
@@ -40,5 +36,11 @@ class DatabaseSeeder extends Seeder
             'email' => 'operator@example.com',
         ]);
         $operatorSeeder->assignRole('operator');
+
+        $teacherSeeder = User::factory()->create([
+            'email' => 'teacher@example.com',
+            'teacher_status' => 'Guru Dayah',
+        ]);
+        $teacherSeeder->assignRole('teacher');
     }
 }
