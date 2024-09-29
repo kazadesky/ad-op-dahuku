@@ -21,28 +21,28 @@
     @endhasrole
 
     @hasrole('admin')
-        <div class="w-full flex items-center justify-between mb-3">
+        <div class="w-full flex items-center justify-between mb-3 max-md:text-sm">
             <a href="{{ route('admin.student.create') }}"
-                class="outline-none flex items-center justify-center md:w-36 max-md:w-30 h-10 rounded-md shadow bg-blue-500 transition duration-300 hover:bg-blue-600 focus:bg-blue-600 text-white">
+                class="outline-none flex items-center justify-center md:w-36 max-md:w-28 h-10 rounded-md shadow bg-blue-500 transition duration-300 hover:bg-blue-600 focus:bg-blue-600 text-white">
                 <span class="material-symbols-outlined">
                     add
                 </span>
                 <span>Tambah</span>
             </a>
             <form action="{{ route('admin.student.index') }}" method="GET" class="md:w-80">
-                <input type="search" name="search" class="w-full h-11 rounded px-3 outline-none transition duration-300 border-2 border-white focus:border-green-500 ring-2 ring-white focus:ring-green-200"
+                <input type="search" name="search"
+                    class="w-full md:h-11 max-md:h-10 rounded px-3 outline-none transition duration-300 border-2 border-white focus:border-green-500 ring-2 ring-white focus:ring-green-200 max-md:hidden"
                     placeholder="Cari berdasarkan nama atau nis">
             </form>
+            <button type="button" onclick=""
+                class="outline-none flex items-center justify-center md:w-32 md:h-10 max-md:size-10 md:rounded-md max-md:rounded-lg shadow bg-white transition duration-300 md:hidden hover:bg-gray-200 focus:bg-gray-200 text-hitam">
+                <span class="material-symbols-outlined">
+                    search
+                </span>
+            </button>
         </div>
-        @if (session('success'))
-            <div id="banner-alert" class="w-full h-12 px-3 flex items-center bg-sky-600 rounded-md shadow mb-3 text-white">
-                <p>
-                    <strong class="max-md:hidden">Success : </strong>
-                    <span>{{ session('success') }}</span>
-                </p>
-            </div>
-        @endif
-        <div class="relative overflow-x-auto bg-white shadow-lg">
+        @include('components.alert')
+        <div class="relative overflow-x-auto bg-white shadow-lg max-md:text-sm">
             @if (count($studentGuardians) > 0)
                 <table class="w-full text-sm text-left rtl:text-right text-gray-500">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-100">
@@ -120,7 +120,7 @@
                     </tbody>
                 </table>
             @else
-                <p class="text-center text-hitam">Akun wali santri belum ada.</p>
+                <p class="text-center text-hitam py-2">Akun wali santri belum ada.</p>
             @endif
         </div>
 

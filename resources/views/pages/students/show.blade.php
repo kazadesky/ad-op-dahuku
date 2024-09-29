@@ -21,55 +21,56 @@
     @endhasrole
 
     @hasrole('admin')
-        <div class="w-full flex items-center justify-end mb-3">
+        <div class="w-full flex items-center justify-end mb-3 max-md:text-sm">
             <a href="{{ route('admin.student.index') }}"
-                class="outline-none h-11 rounded-md text-white w-36 flex items-center justify-center font-medium bg-red-500 shadow transition duration-300 hover:bg-red-600 focus:bg-red-600">Kembali</a>
+                class="outline-none md:h-11 max-md:h-10 rounded-md text-white md:w-36 max-md:w-28 flex items-center justify-center font-medium bg-red-500 shadow transition duration-300 hover:bg-red-600 focus:bg-red-600">Kembali</a>
         </div>
 
-        <div class="w-full p-5 rounded-md shadow-lg bg-white mb-10">
-            <div class="flex items-center h-12">
-                <p class="font-bold w-44">Nama Lengkap</p>
+        <div class="w-full p-5 rounded-md shadow-lg bg-white mb-10 max-md:text-sm">
+            <div class="flex md:items-center max-md:items-start md:h-12 max-md:min-h-11">
+                <p class="md:font-bold max-md:font-semibold w-44">Nama Lengkap</p>
                 <p class="w-5 font-bold">:</p>
                 <p class="w-full">{{ $student->name }}</p>
             </div>
-            <div class="flex items-center h-12">
-                <p class="font-bold w-44">NIS</p>
+            <div class="flex md:items-center max-md:items-start md:h-12 max-md:min-h-11">
+                <p class="md:font-bold max-md:font-semibold w-44">NIS</p>
                 <p class="w-5 font-bold">:</p>
                 <p class="w-full">{{ $student->nis }}</p>
             </div>
-            <div class="flex items-center h-12">
-                <p class="font-bold w-44">NISN</p>
+            <div class="flex md:items-center max-md:items-start md:h-12 max-md:min-h-11">
+                <p class="md:font-bold max-md:font-semibold w-44">NISN</p>
                 <p class="w-5 font-bold">:</p>
                 <p class="w-full">{{ $student->nisn }}</p>
             </div>
-            <div class="flex items-center h-12">
-                <p class="font-bold w-44">Kelas</p>
+            <div class="flex md:items-center max-md:items-start md:h-12 max-md:min-h-11">
+                <p class="md:font-bold max-md:font-semibold w-44">Kelas</p>
                 <p class="w-5 font-bold">:</p>
                 <p class="w-full">{{ $student->classRoom->name }}</p>
             </div>
-            <div class="flex items-center h-12">
-                <p class="font-bold w-44">Tempat Lahir</p>
+            <div class="flex md:items-center max-md:items-start md:h-12 max-md:min-h-11">
+                <p class="md:font-bold max-md:font-semibold w-44">Tempat Lahir</p>
                 <p class="w-5 font-bold">:</p>
                 <p class="w-full">{{ $student->place_of_birth }}</p>
             </div>
-            <div class="flex items-center h-12">
-                <p class="font-bold w-44">Tanggal Lahir</p>
+            <div class="flex md:items-center max-md:items-start md:h-12 max-md:min-h-11">
+                <p class="md:font-bold max-md:font-semibold w-44">Tanggal Lahir</p>
                 <p class="w-5 font-bold">:</p>
                 <p class="w-full">{{ $student->date_of_birth }}</p>
             </div>
-            <div class="flex items-center h-12">
-                <p class="font-bold w-44">Jenis Kelamin</p>
+            <div class="flex md:items-center max-md:items-start md:h-12 max-md:min-h-11">
+                <p class="md:font-bold max-md:font-semibold w-44">Jenis Kelamin</p>
                 <p class="w-5 font-bold">:</p>
                 <p class="w-full">{{ $student->gender }}</p>
             </div>
-            <div class="flex items-center h-12">
-                <p class="font-bold w-44">Alamat</p>
+            <div class="flex md:items-center max-md:items-start md:h-12 max-md:min-h-11">
+                <p class="md:font-bold max-md:font-semibold w-44">Alamat</p>
                 <p class="w-5 font-bold">:</p>
                 <p class="w-full">{{ $student->address }}</p>
             </div>
         </div>
 
-        <div class="relative overflow-x-auto bg-white shadow-lg mb-10">
+        {{-- payment --}}
+        <div class="relative overflow-x-auto bg-white shadow-lg mb-10 max-md:text-sm">
             <table class="w-full text-sm text-left rtl:text-right text-gray-500">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-100">
                     <tr>
@@ -118,9 +119,6 @@
                             <td class="px-6 py-4">
                                 {{ \Carbon\Carbon::parse($payment->created_at)->format('d-m-Y') }}
                             </td>
-                            {{-- <td class="px-6 py-2 flex items-center min-h-[1rem] space-x-2 text-white">
-
-                            </td> --}}
                         </tr>
                     @empty
                         <caption class="caption-bottom my-3">
@@ -132,8 +130,9 @@
             </table>
         </div>
 
-        <div class="relative overflow-x-auto bg-white shadow-lg mb-10">
-            <table class="w-full text-sm text-left rtl:text-right text-gray-500">
+        {{-- achievement --}}
+        <div class="relative overflow-x-auto bg-white shadow-lg mb-10 max-md:text-sm">
+            <table class="w-full text-sm text-left rtl:text-right text-gray-500 ">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-100">
                     <tr>
                         <th scope="col" class="p-3">
@@ -174,8 +173,8 @@
                             </td>
                             <td class="px-6 py-2 flex items-center min-h-[1rem] space-x-2 text-white">
                                 <a href="{{ route('admin.student-achievement.edit', [$achievement->id, $student->id]) }}"
-                                    class="outline-none h-9 w-11 flex items-center justify-center bg-orange-500 rounded-md transition duration-300 hover:bg-orange-600 focus:bg-orange-600">
-                                    <span class="material-symbols-outlined text-[21px]">
+                                    class="outline-none size-10 flex items-center justify-center bg-orange-500 rounded-md transition duration-300 hover:bg-orange-600 focus:bg-orange-600">
+                                    <span class="material-symbols-outlined md:text-[21px] max-md:text-[20px]">
                                         border_color
                                     </span>
                                 </a>
@@ -191,7 +190,8 @@
             </table>
         </div>
 
-        <div class="relative overflow-x-auto bg-white shadow-lg">
+        {{-- misconduct --}}
+        <div class="relative overflow-x-auto bg-white shadow-lg max-md:text-sm">
             <table class="w-full text-sm text-left rtl:text-right text-gray-500">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-100">
                     <tr>
@@ -229,8 +229,8 @@
                             </td>
                             <td class="px-6 py-2 flex items-center min-h-[1rem] space-x-2 text-white">
                                 <a href="{{ route('admin.student-misconduct.edit', $misconduct->id) }}"
-                                    class="outline-none h-9 w-11 flex items-center justify-center bg-orange-500 rounded-md transition duration-300 hover:bg-orange-600 focus:bg-orange-600">
-                                    <span class="material-symbols-outlined text-[21px]">
+                                    class="outline-none size-10 flex items-center justify-center bg-orange-500 rounded-md transition duration-300 hover:bg-orange-600 focus:bg-orange-600">
+                                    <span class="material-symbols-outlined md:text-[21px] max-md:text-[20px]">
                                         border_color
                                     </span>
                                 </a>

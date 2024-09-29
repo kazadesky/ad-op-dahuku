@@ -21,14 +21,14 @@
     @endhasrole
 
     @hasrole('admin')
-        <div class="w-full flex items-center justify-end mb-3">
-            <form action="{{ route('admin.teacher.index') }}" method="GET" class="md:w-80">
+        <div class="w-full flex items-center justify-end mb-3 max-md:text-sm">
+            <form action="{{ route('admin.teacher.index') }}" method="GET" class="md:w-80 max-md:w-56">
                 <input type="search" name="search"
-                    class="w-full h-11 rounded px-3 outline-none transition duration-300 border-2 border-white focus:border-green-500 ring-2 ring-white focus:ring-green-200"
+                    class="w-full md:h-11 max-md:h-10 rounded px-3 outline-none transition duration-300 border-2 border-white focus:border-green-500 ring-2 ring-white focus:ring-green-200"
                     placeholder="Cari berdasarkan nama">
             </form>
         </div>
-        <div class="relative overflow-x-auto bg-white shadow-lg">
+        <div class="relative overflow-x-auto bg-white shadow-lg max-md:text-sm">
             <table class="w-full text-sm text-left rtl:text-right text-gray-500">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-100">
                     <tr>
@@ -83,7 +83,7 @@
                             <td class="px-6 py-4">
                                 <a href="{{ route('admin.teacher.edit', $teacher->id) }}"
                                     class="outline-none text-white size-10 rounded flex items-center justify-center bg-orange-500 transition duration-300 hover:bg-orange-600 focus:bg-orange-600 active:bg-orange-700">
-                                    <span class="material-symbols-outlined text-xl">
+                                    <span class="material-symbols-outlined md:text-[21px] max-md:text-[20px]">
                                         edit_square
                                     </span>
                                 </a>

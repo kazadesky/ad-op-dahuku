@@ -22,10 +22,10 @@
 
     @hasrole('admin')
         <form action="{{ route('admin.teacher-picket.update', $picket->id) }}" method="POST"
-            class="w-full md:p-10 max-sm:p-6 rounded-lg bg-white text-hitam shadow-lg">
+            class="w-full md:p-10 max-sm:p-6 rounded-lg bg-white text-hitam shadow-lg max-md:text-sm">
             @csrf
             @method('PATCH')
-            <section class="w-full mb-4">
+            <section class="w-full md:mb-4 max-md:mb-3">
                 <div class="flex max-md:flex-col max-md:space-y-1 md:space-x-4 md:items-center">
                     <label for="teacher_id" class="font-medium md:w-40">
                         <span>Nama Guru</span>
@@ -45,7 +45,7 @@
                     </div>
                 @enderror
             </section>
-            <section class="w-full mb-4">
+            <section class="w-full md:mb-4 max-md:mb-3">
                 <div class="flex max-md:flex-col max-md:space-y-1 md:space-x-4 md:items-center">
                     <label for="day_id" class="font-medium md:w-40">
                         <span>Jadwal Piket</span>
@@ -65,7 +65,7 @@
                     </div>
                 @enderror
             </section>
-            <section class="w-full mb-4">
+            <section class="w-full md:mb-4 max-md:mb-3">
                 <div class="flex max-md:flex-col max-md:space-y-1 md:space-x-4 md:items-center">
                     <label for="substitute_picket_teacher_id" class="font-medium md:w-40">
                         <span>Piket Pengganti</span>
@@ -75,7 +75,8 @@
                         class="outline-none w-full rounded-md md:h-12 max-md:h-11 px-3 border-2 transition duration-300 focus:border-green-500 focus:shadow-sm focus:ring-2 focus:ring-green-300 @error('substitute_picket_teacher_id') border-red-500 @enderror">
                         <option value="" hidden>Pilih Guru Pengganti</option>
                         @foreach ($teachers as $teacher)
-                            <option value="{{ $teacher->id }}" {{ $teacher->id === $picket->substitute_teacher_id ? 'selected' : '' }}>
+                            <option value="{{ $teacher->id }}"
+                                {{ $teacher->id === $picket->substitute_teacher_id ? 'selected' : '' }}>
                                 {{ $teacher->name }}</option>
                         @endforeach
                     </select>
@@ -92,7 +93,7 @@
                     <span>Kembali</span>
                 </a>
                 <button type="submit"
-                    class="outline-none w-full h-11 flex items-center justify-center font-medium bg-green-600 rounded shadow-sm transition duration-300 hover:bg-green-700 focus:bg-green-700 max-md:mb-3">Update</button>
+                    class="outline-none w-full md:h-11 max-md:h-10 flex items-center justify-center font-medium bg-green-600 rounded shadow-sm transition duration-300 hover:bg-green-700 focus:bg-green-700 max-md:mb-2">Update</button>
             </section>
         </form>
     @endhasrole

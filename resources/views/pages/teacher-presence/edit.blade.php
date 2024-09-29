@@ -25,10 +25,10 @@
 
     @hasrole('admin')
         <form action="{{ route('admin.teacher-presence.update', $presence->id) }}" method="POST"
-            class="w-full md:p-10 max-sm:p-6 rounded-lg bg-white text-hitam shadow-lg">
+            class="w-full md:p-10 max-sm:p-6 rounded-lg bg-white text-hitam shadow-lg max-md:text-sm">
             @csrf
             @method('PATCH')
-            <section class="w-full mb-4">
+            <section class="w-full md:mb-4 max-md:mb-3">
                 <div class="flex max-md:flex-col max-md:space-y-1 md:space-x-4 md:items-center">
                     <label for="teacher_id" class="font-medium md:w-40">
                         <span>Nama Guru</span>
@@ -49,7 +49,7 @@
                     </div>
                 @enderror
             </section>
-            <section class="w-full mb-4">
+            <section class="w-full md:mb-4 max-md:mb-3">
                 <div class="flex max-md:flex-col max-md:space-y-1 md:space-x-4 md:items-center">
                     <label for="lesson_id" class="font-medium md:w-40">
                         <span>Mata Pelajaran</span>
@@ -70,7 +70,7 @@
                     </div>
                 @enderror
             </section>
-            <section class="w-full mb-4">
+            <section class="w-full md:mb-4 max-md:mb-3">
                 <div class="flex max-md:flex-col max-md:space-y-1 md:space-x-4 md:items-center">
                     <label for="class_id" class="font-medium md:w-40">
                         <span>Kelas</span>
@@ -80,7 +80,8 @@
                         class="outline-none w-full rounded-md md:h-12 max-md:h-11 px-3 border-2 transition duration-300 focus:border-green-500 focus:shadow-sm focus:ring-2 focus:ring-green-300 @error('class_id') border-red-500 @enderror">
                         <option value="" hidden>Pilih Kelas</option>
                         @foreach ($classRooms as $room)
-                            <option value="{{ $room->id }}" {{ $room->id === $presence->class_id }}>{{ $room->name }}
+                            <option value="{{ $room->id }}" {{ $room->id === $presence->class_id ? 'selected' : '' }}>
+                                {{ $room->name }}
                             </option>
                         @endforeach
                     </select>
@@ -91,7 +92,7 @@
                     </div>
                 @enderror
             </section>
-            <section class="w-full mb-4">
+            <section class="w-full md:mb-4 max-md:mb-3">
                 <div class="flex max-md:flex-col max-md:space-y-1 md:space-x-4 md:items-center">
                     <label for="day_id" class="font-medium md:w-40">
                         <span>Hari</span>
@@ -111,7 +112,7 @@
                     </div>
                 @enderror
             </section>
-            <section class="w-full mb-4">
+            <section class="w-full md:mb-4 max-md:mb-3">
                 <div class="flex max-md:flex-col max-md:space-y-1 md:space-x-4 md:items-center">
                     <label for="time_id" class="font-medium md:w-40">
                         <span>Jadwal Pelajaran</span>
@@ -132,7 +133,7 @@
                     </div>
                 @enderror
             </section>
-            <section class="w-full mb-4">
+            <section class="w-full md:mb-4 max-md:mb-3">
                 <div class="flex max-md:flex-col max-md:space-y-1 md:space-x-4 md:items-center">
                     <label for="status" class="font-medium md:w-40">
                         <span>Status Absensi</span>
@@ -153,7 +154,7 @@
                     </div>
                 @enderror
             </section>
-            <section class="w-full mb-4">
+            <section class="w-full md:mb-4 max-md:mb-3">
                 <div class="flex max-md:flex-col max-md:space-y-1 md:space-x-4 md:items-center">
                     <label for="substitute_teacher_id" class="font-medium md:w-40">
                         <span>Guru Pengganti</span>
@@ -181,17 +182,17 @@
                     <span>Kembali</span>
                 </a>
                 <button type="submit"
-                    class="outline-none w-full h-11 flex items-center justify-center font-medium bg-green-600 rounded shadow-sm transition duration-300 hover:bg-green-700 focus:bg-green-700 max-md:mb-3">Tambah</button>
+                    class="outline-none w-full md:h-11 max-md:h-10 flex items-center justify-center font-medium bg-green-600 rounded shadow-sm transition duration-300 hover:bg-green-700 focus:bg-green-700 max-md:mb-2">Tambah</button>
             </section>
         </form>
     @endhasrole
 
     @hasrole('teacher')
-        <form action="{{ route('teacher.teacher-presence.updat, $presence->ide') }}" method="POST"
+        <form action="{{ route('teacher.teacher-presence.update', $presence->id) }}" method="POST"
             class="w-full md:p-10 max-sm:p-6 rounded-lg bg-white text-hitam shadow-lg">
             @csrf
             @method('PATCH')
-            <section class="w-full mb-4">
+            <section class="w-full md:mb-4 max-md:mb-3">
                 <div class="flex max-md:flex-col max-md:space-y-1 md:space-x-4 md:items-center">
                     <label for="teacher_id" class="font-medium md:w-40">
                         <span>Nama Guru</span>
@@ -213,7 +214,7 @@
                     </div>
                 @enderror
             </section>
-            <section class="w-full mb-4">
+            <section class="w-full md:mb-4 max-md:mb-3">
                 <div class="flex max-md:flex-col max-md:space-y-1 md:space-x-4 md:items-center">
                     <label for="lesson_id" class="font-medium md:w-40">
                         <span>Mata Pelajaran</span>
@@ -234,7 +235,7 @@
                     </div>
                 @enderror
             </section>
-            <section class="w-full mb-4">
+            <section class="w-full md:mb-4 max-md:mb-3">
                 <div class="flex max-md:flex-col max-md:space-y-1 md:space-x-4 md:items-center">
                     <label for="class_id" class="font-medium md:w-40">
                         <span>Kelas</span>
@@ -244,7 +245,8 @@
                         class="outline-none w-full rounded-md md:h-12 max-md:h-11 px-3 border-2 transition duration-300 focus:border-green-500 focus:shadow-sm focus:ring-2 focus:ring-green-300 @error('class_id') border-red-500 @enderror">
                         <option value="" hidden>Pilih Kelas</option>
                         @foreach ($classRooms as $room)
-                            <option value="{{ $room->id }}" {{ $room->id === $presence->class_id }}>{{ $room->name }}
+                            <option value="{{ $room->id }}" {{ $room->id === $presence->class_id ? 'selected' : '' }}>
+                                {{ $room->name }}
                             </option>
                         @endforeach
                     </select>
@@ -255,7 +257,7 @@
                     </div>
                 @enderror
             </section>
-            <section class="w-full mb-4">
+            <section class="w-full md:mb-4 max-md:mb-3">
                 <div class="flex max-md:flex-col max-md:space-y-1 md:space-x-4 md:items-center">
                     <label for="time_id" class="font-medium md:w-40">
                         <span>Jadwal Pelajaran</span>
@@ -276,7 +278,7 @@
                     </div>
                 @enderror
             </section>
-            <section class="w-full mb-4">
+            <section class="w-full md:mb-4 max-md:mb-3">
                 <div class="flex max-md:flex-col max-md:space-y-1 md:space-x-4 md:items-center">
                     <label for="status" class="font-medium md:w-40">
                         <span>Status Absensi</span>
@@ -297,7 +299,7 @@
                     </div>
                 @enderror
             </section>
-            <section class="w-full mb-4">
+            <section class="w-full md:mb-4 max-md:mb-3">
                 <div class="flex max-md:flex-col max-md:space-y-1 md:space-x-4 md:items-center">
                     <label for="substitute_teacher_id" class="font-medium md:w-40">
                         <span>Guru Pengganti</span>
@@ -325,7 +327,7 @@
                     <span>Kembali</span>
                 </a>
                 <button type="submit"
-                    class="outline-none w-full h-11 flex items-center justify-center font-medium bg-green-600 rounded shadow-sm transition duration-300 hover:bg-green-700 focus:bg-green-700 max-md:mb-3">Tambah</button>
+                    class="outline-none w-full md:h-11 max-md:h-10 flex items-center justify-center font-medium bg-green-600 rounded shadow-sm transition duration-300 hover:bg-green-700 focus:bg-green-700 max-md:mb-2">Tambah</button>
             </section>
         </form>
     @endhasrole

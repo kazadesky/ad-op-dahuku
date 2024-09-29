@@ -21,7 +21,7 @@
     @endhasrole
 
     @hasrole('admin')
-        <div class="w-full flex items-center justify-between mb-3">
+        <div class="w-full flex items-center justify-between mb-3 max-md:text-sm">
             <a href="{{ route('admin.class-room.create') }}"
                 class="outline-none flex items-center justify-center md:w-36 max-md:w-28 h-10 rounded-md shadow bg-blue-500 transition duration-300 hover:bg-blue-600 focus:bg-blue-600 text-white">
                 <span class="material-symbols-outlined">
@@ -31,7 +31,7 @@
             </a>
         </div>
         @include('components.alert')
-        <div class="relative overflow-x-auto bg-white shadow-lg">
+        <div class="relative overflow-x-auto bg-white shadow-lg max-md:text-sm">
             <table class="w-full text-sm text-left rtl:text-right text-gray-500">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-100">
                     <tr>
@@ -70,7 +70,7 @@
                                     @method("DELETE")
                                     <button type="submit"
                                         class="outline-none size-10 flex items-center justify-center bg-red-500 rounded-md transition duration-300 hover:bg-red-600 focus:bg-red-600">
-                                        <span class="material-symbols-outlined text-[21px]">
+                                        <span class="material-symbols-outlined md:text-[21px] max-md:text-[20px]">
                                             delete
                                         </span>
                                     </button>
