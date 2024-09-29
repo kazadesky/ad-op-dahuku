@@ -13,6 +13,7 @@ class StudentMisconduct extends Model
         'teacher_id',
         'student_id',
         'misconduct',
+        'updated_by',
     ];
 
     public function teacher(): BelongsTo
@@ -23,5 +24,10 @@ class StudentMisconduct extends Model
     public function student(): BelongsTo
     {
         return $this->belongsTo(Student::class, 'student_id');
+    }
+
+    public function updatedBy(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'updated_by');
     }
 }

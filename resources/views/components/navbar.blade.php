@@ -56,7 +56,7 @@
             </ul>
         </ul>
     </section>
-    <section class="flex-none block">
+    <section class="flex-none block max-md:my-1 max-md:text-sm">
         @yield('subtitle')
     </section>
 </nav>

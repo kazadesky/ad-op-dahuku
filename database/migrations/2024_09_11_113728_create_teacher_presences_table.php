@@ -43,7 +43,7 @@ return new class extends Migration
                 ->constrained('users')
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
-            $table->foreignId('update_value')
+            $table->foreignId('updated_by')
                 ->nullable()
                 ->constrained('users')
                 ->cascadeOnDelete()

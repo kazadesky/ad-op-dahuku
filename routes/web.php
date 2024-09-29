@@ -35,8 +35,13 @@ Route::middleware("auth")->group(function () {
         Route::resource("student", StudentController::class);
         Route::resource("student-guardian", StudentGuardianController::class);
         Route::resource("monthly-payment", MonthlyPaymentController::class);
-        Route::resource("student-achievement", StudentArchievementController::class)->except('show');
-        Route::resource("student-misconduct", StudentMisconductController::class)->except('show');
+
+        Route::get("achievement/{id}/student/{studentId}", [StudentArchievementController::class, 'edit'])->name("student-achievement.edit");
+        Route::patch("achievement/{id}/student/{studentId}", [StudentArchievementController::class, 'update'])->name("student-achievement.update");
+
+        Route::get("misconduct/{id}/student/{studentId}", [StudentArchievementController::class, 'edit'])->name("student-misconduct.edit");
+        Route::patch("misconduct/{id}/student/{studentId}", [StudentArchievementController::class, 'update'])->name("student-misconduct.update");
+
 
         Route::resource("teacher", TeacherController::class)->only(['index', 'edit', 'update']);
         Route::resource("teacher-picket", TeacherPicketController::class);

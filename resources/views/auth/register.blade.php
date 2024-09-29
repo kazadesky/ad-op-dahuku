@@ -95,7 +95,7 @@
                 class="outline-none w-full rounded-md h-12 pl-3 pr-12 border-2 transition duration-300 focus:border-green-500 focus:shadow-sm focus:ring-2 focus:ring-green-300 @error('teacher_status')
                         border-red-500
                     @enderror">
-                <option value="" hidden>pilih status</option>
+                <option value="" hidden>Pilih Status</option>
                 @foreach ($status as $item)
                     <option value="{{ $item }}">{{ $item }}</option>
                 @endforeach

@@ -167,32 +167,18 @@
                                 {{ $achievement->teacher->name }}
                             </th>
                             <td class="px-6 py-4">
-                                {{ \Carbon::differenthuman($achievement->created_at) }}
+                                {{ \Carbon\Carbon::parse($achievement->created_at)->format('d-m-Y') }}
                             </td>
                             <td class="px-6 py-4">
                                 {{ $achievement->achievement }}
                             </td>
                             <td class="px-6 py-2 flex items-center min-h-[1rem] space-x-2 text-white">
-                                class="outline-none h-9 w-11 flex items-center justify-center bg-sky-500 rounded-md transition duration-300 hover:bg-sky-600 focus:bg-sky-600">
-                                <span class="material-symbols-outlined text-[21px]">
-                                    visibility
-                                </span>
-                                </a>
-                                <a href="{{ route('admin.achievement.edit', $achievement->id) }}"
+                                <a href="{{ route('admin.student-achievement.edit', [$achievement->id, $student->id]) }}"
                                     class="outline-none h-9 w-11 flex items-center justify-center bg-orange-500 rounded-md transition duration-300 hover:bg-orange-600 focus:bg-orange-600">
                                     <span class="material-symbols-outlined text-[21px]">
                                         border_color
                                     </span>
                                 </a>
-                                <form action="{{ route('admin.achievement.destroy', $achievement->id) }}" method="POST">
-                                    @csrf
-                                    <button type="submit"
-                                        class="outline-none h-9 w-11 flex items-center justify-center bg-red-500 rounded-md transition duration-300 hover:bg-red-600 focus:bg-red-600">
-                                        <span class="material-symbols-outlined text-[21px]">
-                                            delete
-                                        </span>
-                                    </button>
-                                </form> --}}
                             </td>
                         </tr>
                     @empty
@@ -226,47 +212,28 @@
                         </th>
                     </tr>
                 </thead>
-                @php
-                    // $i = ($misconducts->currentPage() - 1) * $misconducts->perPage() + 1;
-                    $i = 1;
-                @endphp
                 <tbody>
                     @forelse ($misconducts as $misconduct)
                         <tr class="bg-white border-b text-hitam">
                             <th class="p-4">
-                                {{ $i++ }}.
+                                {{ $loop->iteration }}.
                             </th>
                             <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                                 {{ $misconduct->teacher->name }}
                             </th>
                             <td class="px-6 py-4">
-                                {{ \Carbon::differenhuman($misconduct->created_at) }}
+                                {{ \Carbon\Carbon::parse($misconduct->created_at)->format('d-m-Y') }}
                             </td>
                             <td class="px-6 py-4">
                                 {{ $misconduct->misconduct }}
                             </td>
                             <td class="px-6 py-2 flex items-center min-h-[1rem] space-x-2 text-white">
-                                {{-- <a href="{{ route('admin.misconduct.show', $misconduct->id) }}"
-                                        class="outline-none h-9 w-11 flex items-center justify-center bg-sky-500 rounded-md transition duration-300 hover:bg-sky-600 focus:bg-sky-600">
-                                        <span class="material-symbols-outlined text-[21px]">
-                                            visibility
-                                        </span>
-                                    </a>
-                                    <a href="{{ route('admin.misconduct.edit', $misconduct->id) }}"
-                                        class="outline-none h-9 w-11 flex items-center justify-center bg-orange-500 rounded-md transition duration-300 hover:bg-orange-600 focus:bg-orange-600">
-                                        <span class="material-symbols-outlined text-[21px]">
-                                            border_color
-                                        </span>
-                                    </a>
-                                    <form action="{{ route('admin.misconduct.destroy', $misconduct->id) }}" method="POST">
-                                        @csrf
-                                        <button type="submit"
-                                            class="outline-none h-9 w-11 flex items-center justify-center bg-red-500 rounded-md transition duration-300 hover:bg-red-600 focus:bg-red-600">
-                                            <span class="material-symbols-outlined text-[21px]">
-                                                delete
-                                            </span>
-                                        </button>
-                                    </form> --}}
+                                <a href="{{ route('admin.student-misconduct.edit', $misconduct->id) }}"
+                                    class="outline-none h-9 w-11 flex items-center justify-center bg-orange-500 rounded-md transition duration-300 hover:bg-orange-600 focus:bg-orange-600">
+                                    <span class="material-symbols-outlined text-[21px]">
+                                        border_color
+                                    </span>
+                                </a>
                             </td>
                         </tr>
                     @empty
