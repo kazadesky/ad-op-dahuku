@@ -22,9 +22,9 @@
 
     @hasrole('admin')
         <form action="{{ route('admin.time.store') }}" method="POST"
-            class="w-full md:p-10 max-sm:p-6 rounded-lg bg-white text-hitam shadow-lg">
+            class="w-full md:p-10 max-sm:p-6 rounded-lg bg-white text-hitam shadow-lg max-md:text-sm">
             @csrf
-            <section class="w-full mb-4">
+            <section class="w-full md:mb-4 max-md:mb-3">
                 <div class="flex max-md:flex-col max-md:space-y-1 md:space-x-4 md:items-center">
                     <label for="start" class="font-medium md:w-40">
                         <span>Jam Masuk</span>
@@ -40,7 +40,7 @@
                     </div>
                 @enderror
             </section>
-            <section class="w-full mb-4">
+            <section class="w-full md:mb-4 max-md:mb-3">
                 <div class="flex max-md:flex-col max-md:space-y-1 md:space-x-4 md:items-center">
                     <label for="finish" class="font-medium md:w-40">
                         <span>Jam Keluar</span>
@@ -62,7 +62,7 @@
                     <span>Kembali</span>
                 </a>
                 <button type="submit"
-                    class="outline-none w-full h-11 flex items-center justify-center font-medium bg-green-600 rounded shadow-sm transition duration-300 hover:bg-green-700 focus:bg-green-700 max-md:mb-3">Tambah</button>
+                    class="outline-none w-full md:h-11 max-md:h-10 flex items-center justify-center font-medium bg-green-600 rounded shadow-sm transition duration-300 hover:bg-green-700 focus:bg-green-700 max-md:mb-2">Tambah</button>
             </section>
         </form>
     @endhasrole

@@ -24,24 +24,17 @@
     @endhasrole
 
     @hasrole('teacher')
-        <div class="w-full flex items-center justify-between mb-3">
+        <div class="w-full flex items-center justify-between mb-3 max-md:text-sm">
             <a href="{{ route('teacher.student-achievement.create') }}"
-                class="outline-none flex items-center justify-center md:w-36 max-md:w-30 h-10 rounded-md shadow bg-blue-500 transition duration-300 hover:bg-blue-600 focus:bg-blue-600 text-white">
+                class="outline-none flex items-center justify-center md:w-36 max-md:w-28 h-10 rounded-md shadow bg-blue-500 transition duration-300 hover:bg-blue-600 focus:bg-blue-600 text-white">
                 <span class="material-symbols-outlined">
                     add
                 </span>
                 <span>Tambah</span>
             </a>
         </div>
-        @if (session('success'))
-            <div id="banner-alert" class="w-full h-12 px-3 flex items-center bg-sky-600 rounded-md shadow mb-3 text-white">
-                <p>
-                    <strong class="max-md:hidden">Success : </strong>
-                    <span>{{ session('success') }}</span>
-                </p>
-            </div>
-        @endif
-        <div class="relative overflow-x-auto bg-white shadow-lg">
+        @include('components.alert')
+        <div class="relative overflow-x-auto bg-white shadow-lg max-md:text-sm">
             <table class="w-full text-sm text-left rtl:text-right text-gray-500">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-100">
                     <tr>
@@ -81,15 +74,15 @@
                                 {{ $achievement->student->classRoom->name }}
                             </td>
                             <td class="px-6 py-4">
-                                {{ \Carbon\Carbon::parse($achievement->created_at)->format("d-m-Y") }}
+                                {{ \Carbon\Carbon::parse($achievement->created_at)->format('d-m-Y') }}
                             </td>
                             <td class="px-6 py-4">
                                 {{ $achievement->achievement }}
                             </td>
                             <td class="px-6 py-2 flex items-center min-h-[1rem] space-x-2 text-white">
                                 <a href="{{ route('teacher.student-achievement.edit', $achievement->id) }}"
-                                    class="outline-none h-9 w-11 flex items-center justify-center bg-orange-500 rounded-md transition duration-300 hover:bg-orange-600 focus:bg-orange-600">
-                                    <span class="material-symbols-outlined text-[21px]">
+                                    class="outline-none size-10 flex items-center justify-center bg-orange-500 rounded-md transition duration-300 hover:bg-orange-600 focus:bg-orange-600">
+                                    <span class="material-symbols-outlined md:text-[21px] max-md:text-[20px]">
                                         border_color
                                     </span>
                                 </a>
@@ -98,8 +91,8 @@
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit"
-                                        class="outline-none h-9 w-11 flex items-center justify-center bg-red-500 rounded-md transition duration-300 hover:bg-red-600 focus:bg-red-600">
-                                        <span class="material-symbols-outlined text-[21px]">
+                                        class="outline-none size-10 flex items-center justify-center bg-red-500 rounded-md transition duration-300 hover:bg-red-600 focus:bg-red-600">
+                                        <span class="material-symbols-outlined md:text-[21px] max-md:text-[20px]">
                                             delete
                                         </span>
                                     </button>
