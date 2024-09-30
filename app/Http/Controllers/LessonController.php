@@ -12,7 +12,7 @@ class LessonController extends Controller
      */
     public function index()
     {
-        $title = "Daftar Pelajaran";
+        $title = "Mapel";
         $lessons = Lesson::latest()->get();
         return view("pages.lessons.index", compact(
             "title",
@@ -25,7 +25,7 @@ class LessonController extends Controller
      */
     public function create()
     {
-        $title = "Tambah Pembelajaran";
+        $title = "Mapel";
         return view("pages.lessons.create", compact([
             "title",
         ]));
@@ -57,7 +57,7 @@ class LessonController extends Controller
      */
     public function edit(string $id)
     {
-        $title = "Edit Pembelajaran";
+        $title = "Mapel";
         $lesson = Lesson::findOrFail($id);
         return view("pages.lessons.edit", compact([
             "title",

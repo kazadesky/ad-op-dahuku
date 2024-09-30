@@ -82,7 +82,7 @@
                             </td>
                             <td class="px-6 py-4">
                                 <a href="{{ route('admin.teacher.edit', $teacher->id) }}"
-                                    class="outline-none text-white size-10 rounded flex items-center justify-center bg-orange-500 transition duration-300 hover:bg-orange-600 focus:bg-orange-600 active:bg-orange-700">
+                                    class="outline-none text-white size-10 rounded flex items-center justify-center bg-orange-600 transition duration-300 hover:bg-orange-700 focus:bg-orange-700 active:bg-orange-800">
                                     <span class="material-symbols-outlined md:text-[21px] max-md:text-[20px]">
                                         edit_square
                                     </span>

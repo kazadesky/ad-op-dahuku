@@ -18,7 +18,7 @@ class LessonTimetableController extends Controller
      */
     public function index()
     {
-        $title = "Jadwal Pembelajaran";
+        $title = "Roster";
         $timetables = LessonTimetable::with("lesson", "classRoom", "teacher", "day", "time")->latest()->get();
         return view("pages.lessons-timetable.index", compact([
             "title",
@@ -31,7 +31,7 @@ class LessonTimetableController extends Controller
      */
     public function create()
     {
-        $title = "Tambah Jadwal";
+        $title = "Roster";
         $teachers = User::role("teacher")->orderBy("name", "asc")->get();
         $days = Day::all();
         $lessons = Lesson::orderBy("name", "asc")->get();
@@ -77,7 +77,7 @@ class LessonTimetableController extends Controller
      */
     public function show(string $id)
     {
-        $title = "Edit Jadwal";
+        $title = "Roster";
         $timetable = LessonTimetable::with("lesson", "classRoom", "teacher", "day", "time")->findOrFail($id);
         return view("", compact([
             "title",
@@ -90,7 +90,7 @@ class LessonTimetableController extends Controller
      */
     public function edit(string $id)
     {
-        $title = "Edit Jadwal";
+        $title = "Roster";
         $timetable = LessonTimetable::with("lesson", "classRoom", "teacher", "day", "time")->findOrFail($id);
         $teachers = User::role("teacher")->orderBy("name", "asc")->get();
         $days = Day::all();

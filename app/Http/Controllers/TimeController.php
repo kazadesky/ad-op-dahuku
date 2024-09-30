@@ -17,7 +17,7 @@ class TimeController extends Controller
 
     public function create()
     {
-        $title = "Tambah Jam Masuk";
+        $title = "Jam Masuk";
         return view("pages.times.create", compact("title"));
     }
 
@@ -40,7 +40,7 @@ class TimeController extends Controller
 
     public function edit(string $id)
     {
-        $title = "Edit Jam Masuk";
+        $title = "Jam Masuk";
         $time = Time::findOrFail($id);
         return view("pages.times.edit", compact("title", "time"));
     }

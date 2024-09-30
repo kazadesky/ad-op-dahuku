@@ -12,7 +12,7 @@ class ClassRoomController extends Controller
      */
     public function index()
     {
-        $title = "Daftar Kelas";
+        $title = "Kelas";
         $classRoom = ClassRoom::latest()->get();
         return view("pages.class-rooms.index", compact(
             "title",
@@ -25,7 +25,7 @@ class ClassRoomController extends Controller
      */
     public function create()
     {
-        $title = "Tambah Kelas";
+        $title = "Kelas";
         return view("pages.class-rooms.create", compact(
             "title",
         ));
@@ -59,7 +59,7 @@ class ClassRoomController extends Controller
      */
     public function edit(string $id)
     {
-        $title = "Edit Kelas";
+        $title = "Kelas";
         $classRoom = ClassRoom::findOrFail($id);
         return view("pages.class-rooms.edit", compact(
             "title",

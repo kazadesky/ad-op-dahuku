@@ -25,20 +25,27 @@ class TeacherController extends Controller
         $title = "Edit Status Akun";
         $teacher = User::role("teacher")->findOrFail($id);
         $roles = Role::where('name', '!=', 'super_admin')->pluck("name");
+        $status = ["Guru Dayah", "Guru Umum"];
 
         return view("pages.teachers.edit", compact(
             "title",
             "teacher",
             "roles",
+            "status",
         ));
     }
 
     public function update(Request $request, string $id)
     {
         $request->validate([
+            "teacher_status" => "required|in:Guru Dayah,Guru Umum",
             "roles" => "required|in:admin,operator,teacher",
         ]);
+
         $teacher = User::role("teacher")->findOrFail($id);
+        $teacher->update([
+            "teacher_status" => $request->teacher_status,
+        ]);
 
         // Hapus role yang sebelumnya
         $teacher->roles()->detach();

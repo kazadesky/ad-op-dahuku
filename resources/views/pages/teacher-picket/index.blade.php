@@ -2,7 +2,7 @@
 @section('title', 'Daftar Guru Piket')
 
 @section('subtitle')
-    <p class="flex items-center space-x-px capitalize text-white">
+    <p class="flex items-center space-x-px capitalize text-white-text">
         @hasrole('super_admin')
             <span>Super Admin</span>
         @endhasrole
@@ -23,7 +23,7 @@
     @hasrole('admin')
         <div class="w-full flex items-center justify-between mb-3 max-md:text-sm">
             <a href="{{ route('admin.teacher-picket.create') }}"
-                class="outline-none flex items-center justify-center md:w-32 max-md:w-28 h-10 rounded-md shadow bg-blue-500 transition duration-300 hover:bg-blue-600 focus:bg-blue-600 text-white">
+                class="outline-none flex items-center justify-center md:w-32 max-md:w-28 h-10 rounded-md shadow bg-blue-600 transition duration-300 hover:bg-blue-700 focus:bg-blue-700 text-white-text">
                 <span class="material-symbols-outlined">
                     add
                 </span>
@@ -42,15 +42,15 @@
                                     <span>{{ $loop->iteration }} .</span>
                                     <span>{{ $item->teacher->name }}</span>
                                 </section>
-                                <section class="flex items-center space-x-2 text-white">
+                                <section class="flex items-center space-x-2 text-white-text">
                                     {{-- <a href="{{ route('admin.teacher-picket.show', $item->id) }}"
-                                        class="outline-none size-9 flex items-center justify-center bg-sky-500 rounded-md transition duration-300 hover:bg-sky-600 focus:bg-sky-600">
+                                        class="outline-none size-9 flex items-center justify-center bg-sky-600 rounded-md transition duration-300 hover:bg-sky-700 focus:bg-sky-700">
                                         <span class="material-symbols-outlined md:text-[21px] max-md:text-[20px]">
                                             visibility
                                         </span>
                                     </a> --}}
                                     <a href="{{ route('admin.teacher-picket.edit', $item->id) }}"
-                                        class="outline-none size-9 flex items-center justify-center bg-orange-500 rounded-md transition duration-300 hover:bg-orange-600 focus:bg-orange-600">
+                                        class="outline-none size-9 flex items-center justify-center bg-orange-600 rounded-md transition duration-300 hover:bg-orange-700 focus:bg-orange-700">
                                         <span class="material-symbols-outlined md:text-[21px] max-md:text-[20px]">
                                             border_color
                                         </span>
@@ -59,7 +59,7 @@
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit"
-                                            class="outline-none size-9 flex items-center justify-center bg-red-500 rounded-md transition duration-300 hover:bg-red-600 focus:bg-red-600">
+                                            class="outline-none size-9 flex items-center justify-center bg-red-600 rounded-md transition duration-300 hover:bg-red-700 focus:bg-red-700">
                                             <span class="material-symbols-outlined md:text-[21px] max-md:text-[20px]">
                                                 delete
                                             </span>
@@ -70,7 +70,7 @@
                                         @method('PATCH')
                                         <input type="hidden" name="action" value="{{ $item->action === 0 ? 1 : 0 }}">
                                         <button type="submit"
-                                            class="outline-none text-white size-9 rounded flex items-center justify-center bg-indigo-500 transition duration-300 hover:bg-indigo-600 focus:bg-indigo-600 active:bg-indigo-700">
+                                            class="outline-none text-white-text size-9 rounded flex items-center justify-center bg-indigo-600 transition duration-300 hover:bg-indigo-700 focus:bg-indigo-700 active:bg-indigo-800">
                                             <span class="material-symbols-outlined md:text-[21px] max-md:text-[20px]">
                                                 {{ $item->action === 0 ? 'radio_button_unchecked' : 'radio_button_checked' }}
                                             </span>
@@ -92,15 +92,15 @@
                                     <span>{{ $loop->iteration }} .</span>
                                     <span>{{ $item->teacher->name }}</span>
                                 </section>
-                                <section class="flex items-center space-x-2 text-white">
+                                <section class="flex items-center space-x-2 text-white-text">
                                     {{-- <a href="{{ route('admin.teacher-picket.show', $item->id) }}"
-                                        class="outline-none size-9 flex items-center justify-center bg-sky-500 rounded-md transition duration-300 hover:bg-sky-600 focus:bg-sky-600">
+                                        class="outline-none size-9 flex items-center justify-center bg-sky-600 rounded-md transition duration-300 hover:bg-sky-700 focus:bg-sky-700">
                                         <span class="material-symbols-outlined md:text-[21px] max-md:text-[20px]">
                                             visibility
                                         </span>
                                     </a> --}}
                                     <a href="{{ route('admin.teacher-picket.edit', $item->id) }}"
-                                        class="outline-none size-9 flex items-center justify-center bg-orange-500 rounded-md transition duration-300 hover:bg-orange-600 focus:bg-orange-600">
+                                        class="outline-none size-9 flex items-center justify-center bg-orange-600 rounded-md transition duration-300 hover:bg-orange-700 focus:bg-orange-700">
                                         <span class="material-symbols-outlined md:text-[21px] max-md:text-[20px]">
                                             border_color
                                         </span>
@@ -109,7 +109,7 @@
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit"
-                                            class="outline-none size-9 flex items-center justify-center bg-red-500 rounded-md transition duration-300 hover:bg-red-600 focus:bg-red-600">
+                                            class="outline-none size-9 flex items-center justify-center bg-red-600 rounded-md transition duration-300 hover:bg-red-700 focus:bg-red-700">
                                             <span class="material-symbols-outlined md:text-[21px] max-md:text-[20px]">
                                                 delete
                                             </span>
@@ -120,7 +120,7 @@
                                         @method('PATCH')
                                         <input type="hidden" name="action" value="{{ $item->action === 0 ? 1 : 0 }}">
                                         <button type="submit"
-                                            class="outline-none text-white size-9 rounded flex items-center justify-center bg-indigo-500 transition duration-300 hover:bg-indigo-600 focus:bg-indigo-600 active:bg-indigo-700">
+                                            class="outline-none text-white-text size-9 rounded flex items-center justify-center bg-indigo-600 transition duration-300 hover:bg-indigo-700 focus:bg-indigo-700 active:bg-indigo-800">
                                             <span class="material-symbols-outlined md:text-[21px] max-md:text-[20px]">
                                                 {{ $item->action === 0 ? 'radio_button_unchecked' : 'radio_button_checked' }}
                                             </span>
@@ -142,15 +142,15 @@
                                     <span>{{ $loop->iteration }} .</span>
                                     <span>{{ $item->teacher->name }}</span>
                                 </section>
-                                <section class="flex items-center space-x-2 text-white">
+                                <section class="flex items-center space-x-2 text-white-text">
                                     {{-- <a href="{{ route('admin.teacher-picket.show', $item->id) }}"
-                                        class="outline-none size-9 flex items-center justify-center bg-sky-500 rounded-md transition duration-300 hover:bg-sky-600 focus:bg-sky-600">
+                                        class="outline-none size-9 flex items-center justify-center bg-sky-600 rounded-md transition duration-300 hover:bg-sky-700 focus:bg-sky-700">
                                         <span class="material-symbols-outlined md:text-[21px] max-md:text-[20px]">
                                             visibility
                                         </span>
                                     </a> --}}
                                     <a href="{{ route('admin.teacher-picket.edit', $item->id) }}"
-                                        class="outline-none size-9 flex items-center justify-center bg-orange-500 rounded-md transition duration-300 hover:bg-orange-600 focus:bg-orange-600">
+                                        class="outline-none size-9 flex items-center justify-center bg-orange-600 rounded-md transition duration-300 hover:bg-orange-700 focus:bg-orange-700">
                                         <span class="material-symbols-outlined md:text-[21px] max-md:text-[20px]">
                                             border_color
                                         </span>
@@ -159,7 +159,7 @@
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit"
-                                            class="outline-none size-9 flex items-center justify-center bg-red-500 rounded-md transition duration-300 hover:bg-red-600 focus:bg-red-600">
+                                            class="outline-none size-9 flex items-center justify-center bg-red-600 rounded-md transition duration-300 hover:bg-red-700 focus:bg-red-700">
                                             <span class="material-symbols-outlined md:text-[21px] max-md:text-[20px]">
                                                 delete
                                             </span>
@@ -170,7 +170,7 @@
                                         @method('PATCH')
                                         <input type="hidden" name="action" value="{{ $item->action === 0 ? 1 : 0 }}">
                                         <button type="submit"
-                                            class="outline-none text-white size-9 rounded flex items-center justify-center bg-indigo-500 transition duration-300 hover:bg-indigo-600 focus:bg-indigo-600 active:bg-indigo-700">
+                                            class="outline-none text-white-text size-9 rounded flex items-center justify-center bg-indigo-600 transition duration-300 hover:bg-indigo-700 focus:bg-indigo-700 active:bg-indigo-800">
                                             <span class="material-symbols-outlined md:text-[21px] max-md:text-[20px]">
                                                 {{ $item->action === 0 ? 'radio_button_unchecked' : 'radio_button_checked' }}
                                             </span>
@@ -192,15 +192,15 @@
                                     <span>{{ $loop->iteration }} .</span>
                                     <span>{{ $item->teacher->name }}</span>
                                 </section>
-                                <section class="flex items-center space-x-2 text-white">
+                                <section class="flex items-center space-x-2 text-white-text">
                                     {{-- <a href="{{ route('admin.teacher-picket.show', $item->id) }}"
-                                        class="outline-none size-9 flex items-center justify-center bg-sky-500 rounded-md transition duration-300 hover:bg-sky-600 focus:bg-sky-600">
+                                        class="outline-none size-9 flex items-center justify-center bg-sky-600 rounded-md transition duration-300 hover:bg-sky-700 focus:bg-sky-700">
                                         <span class="material-symbols-outlined md:text-[21px] max-md:text-[20px]">
                                             visibility
                                         </span>
                                     </a> --}}
                                     <a href="{{ route('admin.teacher-picket.edit', $item->id) }}"
-                                        class="outline-none size-9 flex items-center justify-center bg-orange-500 rounded-md transition duration-300 hover:bg-orange-600 focus:bg-orange-600">
+                                        class="outline-none size-9 flex items-center justify-center bg-orange-600 rounded-md transition duration-300 hover:bg-orange-700 focus:bg-orange-700">
                                         <span class="material-symbols-outlined md:text-[21px] max-md:text-[20px]">
                                             border_color
                                         </span>
@@ -209,7 +209,7 @@
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit"
-                                            class="outline-none size-9 flex items-center justify-center bg-red-500 rounded-md transition duration-300 hover:bg-red-600 focus:bg-red-600">
+                                            class="outline-none size-9 flex items-center justify-center bg-red-600 rounded-md transition duration-300 hover:bg-red-700 focus:bg-red-700">
                                             <span class="material-symbols-outlined md:text-[21px] max-md:text-[20px]">
                                                 delete
                                             </span>
@@ -220,7 +220,7 @@
                                         @method('PATCH')
                                         <input type="hidden" name="action" value="{{ $item->action === 0 ? 1 : 0 }}">
                                         <button type="submit"
-                                            class="outline-none text-white size-9 rounded flex items-center justify-center bg-indigo-500 transition duration-300 hover:bg-indigo-600 focus:bg-indigo-600 active:bg-indigo-700">
+                                            class="outline-none text-white-text size-9 rounded flex items-center justify-center bg-indigo-600 transition duration-300 hover:bg-indigo-700 focus:bg-indigo-700 active:bg-indigo-800">
                                             <span class="material-symbols-outlined md:text-[21px] max-md:text-[20px]">
                                                 {{ $item->action === 0 ? 'radio_button_unchecked' : 'radio_button_checked' }}
                                             </span>
@@ -242,15 +242,15 @@
                                     <span>{{ $loop->iteration }} .</span>
                                     <span>{{ $item->teacher->name }}</span>
                                 </section>
-                                <section class="flex items-center space-x-2 text-white">
+                                <section class="flex items-center space-x-2 text-white-text">
                                     {{-- <a href="{{ route('admin.teacher-picket.show', $item->id) }}"
-                                        class="outline-none size-9 flex items-center justify-center bg-sky-500 rounded-md transition duration-300 hover:bg-sky-600 focus:bg-sky-600">
+                                        class="outline-none size-9 flex items-center justify-center bg-sky-600 rounded-md transition duration-300 hover:bg-sky-700 focus:bg-sky-700">
                                         <span class="material-symbols-outlined md:text-[21px] max-md:text-[20px]">
                                             visibility
                                         </span>
                                     </a> --}}
                                     <a href="{{ route('admin.teacher-picket.edit', $item->id) }}"
-                                        class="outline-none size-9 flex items-center justify-center bg-orange-500 rounded-md transition duration-300 hover:bg-orange-600 focus:bg-orange-600">
+                                        class="outline-none size-9 flex items-center justify-center bg-orange-600 rounded-md transition duration-300 hover:bg-orange-700 focus:bg-orange-700">
                                         <span class="material-symbols-outlined md:text-[21px] max-md:text-[20px]">
                                             border_color
                                         </span>
@@ -259,7 +259,7 @@
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit"
-                                            class="outline-none size-9 flex items-center justify-center bg-red-500 rounded-md transition duration-300 hover:bg-red-600 focus:bg-red-600">
+                                            class="outline-none size-9 flex items-center justify-center bg-red-600 rounded-md transition duration-300 hover:bg-red-700 focus:bg-red-700">
                                             <span class="material-symbols-outlined md:text-[21px] max-md:text-[20px]">
                                                 delete
                                             </span>
@@ -270,7 +270,7 @@
                                         @method('PATCH')
                                         <input type="hidden" name="action" value="{{ $item->action === 0 ? 1 : 0 }}">
                                         <button type="submit"
-                                            class="outline-none text-white size-9 rounded flex items-center justify-center bg-indigo-500 transition duration-300 hover:bg-indigo-600 focus:bg-indigo-600 active:bg-indigo-700">
+                                            class="outline-none text-white-text size-9 rounded flex items-center justify-center bg-indigo-600 transition duration-300 hover:bg-indigo-700 focus:bg-indigo-700 active:bg-indigo-800">
                                             <span class="material-symbols-outlined md:text-[21px] max-md:text-[20px]">
                                                 {{ $item->action === 0 ? 'radio_button_unchecked' : 'radio_button_checked' }}
                                             </span>
@@ -292,15 +292,15 @@
                                     <span>{{ $loop->iteration }} .</span>
                                     <span>{{ $item->teacher->name }}</span>
                                 </section>
-                                <section class="flex items-center space-x-2 text-white">
+                                <section class="flex items-center space-x-2 text-white-text">
                                     {{-- <a href="{{ route('admin.teacher-picket.show', $item->id) }}"
-                                        class="outline-none size-9 flex items-center justify-center bg-sky-500 rounded-md transition duration-300 hover:bg-sky-600 focus:bg-sky-600">
+                                        class="outline-none size-9 flex items-center justify-center bg-sky-600 rounded-md transition duration-300 hover:bg-sky-700 focus:bg-sky-700">
                                         <span class="material-symbols-outlined md:text-[21px] max-md:text-[20px]">
                                             visibility
                                         </span>
                                     </a> --}}
                                     <a href="{{ route('admin.teacher-picket.edit', $item->id) }}"
-                                        class="outline-none size-9 flex items-center justify-center bg-orange-500 rounded-md transition duration-300 hover:bg-orange-600 focus:bg-orange-600">
+                                        class="outline-none size-9 flex items-center justify-center bg-orange-600 rounded-md transition duration-300 hover:bg-orange-700 focus:bg-orange-700">
                                         <span class="material-symbols-outlined md:text-[21px] max-md:text-[20px]">
                                             border_color
                                         </span>
@@ -309,7 +309,7 @@
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit"
-                                            class="outline-none size-9 flex items-center justify-center bg-red-500 rounded-md transition duration-300 hover:bg-red-600 focus:bg-red-600">
+                                            class="outline-none size-9 flex items-center justify-center bg-red-600 rounded-md transition duration-300 hover:bg-red-700 focus:bg-red-700">
                                             <span class="material-symbols-outlined md:text-[21px] max-md:text-[20px]">
                                                 delete
                                             </span>
@@ -320,7 +320,7 @@
                                         @method('PATCH')
                                         <input type="hidden" name="action" value="{{ $item->action === 0 ? 1 : 0 }}">
                                         <button type="submit"
-                                            class="outline-none text-white size-9 rounded flex items-center justify-center bg-indigo-500 transition duration-300 hover:bg-indigo-600 focus:bg-indigo-600 active:bg-indigo-700">
+                                            class="outline-none text-white-text size-9 rounded flex items-center justify-center bg-indigo-600 transition duration-300 hover:bg-indigo-700 focus:bg-indigo-700 active:bg-indigo-800">
                                             <span class="material-symbols-outlined md:text-[21px] max-md:text-[20px]">
                                                 {{ $item->action === 0 ? 'radio_button_unchecked' : 'radio_button_checked' }}
                                             </span>

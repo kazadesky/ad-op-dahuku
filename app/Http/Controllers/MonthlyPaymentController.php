@@ -71,7 +71,7 @@ class MonthlyPaymentController extends Controller
      */
     public function create()
     {
-        $title = "Tambah";
+        $title = "Pembayaran";
         $moons = Moon::all();
         $month = Carbon::now()->month;
         $years = range(2020, 2032);
@@ -122,7 +122,7 @@ class MonthlyPaymentController extends Controller
     public function edit(string $id)
     {
         $payment = MonthlyPayment::findOrFail($id);
-        $title = "Edit";
+        $title = "Pembayaran";
         $moons = Moon::all();
         $month = Carbon::now()->month;
         $years = range(2020, 2032);

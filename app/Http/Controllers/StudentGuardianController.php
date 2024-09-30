@@ -13,7 +13,7 @@ class StudentGuardianController extends Controller
      */
     public function index()
     {
-        $title = "Akun Wali Santri";
+        $title = "Akun Wali";
         $studentGuardians = StudentGuardian::with("student")->latest()->paginate(25);
         return view("pages.student-guardian.index", compact(
             "title",

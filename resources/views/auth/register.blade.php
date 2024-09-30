@@ -80,7 +80,7 @@
                     placeholder="******" value="{{ old('password') }}">
                 <button type="button" onclick="passwordConfirmShow(event)"
                     class="absolute top-[0.30rem] right-2 text-gray-500 active:text-green-500 w-10 h-10 flex items-center justify-center outline-none focus:text-green-500">
-                    <span id="icon" class="material-symbols-outlined">
+                    <span id="icon_confirm" class="material-symbols-outlined">
                         visibility
                     </span>
                 </button>

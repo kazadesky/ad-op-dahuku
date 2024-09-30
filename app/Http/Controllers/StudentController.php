@@ -38,7 +38,7 @@ class StudentController extends Controller
      */
     public function create()
     {
-        $title = "Tambah Data Santri";
+        $title = "Data Santri";
         $genders = ["Laki-Laki", "Perempuan"];
         $classRoom = ClassRoom::orderBy('id', 'DESC')->get();
         return view("pages.students.create", compact("classRoom", "title", "genders"));
@@ -83,7 +83,7 @@ class StudentController extends Controller
         $achievements = StudentAchievement::orderBy("id", "DESC")->with("teacher", "student")->where('student_id', $id)->get();
         $misconducts = StudentMisconduct::orderBy("id", "DESC")->with("teacher", "student")->where('student_id', $id)->get();
         $payments = MonthlyPayment::with("moon", "student")->where('student_id', $id)->get();
-        $title = "Detail Data Santri";
+        $title = "Data Santri";
         return view("pages.students.show", compact(
             "student",
             "title",
@@ -99,7 +99,7 @@ class StudentController extends Controller
     public function edit(string $id)
     {
         $student = Student::with('classRoom')->findOrFail($id);
-        $title = "Edit Data Santri";
+        $title = "Data Santri";
         $genders = ["Laki-Laki", "Perempuan"];
         $classRoom = ClassRoom::all();
         return view("pages.students.edit", compact(

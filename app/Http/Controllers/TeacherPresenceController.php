@@ -112,7 +112,7 @@ class TeacherPresenceController extends Controller
      */
     public function create()
     {
-        $title = "Tambah Absensi";
+        $title = "Absensi Guru";
         $teachers = User::role("teacher")->orderBy("name", "asc")->get();
         $lessons = Lesson::orderBy("name", "asc")->get();
         $classRooms = ClassRoom::orderBy("name", "asc")->get();
@@ -172,7 +172,7 @@ class TeacherPresenceController extends Controller
      */
     public function show(string $id)
     {
-        $title = "Detail Absensi";
+        $title = "Absensi Guru";
         $presence = TeacherPresence::with("teacherPicket", "teacher", "lesson", "classRoom", "day", "time", "substituteTeacher", "updatedBy")->findOrFail($id);
         return view("pages.teacher-presence.show", compact("title", "presence"));
     }
@@ -182,7 +182,7 @@ class TeacherPresenceController extends Controller
      */
     public function edit(string $id)
     {
-        $title = "Tambah Absensi";
+        $title = "Absensi Guru";
         $presence = TeacherPresence::with("teacherPicket", "teacher", "lesson", "classRoom", "day", "time", "substituteTeacher", "updatedBy")->findOrFail($id);
         $teachers = User::role("teacher")->orderBy("name", "asc")->get();
         $lessons = Lesson::orderBy("name", "asc")->get();

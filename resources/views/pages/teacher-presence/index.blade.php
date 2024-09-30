@@ -2,7 +2,7 @@
 @section('title', 'Absensi Guru')
 
 @section('subtitle')
-    <p class="flex items-center space-x-px capitalize text-white">
+    <p class="flex items-center space-x-px capitalize text-white-text">
         @hasrole('super_admin')
             <span>Super Admin</span>
         @endhasrole
@@ -25,21 +25,21 @@
         <div class="w-full flex items-center justify-between mb-3 max-md:text-sm">
             <section class="flex items-center md:space-x-3 max-md:space-x-2">
                 <a href="{{ route('admin.teacher-presence.create') }}"
-                    class="outline-none flex items-center justify-center md:w-32 max-md:size-10 md:h-10 rounded-md shadow bg-blue-500 transition duration-300 hover:bg-blue-600 focus:bg-blue-600 text-white">
+                    class="outline-none flex items-center justify-center md:w-32 max-md:size-10 md:h-10 rounded-md shadow bg-blue-600 transition duration-300 hover:bg-blue-700 focus:bg-blue-700 text-white-text">
                     <span class="material-symbols-outlined">
                         add
                     </span>
                     <span class="max-md:hidden">Tambah</span>
                 </a>
                 <button type="button" onclick="modalGetPayment(event)"
-                    class="outline-none flex items-center justify-center md:w-32 max-md:size-10 md:h-10 rounded-md shadow bg-violet-500 transition duration-300 hover:bg-violet-600 focus:bg-violet-600 text-white">
+                    class="outline-none flex items-center justify-center md:w-32 max-md:size-10 md:h-10 rounded-md shadow bg-violet-600 transition duration-300 hover:bg-violet-700 focus:bg-violet-700 text-white-text">
                     <span class="material-symbols-outlined">
                         filter_alt
                     </span>
                     <span class="max-md:hidden">Filter</span>
                 </button>
                 <button type="button" onclick=""
-                    class="outline-none flex items-center justify-center md:w-32 max-md:size-10 md:h-10 rounded-md shadow bg-red-500 transition duration-300 hover:bg-red-600 focus:bg-red-600 text-white">
+                    class="outline-none flex items-center justify-center md:w-32 max-md:size-10 md:h-10 rounded-md shadow bg-red-600 transition duration-300 hover:bg-red-700 focus:bg-red-700 text-white-text">
                     <span class="material-symbols-outlined">
                         download
                     </span>
@@ -112,15 +112,15 @@
                             <td class="px-6 py-4">
                                 {{ $presence->status }}
                             </td>
-                            <td class="px-6 py-2 flex items-center min-h-[1rem] space-x-2 text-white">
+                            <td class="px-6 py-2 flex items-center min-h-[1rem] space-x-2 text-white-text">
                                 <a href="{{ route('admin.teacher-presence.show', $presence->id) }}"
-                                    class="outline-none size-10 flex items-center justify-center bg-sky-500 rounded-md transition duration-300 hover:bg-sky-600 focus:bg-sky-600">
+                                    class="outline-none size-10 flex items-center justify-center bg-sky-500 rounded-md transition duration-300 hover:bg-sky-700 focus:bg-sky-700">
                                     <span class="material-symbols-outlined md:text-[21px] max-md:text-[20px]">
                                         visibility
                                     </span>
                                 </a>
                                 <a href="{{ route('admin.teacher-presence.edit', $presence->id) }}"
-                                    class="outline-none size-10 flex items-center justify-center bg-orange-500 rounded-md transition duration-300 hover:bg-orange-600 focus:bg-orange-600">
+                                    class="outline-none size-10 flex items-center justify-center bg-orange-600 rounded-md transition duration-300 hover:bg-orange-700 focus:bg-orange-700">
                                     <span class="material-symbols-outlined md:text-[21px] max-md:text-[20px]">
                                         border_color
                                     </span>
@@ -128,7 +128,7 @@
                                 <form action="{{ route('admin.teacher-presence.destroy', $presence->id) }}" method="POST">
                                     @csrf
                                     <button type="submit"
-                                        class="outline-none size-10 flex items-center justify-center bg-red-500 rounded-md transition duration-300 hover:bg-red-600 focus:bg-red-600">
+                                        class="outline-none size-10 flex items-center justify-center bg-red-600 rounded-md transition duration-300 hover:bg-red-700 focus:bg-red-700">
                                         <span class="material-symbols-outlined md:text-[21px] max-md:text-[20px]">
                                             delete
                                         </span>
@@ -153,7 +153,7 @@
     @hasrole('teacher')
         <div class="w-full flex items-center justify-between mb-3 max-md:text-sm">
             <a href="{{ $action->action === 0 ? '#' : route('teacher.teacher-presence.create') }}"
-                class="outline-none flex items-center justify-center md:w-40 max-md:w-28 h-10 rounded-md shadow  transition duration-300 text-white {{ $action->action === 0 ? 'bg-zinc-400' : 'bg-blue-500 hover:bg-blue-600 focus:bg-blue-600' }}">
+                class="outline-none flex items-center justify-center md:w-40 max-md:w-28 h-10 rounded-md shadow  transition duration-300 text-white-text {{ $action->action === 0 ? 'bg-zinc-400' : 'bg-blue-600 hover:bg-blue-700 focus:bg-blue-700' }}">
                 <span class="material-symbols-outlined">
                     add
                 </span>
@@ -171,14 +171,7 @@
                 </span>
             </button>
         </div>
-        @if (session('success'))
-            <div id="banner-alert" class="w-full h-12 px-3 flex items-center bg-sky-600 rounded-md shadow mb-3 text-white">
-                <p>
-                    <strong class="max-md:hidden">Success : </strong>
-                    <span>{{ session('success') }}</span>
-                </p>
-            </div>
-        @endif
+        @include('components.alert')
         @if ($action->action === 1)
             <div class="relative overflow-x-auto bg-white shadow-lg">
                 <table class="w-full text-sm text-left rtl:text-right text-gray-500">
@@ -238,15 +231,15 @@
                                 <td class="px-6 py-4">
                                     {{ $presence->status }}
                                 </td>
-                                <td class="px-6 py-2 flex items-center min-h-[1rem] space-x-2 text-white">
+                                <td class="px-6 py-2 flex items-center min-h-[1rem] space-x-2 text-white-text">
                                     <a href="{{ route('teacher.teacher-presence.show', $presence->id) }}"
-                                        class="outline-none size-10 flex items-center justify-center bg-sky-500 rounded-md transition duration-300 hover:bg-sky-600 focus:bg-sky-600">
+                                        class="outline-none size-10 flex items-center justify-center bg-sky-600 rounded-md transition duration-300 hover:bg-sky-700 focus:bg-sky-700">
                                         <span class="material-symbols-outlined md:text-[21px] max-md:text-[20px]">
                                             visibility
                                         </span>
                                     </a>
                                     <a href="{{ route('teacher.teacher-presence.edit', $presence->id) }}"
-                                        class="outline-none size-10 flex items-center justify-center bg-orange-500 rounded-md transition duration-300 hover:bg-orange-600 focus:bg-orange-600">
+                                        class="outline-none size-10 flex items-center justify-center bg-orange-600 rounded-md transition duration-300 hover:bg-orange-700 focus:bg-orange-700">
                                         <span class="material-symbols-outlined md:text-[21px] max-md:text-[20px]">
                                             border_color
                                         </span>
@@ -256,7 +249,7 @@
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit"
-                                            class="outline-none size-10 flex items-center justify-center bg-red-500 rounded-md transition duration-300 hover:bg-red-600 focus:bg-red-600">
+                                            class="outline-none size-10 flex items-center justify-center bg-red-600 rounded-md transition duration-300 hover:bg-red-700 focus:bg-red-700">
                                             <span class="material-symbols-outlined md:text-[21px] max-md:text-[20px]">
                                                 delete
                                             </span>
