@@ -18,10 +18,12 @@ use App\Http\Controllers\TimeController;
 use Illuminate\Support\Facades\Route;
 
 // Rute untuk Login Page dan Login Proses
-Route::get("/", [AuthController::class, 'loginPage'])->name("login");
-Route::post("/", [AuthController::class, "loginProses"])->name("login.proses");
-Route::get("/register", [AuthController::class, "registerPage"])->name("register");
-Route::post("/register", [AuthController::class, "registerProses"])->name("register.proses");
+Route::middleware("guest")->group(function () {
+    Route::get("/", [AuthController::class, 'loginPage'])->name("login");
+    Route::post("/", [AuthController::class, "loginProses"])->name("login.proses");
+    Route::get("/register", [AuthController::class, "registerPage"])->name("register");
+    Route::post("/register", [AuthController::class, "registerProses"])->name("register.proses");
+});
 
 Route::middleware("auth")->group(function () {
     Route::prefix("super-admin")->name("sa.")->middleware("role:super_admin")->group(function () {
@@ -36,11 +38,11 @@ Route::middleware("auth")->group(function () {
         Route::resource("student-guardian", StudentGuardianController::class);
         Route::resource("monthly-payment", MonthlyPaymentController::class);
 
-        Route::get("achievement/{id}/student/{studentId}", [StudentArchievementController::class, 'edit'])->name("student-achievement.edit");
-        Route::patch("achievement/{id}/student/{studentId}", [StudentArchievementController::class, 'update'])->name("student-achievement.update");
+        Route::get("achievement/{id}/student/{studentId}", [StudentArchievementController::class, 'editFromAdmin'])->name("student-achievement.edit");
+        Route::patch("achievement/{id}/student/{studentId}", [StudentArchievementController::class, 'updateFromAdmin'])->name("student-achievement.update");
 
-        Route::get("misconduct/{id}/student/{studentId}", [StudentArchievementController::class, 'edit'])->name("student-misconduct.edit");
-        Route::patch("misconduct/{id}/student/{studentId}", [StudentArchievementController::class, 'update'])->name("student-misconduct.update");
+        Route::get("misconduct/{id}/student/{studentId}", [StudentArchievementController::class, 'editFromAdmin'])->name("student-misconduct.edit");
+        Route::patch("misconduct/{id}/student/{studentId}", [StudentArchievementController::class, 'updateFromAdmin'])->name("student-misconduct.update");
 
 
         Route::resource("teacher", TeacherController::class)->only(['index', 'edit', 'update']);

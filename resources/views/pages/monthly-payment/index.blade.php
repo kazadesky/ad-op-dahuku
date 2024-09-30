@@ -25,21 +25,21 @@
         <div class="w-full flex items-center justify-between mb-3 max-md:text-sm">
             <section class="flex items-center md:space-x-3 max-md:space-x-2">
                 <a href="{{ route('admin.monthly-payment.create') }}"
-                    class="outline-none flex items-center justify-center md:w-32 md:h-10 max-md:size-10 md:rounded-md max-md:rounded-lg shadow bg-blue-500 transition duration-300 hover:bg-blue-600 focus:bg-blue-600 text-white">
+                    class="outline-none flex items-center justify-center md:w-32 md:h-10 max-md:size-10 md:rounded-md max-md:rounded-lg shadow bg-blue-600 transition duration-300 hover:bg-blue-700 focus:bg-blue-700 text-white">
                     <span class="material-symbols-outlined">
                         add
                     </span>
                     <span class="max-md:hidden">Tambah</span>
                 </a>
                 <button type="button" onclick="modalGetPayment(event)"
-                    class="outline-none flex items-center justify-center md:w-32 md:h-10 max-md:size-10 md:rounded-md max-md:rounded-lg shadow bg-violet-500 transition duration-300 hover:bg-violet-600 focus:bg-violet-600 text-white">
+                    class="outline-none flex items-center justify-center md:w-32 md:h-10 max-md:size-10 md:rounded-md max-md:rounded-lg shadow bg-violet-600 transition duration-300 hover:bg-violet-700 focus:bg-violet-700 text-white">
                     <span class="material-symbols-outlined">
                         filter_alt
                     </span>
                     <span class="max-md:hidden">Filter</span>
                 </button>
                 <button type="button" onclick=""
-                    class="outline-none flex items-center justify-center md:w-32 md:h-10 max-md:size-10 md:rounded-md max-md:rounded-lg shadow bg-red-500 transition duration-300 hover:bg-red-600 focus:bg-red-600 text-white">
+                    class="outline-none flex items-center justify-center md:w-32 md:h-10 max-md:size-10 md:rounded-md max-md:rounded-lg shadow bg-red-600 transition duration-300 hover:bg-red-700 focus:bg-red-700 text-white">
                     <span class="material-symbols-outlined">
                         download
                     </span>
@@ -60,14 +60,7 @@
                 </span>
             </button>
         </div>
-        @if (session('success'))
-            <div id="banner-alert" class="w-full h-12 px-3 flex items-center bg-sky-600 rounded-md shadow mb-3 text-white max-md:text-sm">
-                <p>
-                    <strong class="max-md:hidden">Success : </strong>
-                    <span>{{ session('success') }}</span>
-                </p>
-            </div>
-        @endif
+        @include('components.alert')
         <div class="relative overflow-x-auto bg-white shadow-lg">
             @if (count($payments) > 0)
                 <table class="w-full text-sm text-left rtl:text-right text-gray-500">
@@ -122,7 +115,7 @@
                                 </td>
                                 <td class="px-6 py-2 flex items-center min-h-[1rem] space-x-2 text-white">
                                     <a href="{{ route('admin.monthly-payment.edit', $payment->id) }}"
-                                        class="outline-none size-10 flex items-center justify-center rounded-md transition duration-300 {{ $payment->status === 'Lunas' ? 'bg-orange-300 hover:bg-orange-400 focus:bg-orange-400' : 'bg-orange-500 hover:bg-orange-600 focus:bg-orange-600' }}">
+                                        class="outline-none size-10 flex items-center justify-center rounded-md transition duration-300 {{ $payment->status === 'Lunas' ? 'bg-orange-400 hover:bg-orange-500 focus:bg-orange-500' : 'bg-orange-600 hover:bg-orange-700 focus:bg-orange-700' }}">
                                         <span class="material-symbols-outlined text-[21px]">
                                             border_color
                                         </span>

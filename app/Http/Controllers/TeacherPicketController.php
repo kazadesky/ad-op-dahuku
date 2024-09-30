@@ -40,7 +40,7 @@ class TeacherPicketController extends Controller
      */
     public function create()
     {
-        $title = "Tambah Guru Piket";
+        $title = "Guru Piket";
         $teachers = User::role("teacher")->where("teacher_status", "Guru Dayah")->orderBy("name", "asc")->get();
         $days = Day::all();
         return view("pages.teacher-picket.create", compact(
@@ -71,7 +71,7 @@ class TeacherPicketController extends Controller
      */
     public function show(string $id)
     {
-        $title = "Detail Guru Piket";
+        $title = "Guru Piket";
         $picket = TeacherPicket::with("teacher", "substitute", "day")->findOrFail($id);
         return view("pages.teacher-picket.show", compact([
             "title",
@@ -84,7 +84,7 @@ class TeacherPicketController extends Controller
      */
     public function edit(string $id)
     {
-        $title = "Edit Guru Piket";
+        $title = "Guru Piket";
         $picket = TeacherPicket::with("teacher", "substitute", "day")->findOrFail($id);
         $teachers = User::role("teacher")->where("teacher_status", "Guru Dayah")->orderBy("name", "asc")->get();
         $days = Day::all();

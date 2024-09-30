@@ -2,7 +2,7 @@
 @section('title', 'Detail Data Santri')
 
 @section('subtitle')
-    <p class="flex items-center space-x-px capitalize text-white">
+    <p class="flex items-center space-x-px capitalize text-white-text">
         @hasrole('super_admin')
             <span>Super Admin </span>
         @endhasrole
@@ -23,7 +23,7 @@
     @hasrole('admin')
         <div class="w-full flex items-center justify-end mb-3 max-md:text-sm">
             <a href="{{ route('admin.student.index') }}"
-                class="outline-none md:h-11 max-md:h-10 rounded-md text-white md:w-36 max-md:w-28 flex items-center justify-center font-medium bg-red-500 shadow transition duration-300 hover:bg-red-600 focus:bg-red-600">Kembali</a>
+                class="outline-none md:h-11 max-md:h-10 rounded-md text-white-text md:w-36 max-md:w-28 flex items-center justify-center font-medium bg-red-600 shadow transition duration-300 hover:bg-red-700 focus:bg-red-700">Kembali</a>
         </div>
 
         <div class="w-full p-5 rounded-md shadow-lg bg-white mb-10 max-md:text-sm">
@@ -171,9 +171,9 @@
                             <td class="px-6 py-4">
                                 {{ $achievement->achievement }}
                             </td>
-                            <td class="px-6 py-2 flex items-center min-h-[1rem] space-x-2 text-white">
+                            <td class="px-6 py-2 flex items-center min-h-[1rem] space-x-2 text-white-text">
                                 <a href="{{ route('admin.student-achievement.edit', [$achievement->id, $student->id]) }}"
-                                    class="outline-none size-10 flex items-center justify-center bg-orange-500 rounded-md transition duration-300 hover:bg-orange-600 focus:bg-orange-600">
+                                    class="outline-none size-10 flex items-center justify-center bg-orange-600 rounded-md transition duration-300 hover:bg-orange-700 focus:bg-orange-700">
                                     <span class="material-symbols-outlined md:text-[21px] max-md:text-[20px]">
                                         border_color
                                     </span>
@@ -227,9 +227,9 @@
                             <td class="px-6 py-4">
                                 {{ $misconduct->misconduct }}
                             </td>
-                            <td class="px-6 py-2 flex items-center min-h-[1rem] space-x-2 text-white">
+                            <td class="px-6 py-2 flex items-center min-h-[1rem] space-x-2 text-white-text">
                                 <a href="{{ route('admin.student-misconduct.edit', $misconduct->id) }}"
-                                    class="outline-none size-10 flex items-center justify-center bg-orange-500 rounded-md transition duration-300 hover:bg-orange-600 focus:bg-orange-600">
+                                    class="outline-none size-10 flex items-center justify-center bg-orange-600 rounded-md transition duration-300 hover:bg-orange-700 focus:bg-orange-700">
                                     <span class="material-symbols-outlined md:text-[21px] max-md:text-[20px]">
                                         border_color
                                     </span>

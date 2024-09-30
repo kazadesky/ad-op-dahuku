@@ -18,9 +18,9 @@
     @vite(['resources/js/app.js', 'resources/css/app.css'])
 </head>
 
-<body class="w-full h-screen overflow-hidden font-inter bg-gray-50">
+<body class="w-full h-screen overflow-hidden font-inter bg-background">
     @include('components.sidebar')
-    <div class="w-full absolute top-0 left-0 h-48 bg-gradient-to-b from-green-600 to-green-400"></div>
+    <div class="w-full absolute top-0 left-0 h-48 bg-gradient-to-tr from-elf-green to-hitam"></div>
 
     <main id="content" class="relative z-10 w-full md:max-w-[80.5%] md:ml-[19.5%] h-full overflow-x-hidden md:px-5 max-md:px-3">
         @include('components.navbar')

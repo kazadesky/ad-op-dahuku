@@ -1,5 +1,5 @@
 <aside id="sidebar"
-    class="fixed sm:z-10 max-md:z-30 w-full max-md:-translate-x-[105%] [&.active]:max-md:translate-x-0 max-md:max-w-[65%] transition-all duration-300 ease-in-out sm:max-w-[18%] m-3 rounded-lg shadow-lg bg-hitam overflow-x-hidden max-md:p-3 sm:p-5 text-white">
+    class="fixed sm:z-10 max-md:z-30 w-full max-md:-translate-x-[105%] [&.active]:max-md:translate-x-0 max-md:max-w-[65%] transition-all duration-300 ease-in-out sm:max-w-[18%] m-3 rounded-lg shadow-lg bg-hitam overflow-x-hidden max-md:p-3 sm:p-5 text-white-text">
     <section class="w-full h-16 border-b border-abu-muda mb-5">
         <h1 class="font-poppins uppercase font-semibold text-xl max-md:text-lg -mb-px">
             {{ Auth::user()->roles->pluck('name')->first() }}
@@ -21,7 +21,7 @@
                 <a href="{{ route('sa.dashboard') }}"
                     class="
                 outline-none w-full h-10 flex items-center px-3 rounded space-x-1
-                {{ request()->routeIs('sa.dashboard') ? 'bg-green-600 shadow-sm' : '' }}
+                {{ request()->routeIs('sa.dashboard') ? 'bg-elf-green shadow-sm' : '' }}
                 ">
                     <span class="material-symbols-outlined">
                         dashboard
@@ -42,7 +42,7 @@
                 <a href="{{ route('admin.dashboard') }}"
                     class="
                     outline-none w-full h-10 flex items-center px-3 rounded space-x-1
-                    {{ request()->routeIs('admin.dashboard') ? 'bg-green-600 shadow-sm' : '' }}
+                    {{ request()->routeIs('admin.dashboard') ? 'bg-elf-green shadow-sm' : '' }}
                     ">
                     <span class="material-symbols-outlined">
                         dashboard
@@ -56,7 +56,7 @@
                 <a href="{{ route('admin.student.index') }}"
                     class="
                     outline-none w-full h-10 flex items-center px-3 rounded space-x-1
-                    {{ request()->routeIs(['admin.student.*', 'admin.student-achievement.edit']) ? 'bg-green-600 shadow-sm' : '' }}
+                    {{ request()->routeIs(['admin.student.*', 'admin.student-achievement.edit']) ? 'bg-elf-green shadow-sm' : '' }}
                     ">
                     <span class="material-symbols-outlined">
                         Description
@@ -68,7 +68,7 @@
                 <a href="{{ route('admin.teacher.index') }}"
                     class="
                     outline-none w-full h-10 flex items-center px-3 rounded space-x-1
-                    {{ request()->routeIs('admin.teacher.*') ? 'bg-green-600 shadow-sm' : '' }}
+                    {{ request()->routeIs('admin.teacher.*') ? 'bg-elf-green shadow-sm' : '' }}
                     ">
                     <span class="material-symbols-outlined">
                         Description
@@ -80,7 +80,7 @@
                 <a href="{{ route('admin.class-room.index') }}"
                     class="
                     outline-none w-full h-10 flex items-center px-3 rounded space-x-1
-                    {{ request()->routeIs('admin.class-room.*') ? 'bg-green-600 shadow-sm' : '' }}
+                    {{ request()->routeIs('admin.class-room.*') ? 'bg-elf-green shadow-sm' : '' }}
                     ">
                     <span class="material-symbols-outlined">
                         list
@@ -92,7 +92,7 @@
                 <a href="{{ route('admin.lesson.index') }}"
                     class="
                     outline-none w-full h-10 flex items-center px-3 rounded space-x-1
-                    {{ request()->routeIs('admin.lesson.*') ? 'bg-green-600 shadow-sm' : '' }}
+                    {{ request()->routeIs('admin.lesson.*') ? 'bg-elf-green shadow-sm' : '' }}
                     ">
                     <span class="material-symbols-outlined">
                         local_library
@@ -104,7 +104,7 @@
                 <a href="{{ route('admin.time.index') }}"
                     class="
                     outline-none w-full h-10 flex items-center px-3 rounded space-x-1
-                    {{ request()->routeIs('admin.time.*') ? 'bg-green-600 shadow-sm' : '' }}
+                    {{ request()->routeIs('admin.time.*') ? 'bg-elf-green shadow-sm' : '' }}
                     ">
                     <span class="material-symbols-outlined">
                         schedule
@@ -116,7 +116,7 @@
                 <a href="{{ route('admin.lesson-timetable.index') }}"
                     class="
                     outline-none w-full h-10 flex items-center px-3 rounded space-x-1
-                    {{ request()->routeIs('admin.lesson-timetable.*') ? 'bg-green-600 shadow-sm' : '' }}
+                    {{ request()->routeIs('admin.lesson-timetable.*') ? 'bg-elf-green shadow-sm' : '' }}
                     ">
                     <span class="material-symbols-outlined">
                         date_range
@@ -128,7 +128,7 @@
                 <a href="{{ route('admin.monthly-payment.index') }}"
                     class="
                     outline-none w-full h-10 flex items-center px-3 rounded space-x-1
-                    {{ request()->routeIs('admin.monthly-payment.*') ? 'bg-green-600 shadow-sm' : '' }}
+                    {{ request()->routeIs('admin.monthly-payment.*') ? 'bg-elf-green shadow-sm' : '' }}
                     ">
                     <span class="material-symbols-outlined">
                         Edit_Note
@@ -140,7 +140,7 @@
                 <a href="{{ route('admin.teacher-picket.index') }}"
                     class="
                     outline-none w-full h-10 flex items-center px-3 rounded space-x-1
-                    {{ request()->routeIs('admin.teacher-picket.*') ? 'bg-green-600 shadow-sm' : '' }}
+                    {{ request()->routeIs('admin.teacher-picket.*') ? 'bg-elf-green shadow-sm' : '' }}
                     ">
                     <span class="material-symbols-outlined">
                         List
@@ -152,7 +152,7 @@
                 <a href="{{ route('admin.teacher-presence.index') }}"
                     class="
                     outline-none w-full h-10 flex items-center px-3 rounded space-x-1
-                    {{ request()->routeIs('admin.teacher-presence.*') ? 'bg-green-600 shadow-sm' : '' }}
+                    {{ request()->routeIs('admin.teacher-presence.*') ? 'bg-elf-green shadow-sm' : '' }}
                     ">
                     <span class="material-symbols-outlined">
                         co_present
@@ -164,7 +164,7 @@
                 <a href="{{ route('admin.student-guardian.index') }}"
                     class="
                     outline-none w-full h-10 flex items-center px-3 rounded space-x-1
-                    {{ request()->routeIs('admin.student-guardian.*') ? 'bg-green-600 shadow-sm' : '' }}
+                    {{ request()->routeIs('admin.student-guardian.*') ? 'bg-elf-green shadow-sm' : '' }}
                     ">
                     <span class="material-symbols-outlined">
                         Group
@@ -176,7 +176,7 @@
                 <a href="{{ route('admin.archive.index') }}"
                     class="
                     outline-none w-full h-10 flex items-center px-3 rounded space-x-1
-                    {{ request()->routeIs('admin.archive.*') ? 'bg-green-600 shadow-sm' : '' }}
+                    {{ request()->routeIs('admin.archive.*') ? 'bg-elf-green shadow-sm' : '' }}
                     ">
                     <span class="material-symbols-outlined">
                         Bookmark
@@ -194,7 +194,7 @@
                 <a href="{{ route('operator.dashboard') }}"
                     class="
                     outline-none w-full h-10 flex items-center px-3 rounded space-x-1
-                    {{ request()->routeIs('operator.dashboard') ? 'bg-green-600 shadow-sm' : '' }}
+                    {{ request()->routeIs('operator.dashboard') ? 'bg-elf-green shadow-sm' : '' }}
                     ">
                     <span class="material-symbols-outlined">
                         dashboard
@@ -215,7 +215,7 @@
                 <a href="{{ route('teacher.dashboard') }}"
                     class="
                     outline-none w-full h-10 flex items-center px-3 rounded space-x-1
-                    {{ request()->routeIs('teacher.dashboard') ? 'bg-green-600 shadow-sm' : '' }}
+                    {{ request()->routeIs('teacher.dashboard') ? 'bg-elf-green shadow-sm' : '' }}
                     ">
                     <span class="material-symbols-outlined">
                         dashboard
@@ -238,7 +238,7 @@
                     <a href="{{ route('teacher.teacher-presence.index') }}"
                         class="
                         outline-none w-full h-10 flex items-center px-3 rounded space-x-1
-                        {{ request()->routeIs('teacher.teacher-presence.*') ? 'bg-green-600 shadow-sm' : '' }}
+                        {{ request()->routeIs('teacher.teacher-presence.*') ? 'bg-elf-green shadow-sm' : '' }}
                         ">
                         <span class="material-symbols-outlined">
                             co_present
@@ -251,7 +251,7 @@
                 <a href="{{ route('teacher.student-achievement.index') }}"
                     class="
                     outline-none w-full h-10 flex items-center px-3 rounded space-x-1
-                    {{ request()->routeIs('teacher.student-achievement.*') ? 'bg-green-600 shadow-sm' : '' }}
+                    {{ request()->routeIs('teacher.student-achievement.*') ? 'bg-elf-green shadow-sm' : '' }}
                     ">
                     <span class="material-symbols-outlined">
                         note_alt
@@ -263,7 +263,7 @@
                 <a href="{{ route('teacher.student-misconduct.index') }}"
                     class="
                     outline-none w-full h-10 flex items-center px-3 rounded space-x-1
-                    {{ request()->routeIs('teacher.student-misconduct.*') ? 'bg-green-600 shadow-sm' : '' }}
+                    {{ request()->routeIs('teacher.student-misconduct.*') ? 'bg-elf-green shadow-sm' : '' }}
                     ">
                     <span class="material-symbols-outlined">
                         note_alt
@@ -275,7 +275,7 @@
                 <a href="{{ route('teacher.archive.index') }}"
                     class="
                     outline-none w-full h-10 flex items-center px-3 rounded space-x-1
-                    {{ request()->routeIs('teacher.archive.*') ? 'bg-green-600 shadow-sm' : '' }}
+                    {{ request()->routeIs('teacher.archive.*') ? 'bg-elf-green shadow-sm' : '' }}
                     ">
                     <span class="material-symbols-outlined">
                         Bookmark
