@@ -27,7 +27,7 @@
             <div class="flex items-center justify-between md:mb-2 max-md:mb-1">
                 <label for="password" class="block font-medium">Password</label>
                 <a href="" onclick="return false"
-                    class="outline-none capitalize text-gray-600 md:text-sm max-md:text-xs underline underline-offset-2 active:text-green-500 focus:text-green-500">forgot
+                    class="outline-none capitalize text-gray-600 md:text-sm max-md:text-xs underline underline-offset-2 active:text-elf-green focus:text-elf-green">forgot
                     password?</a>
             </div>
             <div class="relative w-full">
@@ -37,7 +37,7 @@
                     @enderror"
                     placeholder="******" value="{{ old('password') }}">
                 <button type="button" onclick="passwordShow(event)"
-                    class="absolute top-[0.30rem] right-2 text-gray-500 active:text-green-500 size-10 flex items-center justify-center outline-none focus:text-green-500">
+                    class="absolute top-[0.30rem] right-2 text-gray-500 active:text-elf-green size-10 flex items-center justify-center outline-none focus:text-elf-green">
                     <span id="icon_pass" class="material-symbols-outlined max-md:text-[22px]">
                         visibility
                     </span>
@@ -49,9 +49,9 @@
         </div>
         <section class="mt-2 flex flex-col items-center justify-center space-y-2">
             <button type="submit"
-                class="w-full md:h-11 max-md:h-10 flex items-center justify-center uppercase font-medium bg-green-500 rounded-md shadow transition duration-300 text-white hover:bg-green-600 focus:bg-green-600 outline-none">login</button>
+                class="w-full md:h-11 max-md:h-10 flex items-center justify-center uppercase font-medium bg-elf-green rounded-md shadow transition duration-300 text-white hover:bg-dark-elf focus:bg-dark-elf outline-none">login</button>
             <p class="text-center">Belum mempunyai akun? <a href="{{ route('register') }}"
-                    class="outline-none underline underline-offset-2 text-green-500 transition duration-300 active:text-green-600">Register.</a>
+                    class="outline-none underline underline-offset-2 text-elf-green transition duration-300 active:text-dark-elf">Register.</a>
             </p>
         </section>
     </form>

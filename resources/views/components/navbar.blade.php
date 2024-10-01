@@ -27,8 +27,19 @@
                     <p class="capitalize">{{ Auth::user()->roles->pluck('name')->first() }}</p>
                 </section>
                 <li class="border-y py-1">
-                    <a href=""
-                        class="outline-none w-full flex items-center px-3 h-10 rounded space-x-1 transition duration-300 hover:bg-green-500/40">
+                    <a @hasrole('super_admin')
+                    href="{{ route('sa.profile', Auth::user()->id) }}"
+                    @endhasrole
+                        @hasrole('admin')
+                    href="{{ route('admin.profile', Auth::user()->id) }}"
+                    @endhasrole
+                        @hasrole('operator')
+                    href="{{ route('operator.profile', Auth::user()->id) }}"
+                    @endhasrole
+                        @hasrole('teacher')
+                    href="{{ route('teacher.profile', Auth::user()->id) }}"
+                    @endhasrole
+                        class="outline-none w-full flex items-center px-3 h-10 rounded space-x-1 transition duration-300 {{ request()->routeIs(['sa.profile', 'admin.profile', 'operator.profile', 'teacher.profile']) ? 'bg-elf-green hover:bg-dark-elf focus:bg-dark-elf' : 'hover:bg-green-500/40' }}">
                         <span class="material-symbols-outlined text-[22px]">
                             Person
                         </span>

@@ -1,4 +1,5 @@
-<div id="modal-filter" class="animation-fade hidden fixed z-50 w-full md:max-w-screen-lg max-md:w-screen justify-center max-md:px-3 max-md:-ml-3">
+<div id="modal-filter"
+    class="animation-fade hidden fixed z-50 w-full md:max-w-screen-lg max-md:w-screen justify-center max-md:px-3 max-md:-ml-3">
     <form action="{{ route('admin.monthly-payment.index') }}" method="GET"
         class="w-full md:max-w-md max-md:w-full rounded-md shadow-md p-5 bg-white max-sm:text-sm">
         <h1 class="mb-5 font-poppins md:text-xl max-md:text-lg capitalize font-bold flex items-center">
@@ -42,8 +43,9 @@
 
         <section class="flex flex-col md:space-y-3 max-md:space-y-2">
             <button type="submit"
-            class="outline-none text-white w-full md:h-11 max-md:h-10 flex items-center justify-center font-medium bg-green-600 rounded shadow-sm transition duration-300 hover:bg-green-700 focus:bg-green-700">Filter</button>
-            <a href="" onclick="modalGetPayment(event)" class="text-center outline-none text-slate-800 underline underline-offset-2 transition duration-300 active:text-green-500">Close</a>
+                class="outline-none text-white-text w-full md:h-11 max-md:h-10 flex items-center justify-center font-medium bg-elf-green rounded shadow-sm transition duration-300 hover:bg-dark-elf focus:bg-dark-elf">Filter</button>
+            <a href="" onclick="modalGetPayment(event)"
+                class="text-center outline-none text-slate-800 underline underline-offset-2 transition duration-300 active:text-elf-green">Close</a>
         </section>
     </form>
 </div>

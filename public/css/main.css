@@ -17,17 +17,20 @@
     }
 }
 
-/* #content::-webkit-scrollbar {
-    width: 13px;
+#sidebar::-webkit-scrollbar {
+    width: 10px;
 }
 
-#content::-webkit-scrollbar-track {
-    background-color: #2C3E50;
-    border-radius: 5px;
+#sidebar::-webkit-scrollbar-track {
+    background-color: #1e1f1e;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
 }
 
-#content::-webkit-scrollbar-thumb {
-    background: linear-gradient(to top, #16a34a, #4ade80);
+#sidebar::-webkit-scrollbar-thumb {
+    background: linear-gradient(to bottom, #098666, #076c53, #1e1f1e);
     border-radius: 5px;
-} */
+    /* border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px; */
+}
 

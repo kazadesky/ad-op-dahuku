@@ -19,6 +19,7 @@ class AuthController extends Controller
         $request->validate([
             'email' => 'required|email|max:255',
             'password' => 'required',
+            // 'remember' => 'boolean', // Validasi untuk checkbox remember
         ]);
 
         $checkAuth = User::where('email', $request->email)->first();
@@ -29,7 +30,9 @@ class AuthController extends Controller
 
         $request->session()->regenerate();
 
-        Auth::login($checkAuth);
+        // Gunakan parameter remember dari request
+        // Auth::login($checkAuth, $request->remember);
+        Auth::login($checkAuth, true);
 
         if ($checkAuth->hasRole('super_admin')) {
             return redirect()->route('sa.dashboard');
@@ -79,7 +82,7 @@ class AuthController extends Controller
         $user = User::create($userData);
         $user->assignRole("teacher");
 
-        Auth::login($user);
+        Auth::login($user, true);
 
         return redirect()->route("teacher.dashboard");
     }

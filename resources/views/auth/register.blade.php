@@ -60,7 +60,7 @@
                     @enderror"
                     placeholder="******" value="{{ old('password') }}">
                 <button type="button" onclick="passwordShow(event)"
-                    class="absolute top-[0.30rem] right-2 text-gray-500 active:text-green-500 w-10 h-10 flex items-center justify-center outline-none focus:text-green-500">
+                    class="absolute top-[0.30rem] right-2 text-gray-500 active:text-elf-green w-10 h-10 flex items-center justify-center outline-none focus:text-elf-green">
                     <span id="icon_pass" class="material-symbols-outlined">
                         visibility
                     </span>
@@ -79,7 +79,7 @@
                     @enderror"
                     placeholder="******" value="{{ old('password') }}">
                 <button type="button" onclick="passwordConfirmShow(event)"
-                    class="absolute top-[0.30rem] right-2 text-gray-500 active:text-green-500 w-10 h-10 flex items-center justify-center outline-none focus:text-green-500">
+                    class="absolute top-[0.30rem] right-2 text-gray-500 active:text-elf-green w-10 h-10 flex items-center justify-center outline-none focus:text-elf-green">
                     <span id="icon_confirm" class="material-symbols-outlined">
                         visibility
                     </span>
@@ -106,9 +106,9 @@
         </div>
         <section class="mt-2 flex flex-col items-center justify-center space-y-2">
             <button type="submit"
-                class="w-full md:h-11 max-md:h-10 flex items-center justify-center uppercase font-medium bg-green-500 rounded-md shadow transition duration-300 text-white hover:bg-green-600 focus:bg-green-600 outline-none">daftar</button>
+                class="w-full md:h-11 max-md:h-10 flex items-center justify-center uppercase font-medium bg-elf-green rounded-md shadow transition duration-300 text-white hover:bg-dark-elf focus:bg-dark-elf outline-none">daftar</button>
             <p class="text-center">Sudah mempunyai akun? <a href="{{ route('login') }}"
-                    class="outline-none underline underline-offset-2 text-green-500 transition duration-300 active:text-green-600">Login.</a>
+                    class="outline-none underline underline-offset-2 text-elf-green transition duration-300 active:text-dark-elf">Login.</a>
             </p>
         </section>
     </form>
