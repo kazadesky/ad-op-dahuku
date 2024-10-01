@@ -65,7 +65,9 @@ class LessonTimetableController extends Controller
 
         $role = Auth::user()->roles->pluck("name")->first();
 
-        if ($role == "admin") {
+        if ($role == 'super_admin') {
+            return redirect()->route("sa.lesson-timetable.index")->with("success", "Jadwal pembelajaran guru " . $timetable->teacher->name . " berhasil dibuat.");
+        } elseif ($role == "admin") {
             return redirect()->route("admin.lesson-timetable.index")->with("success", "Jadwal pembelajaran guru " . $timetable->teacher->name . " berhasil dibuat.");
         } elseif ($role == "operator") {
             return redirect()->route("operator.lesson-timetable.index")->with("success", "Jadwal pembelajaran guru " . $timetable->teacher->name . " berhasil dibuat.");
@@ -127,7 +129,9 @@ class LessonTimetableController extends Controller
 
         $role = Auth::user()->roles->pluck("name")->first();
 
-        if ($role == "admin") {
+        if ($role == "super_admin") {
+            return redirect()->route("sa.lesson-timetable.index")->with("success", "Jadwal pembelajaran guru " . $timetable->teacher->name . " telah diupdate.");
+        } elseif ($role == "admin") {
             return redirect()->route("admin.lesson-timetable.index")->with("success", "Jadwal pembelajaran guru " . $timetable->teacher->name . " telah diupdate.");
         } elseif ($role == "operator") {
             return redirect()->route("operator.lesson-timetable.index")->with("success", "Jadwal pembelajaran guru " . $timetable->teacher->name . " telah diupdate.");

@@ -14,7 +14,9 @@ class AccountController extends Controller
     {
         $title = "Profil";
         $user = User::findOrFail($id);
-        return view("pages.account.profile", compact("user", "title"));
+        $role = $user->roles->pluck("name")->first();
+        $status = ["Guru Dayah", "Guru umum"];
+        return view("pages.account.profile", compact("user", "title", "role", "status"));
     }
 
     public function updateProfile(Request $request, string $id)
@@ -47,6 +49,7 @@ class AccountController extends Controller
             "name" => "required|string|max:255",
             "email" => "required|email|unique:users,email" . Auth::user()->id,
             "nomor_telepon" => "required|numeric|min:10",
+            "teacher_status" => "nullable|in:Guru Dayah,Guru Umum",
         ]);
 
         $user = User::findOrFail($id);
@@ -54,6 +57,7 @@ class AccountController extends Controller
             "name" => $request->name,
             "email" => $request->email,
             "nomor_telepon" => $request->nomor_telepon,
+            "teacher_status" => $request->teacher_status,
         ]);
 
         return redirect()->back()->with("success", "Profil akun berhasil diperbarui.");
@@ -70,7 +74,7 @@ class AccountController extends Controller
         }
         $user->delete();
         Auth::logout();
-        return redirect()->route("login")->with("success", "Akun anda atas nama " . $user->name . " berhasil dihapus.");
+        return redirect()->route("login")->with("delete", "Akun anda atas nama " . $user->name . " berhasil dihapus.");
     }
 
     public function resetPassword(string $id)

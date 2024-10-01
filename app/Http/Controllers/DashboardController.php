@@ -39,6 +39,12 @@ class DashboardController extends Controller
             return $schedule->day->name;
         });
 
+        $pickets = TeacherPicket::with("teacher", "substitute", "day")->where("teacher_id", $user->id)->orderBy("day_id", "asc")->get();
+
+        $groupedPickets = $pickets->groupBy(function ($picket) {
+            return $picket->day->name;
+        });
+
         Carbon::setLocale("id");
         $action = Carbon::now()->setTimezone("Asia/Jakarta")->isoFormat("dddd");
 
@@ -55,6 +61,7 @@ class DashboardController extends Controller
             "archive" => $archives,
             "schedules" => $groupedSchedules,
             "action" => $action,
+            "pickets" => $groupedPickets,
         ]);
     }
 }

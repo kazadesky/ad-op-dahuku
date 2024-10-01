@@ -1,8 +1,25 @@
+@php
+    $user = Auth::user();
+    $role = $user->roles->pluck('name')->first();
+    $action = \App\Models\TeacherPicket::with('teacher', 'substitute', 'day')
+        ->where('teacher_id', $user->id)
+        ->orWhere('substitute_picket_teacher_id', $user->id)
+        ->first();
+@endphp
+
 <aside id="sidebar"
     class="fixed sm:z-10 max-md:z-30 w-full max-md:-translate-x-[105%] [&.active]:max-md:translate-x-0 max-md:max-w-[65%] transition-all duration-300 ease-in-out sm:max-w-[18%] m-3 rounded-lg shadow-lg bg-hitam overflow-x-hidden max-md:p-3 sm:p-5 text-white-text">
     <section class="w-full h-16 border-b border-abu-muda mb-5">
         <h1 class="font-poppins uppercase font-semibold text-xl max-md:text-lg -mb-px">
-            {{ Auth::user()->roles->pluck('name')->first() }}
+            @if ($role == 'super_admin')
+                Super Admin
+            @elseif($role == 'admin')
+                Admin
+            @elseif($role == 'operator')
+                Operator
+            @elseif($role == 'teacher')
+                Guru
+            @endif
         </h1>
         <h1 class="font-poppins uppercase font-medium text-lg max-md:text-base">Darul Huda Kutacane</h1>
     </section>
@@ -31,7 +48,138 @@
             </li>
 
             <span class="font-semibold uppercase text-[11px]">content</span>
-            <li class="mt-2"></li>
+            <li class="mt-2">
+                <a href="{{ route('sa.student.index') }}"
+                    class="
+                    outline-none w-full h-10 flex items-center px-3 rounded space-x-1
+                    {{ request()->routeIs(['sa.student.*', 'sa.student-achievement.edit']) ? 'bg-elf-green shadow-sm' : '' }}
+                    ">
+                    <span class="material-symbols-outlined">
+                        Description
+                    </span>
+                    <span>Data Santri</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('sa.teacher.index') }}"
+                    class="
+                    outline-none w-full h-10 flex items-center px-3 rounded space-x-1
+                    {{ request()->routeIs('sa.teacher.*') ? 'bg-elf-green shadow-sm' : '' }}
+                    ">
+                    <span class="material-symbols-outlined">
+                        Description
+                    </span>
+                    <span>Daftar Guru</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('sa.class-room.index') }}"
+                    class="
+                    outline-none w-full h-10 flex items-center px-3 rounded space-x-1
+                    {{ request()->routeIs('sa.class-room.*') ? 'bg-elf-green shadow-sm' : '' }}
+                    ">
+                    <span class="material-symbols-outlined">
+                        list
+                    </span>
+                    <span>Daftar Kelas</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('sa.lesson.index') }}"
+                    class="
+                    outline-none w-full h-10 flex items-center px-3 rounded space-x-1
+                    {{ request()->routeIs('sa.lesson.*') ? 'bg-elf-green shadow-sm' : '' }}
+                    ">
+                    <span class="material-symbols-outlined">
+                        local_library
+                    </span>
+                    <span>Mata Pelajaran</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('sa.time.index') }}"
+                    class="
+                    outline-none w-full h-10 flex items-center px-3 rounded space-x-1
+                    {{ request()->routeIs('sa.time.*') ? 'bg-elf-green shadow-sm' : '' }}
+                    ">
+                    <span class="material-symbols-outlined">
+                        schedule
+                    </span>
+                    <span>Jam Masuk</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('sa.lesson-timetable.index') }}"
+                    class="
+                    outline-none w-full h-10 flex items-center px-3 rounded space-x-1
+                    {{ request()->routeIs('sa.lesson-timetable.*') ? 'bg-elf-green shadow-sm' : '' }}
+                    ">
+                    <span class="material-symbols-outlined">
+                        date_range
+                    </span>
+                    <span>Jadwal Pelajaran</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('sa.monthly-payment.index') }}"
+                    class="
+                    outline-none w-full h-10 flex items-center px-3 rounded space-x-1
+                    {{ request()->routeIs('sa.monthly-payment.*') ? 'bg-elf-green shadow-sm' : '' }}
+                    ">
+                    <span class="material-symbols-outlined">
+                        Edit_Note
+                    </span>
+                    <span>Pembayaran</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('sa.teacher-picket.index') }}"
+                    class="
+                    outline-none w-full h-10 flex items-center px-3 rounded space-x-1
+                    {{ request()->routeIs('sa.teacher-picket.*') ? 'bg-elf-green shadow-sm' : '' }}
+                    ">
+                    <span class="material-symbols-outlined">
+                        List
+                    </span>
+                    <span>Guru Piket</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('sa.teacher-presence.index') }}"
+                    class="
+                    outline-none w-full h-10 flex items-center px-3 rounded space-x-1
+                    {{ request()->routeIs('sa.teacher-presence.*') ? 'bg-elf-green shadow-sm' : '' }}
+                    ">
+                    <span class="material-symbols-outlined">
+                        co_present
+                    </span>
+                    <span>Absensi Guru</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('sa.student-guardian.index') }}"
+                    class="
+                    outline-none w-full h-10 flex items-center px-3 rounded space-x-1
+                    {{ request()->routeIs('sa.student-guardian.*') ? 'bg-elf-green shadow-sm' : '' }}
+                    ">
+                    <span class="material-symbols-outlined">
+                        Group
+                    </span>
+                    <span>Akun Wali Santri</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('sa.archive.index') }}"
+                    class="
+                    outline-none w-full h-10 flex items-center px-3 rounded space-x-1
+                    {{ request()->routeIs('sa.archive.*') ? 'bg-elf-green shadow-sm' : '' }}
+                    ">
+                    <span class="material-symbols-outlined">
+                        Bookmark
+                    </span>
+                    <span>Arsip Data</span>
+                </a>
+            </li>
         </ul>
     @endhasrole
 
@@ -223,14 +371,6 @@
                     <span>Dashboard</span>
                 </a>
             </li>
-
-            @php
-                $user = Auth::user();
-                $action = \App\Models\TeacherPicket::with('teacher', 'substitute', 'day')
-                    ->where('teacher_id', $user->id)
-                    ->orWhere('substitute_picket_teacher_id', $user->id)
-                    ->first();
-            @endphp
 
             <span class="font-semibold uppercase text-[11px]">content</span>
             @if ($action)

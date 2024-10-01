@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ClassRoom;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ClassRoomController extends Controller
 {
@@ -43,7 +44,15 @@ class ClassRoomController extends Controller
         $classRoom = ClassRoom::create([
             "name" => ucwords($request->name),
         ]);
-        return redirect()->route("admin.class-room.index")->with("success", "Kelas " . $classRoom->name . " telah ditambahkan.");
+
+        $role = Auth::user()->roles->pluck('name')->first();
+        if($role == 'super_admin'){
+            return redirect()->route("sa.class-room.index")->with("success", "Kelas " . $classRoom->name . " telah ditambahkan.");
+        }elseif($role == 'admin'){
+            return redirect()->route("admin.class-room.index")->with("success", "Kelas " . $classRoom->name . " telah ditambahkan.");
+        }elseif($role == 'operator'){
+            return redirect()->route("operator.class-room.index")->with("success", "Kelas " . $classRoom->name . " telah ditambahkan.");
+        }
     }
 
     /**
@@ -79,7 +88,14 @@ class ClassRoomController extends Controller
         $classRoom = ClassRoom::findOrFail($id);
         $classRoom->update(["name" => ucwords($request->name)]);
 
-        return redirect()->route("admin.class-room.index")->with("success", "Kelas " . $classRoom->name . " telah diupdate.");
+        $role = Auth::user()->roles->pluck('name')->first();
+        if($role == 'super_admin'){
+            return redirect()->route("sa.class-room.index")->with("success", "Kelas " . $classRoom->name . " telah diupdate.");
+        }elseif($role == 'admin'){
+            return redirect()->route("admin.class-room.index")->with("success", "Kelas " . $classRoom->name . " telah diupdate.");
+        }elseif($role == 'operator'){
+            return redirect()->route("operator.class-room.index")->with("success", "Kelas " . $classRoom->name . " telah diupdate.");
+        }
     }
 
     /**
@@ -89,6 +105,6 @@ class ClassRoomController extends Controller
     {
         $classRoom = ClassRoom::findOrFail($id);
         $classRoom->delete();
-        return redirect()->route("admin.class-room.index")->with("success", "Kelas " . $classRoom->name . " telah dihapus.");
+        return redirect()->back()->with("success", "Kelas " . $classRoom->name . " telah dihapus.");
     }
 }

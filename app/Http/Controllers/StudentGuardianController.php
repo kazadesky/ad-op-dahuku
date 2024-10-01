@@ -5,16 +5,24 @@ namespace App\Http\Controllers;
 use App\Models\Student;
 use App\Models\StudentGuardian;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class StudentGuardianController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $title = "Akun Wali";
-        $studentGuardians = StudentGuardian::with("student")->latest()->paginate(25);
+        $seacrh = $request->input("search");
+
+        if ($seacrh) {
+            $studentGuardians = StudentGuardian::where("name", "%", $seacrh, "%")->orWhere("nis", "%", $seacrh, "%")->latest()->paginate(15);
+        } else {
+            $studentGuardians = StudentGuardian::with("student")->latest()->paginate(25);
+        }
+
         return view("pages.student-guardian.index", compact(
             "title",
             "studentGuardians",
@@ -51,7 +59,12 @@ class StudentGuardianController extends Controller
         $fields["name"] = ucwords($request->name);
         $studentGuardiant = StudentGuardian::create($fields);
 
-        return redirect()->route("admin.student-guardian.index")->with("success", "Akun atas nama " . $studentGuardiant . " berhasil ditambahkan.");
+        $role = Auth::user()->roles->pluck('name')->first();
+        if($role == 'super_admin'){
+            return redirect()->route("sa.student-guardian.index")->with("success", "Akun atas nama " . $studentGuardiant . " berhasil ditambahkan.");
+        }elseif($role == 'admin'){
+            return redirect()->route("admin.student-guardian.index")->with("success", "Akun atas nama " . $studentGuardiant . " berhasil ditambahkan.");
+        }
     }
 
     /**
@@ -98,7 +111,12 @@ class StudentGuardianController extends Controller
         $studentGuardian = StudentGuardian::with("student")->findOrFail($id);
         $studentGuardian->update($fields);
 
-        return redirect()->route("")->with("success", "Akun atas nama " . $studentGuardian->name . " telah diupdate.");
+        $role = Auth::user()->roles->pluck('name')->first();
+        if($role == 'super_admin'){
+            return redirect()->route("sa.student-guardiant.index")->with("success", "Akun atas nama " . $studentGuardian->name . " telah diupdate.");
+        }elseif($role == 'admin'){
+            return redirect()->route("admin.student-guardian.index")->with("success", "Akun atas nama " . $studentGuardian->name . " telah diupdate.");
+        }
     }
 
     /**
@@ -109,6 +127,6 @@ class StudentGuardianController extends Controller
         $studentGuardian = StudentGuardian::findOrFail($id);
         $studentGuardian->delete();
 
-        return redirect()->route("admin.student-guardian.index")->with("success", "Akun atas nama " . $studentGuardian->name . " telah dihapus.");
+        return redirect()->back()->with("success", "Akun atas nama " . $studentGuardian->name . " telah dihapus.");
     }
 }

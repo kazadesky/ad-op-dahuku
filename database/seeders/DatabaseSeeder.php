@@ -42,5 +42,17 @@ class DatabaseSeeder extends Seeder
             'teacher_status' => 'Guru Dayah',
         ]);
         $teacherSeeder->assignRole('teacher');
+
+        $teacher1Seeder = User::factory()->create([
+            'email' => 'teacher1@example.com',
+            'teacher_status' => 'Guru Umum',
+        ]);
+        $teacher1Seeder->assignRole('teacher');
+
+        $teacher2Seeder = User::factory()->create([
+            'email' => 'teacher2@example.com',
+            'teacher_status' => 'Guru Dayah',
+        ]);
+        $teacher2Seeder->assignRole('teacher');
     }
 }

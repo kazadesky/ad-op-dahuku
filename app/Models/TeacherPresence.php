@@ -52,7 +52,7 @@ class TeacherPresence extends Model
 
     public function substituteTeacher(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'subtitute_teacher_id');
+        return $this->belongsTo(User::class, 'substitute_teacher_id');
     }
 
     public function updatedBy(): BelongsTo

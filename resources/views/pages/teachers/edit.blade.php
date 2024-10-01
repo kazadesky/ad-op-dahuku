@@ -31,15 +31,15 @@
                         <span>Status Guru</span>
                         <span class="float-end max-md:hidden">:</span>
                     </label>
-                    <select name="status" id="status" size="-1"
-                        class="outline-none w-full rounded-md md:h-12 max-md:h-11 px-3 border-2 transition duration-300 focus:border-green-500 focus:shadow-sm focus:ring-2 focus:ring-green-300 capitalize @error('roles') border-red-500 @enderror">
+                    <select name="teacher_status" id="status" size="-1"
+                        class="outline-none w-full rounded-md md:h-12 max-md:h-11 px-3 border-2 transition duration-300 focus:border-green-500 focus:shadow-sm focus:ring-2 focus:ring-green-300 capitalize @error('teacher_status') border-red-500 @enderror">
                         @foreach ($status as $sts)
-                            <option value="{{ $sts }}" {{ $sts === $teacher->status ? 'selected' : '' }}>
+                            <option value="{{ $sts }}" {{ $sts === $teacher->teacher_status ? 'selected' : '' }}>
                                 {{ $sts }}</option>
                         @endforeach
                     </select>
                 </div>
-                @error('status')
+                @error('teacher_status')
                     <div class="w-full md:pl-40">
                         <small class="text-red-500">{{ $message }}</small>
                     </div>

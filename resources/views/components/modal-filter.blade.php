@@ -1,7 +1,13 @@
 <div id="modal-filter"
     class="animation-fade hidden fixed z-50 w-full md:max-w-screen-lg max-md:w-screen justify-center max-md:px-3 max-md:-ml-3">
-    <form action="{{ route('admin.monthly-payment.index') }}" method="GET"
-        class="w-full md:max-w-md max-md:w-full rounded-md shadow-md p-5 bg-white max-sm:text-sm">
+    <form
+        @hasrole('super_admin')
+            action="{{ request()->routeIs('sa.teacher-presence.index') ? route('sa.teacher-presence.index') : route('sa.monthly-payment.index') }}"
+        @endhasrole
+        @hasrole('admin')
+            action="{{ request()->routeIs('admin.teacher-presence.index') ? route('admin.teacher-presence.index') : route('admin.monthly-payment.index') }}"
+        @endhasrole
+        method="GET" class="w-full md:max-w-md max-md:w-full rounded-md shadow-md p-5 bg-white max-sm:text-sm">
         <h1 class="mb-5 font-poppins md:text-xl max-md:text-lg capitalize font-bold flex items-center">
             <span class="material-symbols-outlined text-3xl -ml-2">
                 filter_alt
@@ -17,9 +23,10 @@
                 </label>
                 <select name="month" id="month" size="-1"
                     class="outline-none w-full rounded-md md:h-12 max-md:h-11 px-3 border-2 transition duration-300 focus:border-green-500 focus:shadow-sm focus:ring-2 focus:ring-green-300">
-                    <option value="" hidden>Pilih Bulan</option>
+                    <option value="">Pilih Bulan</option>
                     @foreach ($moons as $moon)
-                        <option value="{{ $moon->id }}">{{ $moon->name }}</option>
+                        <option value="{{ $moon->id }}"
+                            {{ request()->input('month') == $moon->id ? 'selected' : '' }}>{{ $moon->name }}</option>
                     @endforeach
                 </select>
             </div>
@@ -33,9 +40,10 @@
                 </label>
                 <select name="year" id="year" size="-1"
                     class="outline-none w-full rounded-md md:h-12 max-md:h-11 px-3 border-2 transition duration-300 focus:border-green-500 focus:shadow-sm focus:ring-2 focus:ring-green-300">
-                    <option value="" hidden>Pilih Tahun</option>
+                    <option value="">Pilih Tahun</option>
                     @foreach ($years as $year)
-                        <option value="{{ $year }}">{{ $year }}</option>
+                        <option value="{{ $year }}" {{ request()->input('year') == $year ? 'selected' : '' }}>
+                            {{ $year }}</option>
                     @endforeach
                 </select>
             </div>
