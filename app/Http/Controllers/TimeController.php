@@ -31,7 +31,9 @@ class TimeController extends Controller
         $time = Time::create($fields);
 
         $role = Auth::user()->roles->pluck("name")->first();
-        if ($role == "admin") {
+        if ($role == 'super_admin') {
+            return redirect()->route("sa.time.index")->with("success", "Jam masuk telah dibuat.");
+        } elseif ($role == "admin") {
             return redirect()->route("admin.time.index")->with("success", "Jam masuk telah dibuat.");
         } elseif ($role == "operator") {
             return redirect()->route("operator.time.index")->with("success", "Jam masuk telah dibuat.");
@@ -56,7 +58,9 @@ class TimeController extends Controller
         $time->update($fields);
 
         $role = Auth::user()->roles->pluck("name")->first();
-        if ($role == "admin") {
+        if ($role == 'super_admin') {
+            return redirect()->route("sa.time.index")->with("success", "Jam masuk telah diupdate.");
+        } elseif ($role == "admin") {
             return redirect()->route("admin.time.index")->with("success", "Jam masuk telah diupdate.");
         } elseif ($role == "operator") {
             return redirect()->route("operator.time.index")->with("success", "Jam masuk telah diupdate.");

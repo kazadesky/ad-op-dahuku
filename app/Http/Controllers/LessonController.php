@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Lesson;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LessonController extends Controller
 {
@@ -41,7 +42,15 @@ class LessonController extends Controller
         ]);
 
         $lesson = Lesson::create(["name" => ucwords($request->name)]);
-        return redirect()->route("admin.lesson.index")->with("success", "Pembelajaran " . $lesson->name . " berhasil ditambah.");
+
+        $role = Auth::user()->roles->pluck('name')->first();
+        if ($role == 'super_admin') {
+            return redirect()->route("sa.lesson.index")->with("success", "Pembelajaran " . $lesson->name . " berhasil ditambah.");
+        } elseif ($role == 'admin') {
+            return redirect()->route("admin.lesson.index")->with("success", "Pembelajaran " . $lesson->name . " berhasil ditambah.");
+        } elseif ($role == 'operator') {
+            return redirect()->route("operator.lesson.index")->with("success", "Pembelajaran " . $lesson->name . " berhasil ditambah.");
+        }
     }
 
     /**
@@ -76,7 +85,15 @@ class LessonController extends Controller
 
         $lesson = Lesson::findOrFail($id);
         $lesson->update(["name" => ucwords($request->name)]);
-        return redirect()->route("admin.lesson.index")->with("success", "Pembelajaran " . $lesson->name . " telah diupdate.");
+
+        $role = Auth::user()->roles->pluck('name')->first();
+        if ($role == 'super_admin') {
+            return redirect()->route("sa.lesson.index")->with("success", "Pembelajaran " . $lesson->name . " telah diupdate.");
+        } elseif ($role == 'admin') {
+            return redirect()->route("admin.lesson.index")->with("success", "Pembelajaran " . $lesson->name . " telah diupdate.");
+        } elseif ($role == 'operator') {
+            return redirect()->route("operator.lesson.index")->with("success", "Pembelajaran " . $lesson->name . " telah diupdate.");
+        }
     }
 
     /**
@@ -87,6 +104,6 @@ class LessonController extends Controller
         $lesson = Lesson::findOrFail($id);
         $lesson->delete();
 
-        return redirect()->route("admin.lesson.index")->with("success", "Pembelajaran " . $lesson->name . " telah dihapus.");
+        return redirect()->back()->with("success", "Pembelajaran " . $lesson->name . " telah dihapus.");
     }
 }

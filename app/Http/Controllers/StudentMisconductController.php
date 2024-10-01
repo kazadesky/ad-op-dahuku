@@ -44,7 +44,6 @@ class StudentMisconductController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            "teacher_id" => "required",
             "student_id" => "required",
             "misconduct" => "required"
         ]);
@@ -63,7 +62,10 @@ class StudentMisconductController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $title = "Pelanggaran";
+        $misconduct = StudentMisconduct::with("teacher", "student", "updatedBy")->findOrFail($id);
+
+        return view("pages.student-misconduct.show", compact("title", "misconduct"));
     }
 
     /**
@@ -75,7 +77,7 @@ class StudentMisconductController extends Controller
         $misconduct = StudentMisconduct::with("teacher", "student", "updatedBy")->findOrFail($id);
         $students = Student::with("classRoom")->orderBy("name", "asc")->get();
 
-        return view("pages.student-misconduct.create", compact([
+        return view("pages.student-misconduct.edit", compact([
             "title",
             "misconduct",
             "students",
@@ -89,7 +91,7 @@ class StudentMisconductController extends Controller
         $student = Student::with("classRoom")->findOrFail($studentId);
         $students = Student::with("classRoom")->orderBy("name", "asc")->get();
 
-        return view("pages.student-misconduct.create", compact([
+        return view("pages.student-misconduct.edit", compact([
             "title",
             "misconduct",
             "student",
@@ -105,6 +107,7 @@ class StudentMisconductController extends Controller
         $user = Auth::user();
 
         $request->validate([
+            "student_id" => "required",
             "misconduct" => "required|string"
         ]);
 
@@ -124,20 +127,26 @@ class StudentMisconductController extends Controller
         $user = Auth::user();
 
         $request->validate([
-            "misconduct" => "required|string"
+            "misconduct" => "required|string",
         ]);
 
-        $misconduct = StudentMisconduct::with("teacher", "student", "updatedBy")->findOrFail($id);
+        $misconduct = StudentMisconduct::with("student", "teacher", "updatedBy")->findOrFail($id);
         $student = Student::with("classRoom")->findOrFail($studentId);
 
         $misconduct->update([
-            "teacher_id" => $request->teacher_id,
-            "student_id" => $request->student_id,
             "misconduct" => ucfirst($request->misconduct),
             "updated_by" => $user->id,
         ]);
 
-        return redirect()->route("admin.student.show", $student->id)->with("success", "Pelanggaran atas nama " . $misconduct->student->name . " telah diupdate.");
+        $role = $user->roles->pluck('name')->first();
+        if ($role == 'super_admin') {
+            return redirect()->route("sa.student.show", $student->id)
+                ->with("misconduct", "Pencapaian atas nama " . $misconduct->student->name . " telah diupdate.");
+        } elseif ($role == 'admin') {
+            return redirect()->route("admin.student.show", $student->id)
+                ->with("misconduct", "Pencapaian atas nama " . $misconduct->student->name . " telah diupdate.");
+        }
+
     }
 
     /**

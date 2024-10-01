@@ -9,9 +9,6 @@
         @hasrole('admin')
             <span>Admin</span>
         @endhasrole
-        @hasrole('operator')
-            <span>Operator</span>
-        @endhasrole
         @hasrole('teacher')
             <span>Operator</span>
         @endhasrole
@@ -50,12 +47,12 @@
             <section class="w-full md:mb-4 max-md:mb-3">
                 <div class="flex max-md:flex-col max-md:space-y-1 md:space-x-4 md:items-start">
                     <label for="misconduct" class="font-medium md:w-40">
-                        <span>Pencapaian</span>
+                        <span>Pelanggaran</span>
                         <span class="float-end max-md:hidden">:</span>
                     </label>
                     <textarea name="misconduct" id="misconduct"
                         class="outline-none w-full rounded-md md:min-h-24 max-md:min-h-20 p-3 border-2 transition duration-300 focus:border-green-500 focus:shadow-sm focus:ring-2 focus:ring-green-300 @error('misconduct') border-red-500 @enderror"
-                        placeholder="Masukkan pencapaian santri..."></textarea>
+                        placeholder="Masukkan pelanggaran santri..."></textarea>
                 </div>
                 @error('misconduct')
                     <div class="w-full md:pl-40">

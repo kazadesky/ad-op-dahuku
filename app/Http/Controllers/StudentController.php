@@ -8,6 +8,7 @@ use App\Models\Student;
 use App\Models\StudentAchievement;
 use App\Models\StudentMisconduct;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class StudentController extends Controller
 {
@@ -71,7 +72,14 @@ class StudentController extends Controller
             'address' => ucwords($request->address),
         ]);
 
-        return redirect()->route("admin.student.index")->with("success", "Data santri dengan nama " . $student->name . " telah di tambahkan");
+        $role = Auth::user()->roles->pluck('name')->first();
+        if ($role == 'super_admin') {
+            return redirect()->route("sa.student.index")->with("success", "Data santri dengan nama " . $student->name . " telah di tambahkan");
+        } elseif ($role == 'admin') {
+            return redirect()->route("admin.student.index")->with("success", "Data santri dengan nama " . $student->name . " telah di tambahkan");
+        } elseif ($role == 'operator') {
+            return redirect()->route("operator.student.index")->with("success", "Data santri dengan nama " . $student->name . " telah di tambahkan");
+        }
     }
 
     /**
@@ -80,9 +88,9 @@ class StudentController extends Controller
     public function show(string $id)
     {
         $student = Student::findOrFail($id);
-        $achievements = StudentAchievement::orderBy("id", "DESC")->with("teacher", "student")->where('student_id', $id)->get();
-        $misconducts = StudentMisconduct::orderBy("id", "DESC")->with("teacher", "student")->where('student_id', $id)->get();
-        $payments = MonthlyPayment::with("moon", "student")->where('student_id', $id)->get();
+        $achievements = StudentAchievement::with("teacher", "student")->where('student_id', $id)->latest()->paginate(50);
+        $misconducts = StudentMisconduct::with("teacher", "student")->where('student_id', $id)->latest()->paginate(50);
+        $payments = MonthlyPayment::with("moon", "student")->where('student_id', $id)->latest()->paginate(50);
         $title = "Data Santri";
         return view("pages.students.show", compact(
             "student",
@@ -139,7 +147,15 @@ class StudentController extends Controller
             'address' => ucwords($request->address),
         ]);
 
-        return redirect()->route("admin.student.index")->with("success", "Data santri atas nama " . $student->name . " telah diubah.");
+        $role = Auth::user()->roles->pluck('name')->first();
+        if ($role == 'super_admin') {
+            return redirect()->route("sa.student.index")->with("success", "Data santri atas nama " . $student->name . " telah diubah.");
+        } elseif ($role == 'admin') {
+            return redirect()->route("admin.student.index")->with("success", "Data santri atas nama " . $student->name . " telah diubah.");
+        } elseif ($role == 'operator') {
+            return redirect()->route("operator.student.index")->with("success", "Data santri atas nama " . $student->name . " telah diubah.");
+        }
+
     }
 
     /**

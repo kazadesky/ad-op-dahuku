@@ -131,16 +131,20 @@
     @endhasrole
 
     @hasrole('teacher')
+        <h1
+            class="md:text-lg max-md:text-base font-poppins text-hitam md:font-bold max-md:font-semibold drop-shadow-lg mb-3 px-10 py-3 rounded-md shadow-md bg-white w-max uppercase border-2">
+            Jadwal mengajar :
+        </h1>
         @if (count($schedules) > 0)
-            <div class="w-full grid md:grid-cols-3 max-md:grid-cols-1 md:gap-5 max-md:gap-y-3 text-hitam">
+            <div class="w-full grid md:grid-cols-3 max-md:grid-cols-1 md:gap-5 max-md:gap-y-3 text-hitam mb-10">
                 @foreach ($schedules as $day => $items)
                     <section
-                        class="col-span-1 p-5 rounded-lg shadow-lg {{ strtolower($day) === strtolower($action) ? 'bg-gradient-to-tr from-[#098666] to-[#1e1f1e] text-white' : 'bg-white' }}">
+                        class="col-span-1 p-5 rounded-lg border-2 shadow-lg {{ strtolower($day) === strtolower($action) ? 'bg-gradient-to-tr from-[#098666] to-[#1e1f1e] text-white' : 'bg-white' }}">
                         <h1 class="md:text-xl max-md:text-lg md:font-bold max-md:font-semibold">{{ $day }} :</h1>
                         @foreach ($items as $item)
-                            <div class="w-full flex items-start space-x-1 my-3">
+                            <div class="w-full flex items-start space-x-2 my-3">
                                 <p>{{ $loop->iteration }}.</p>
-                                <div class="flex flex-col space-y-1">
+                                <div class="flex flex-col space-y-2">
                                     <p class="flex flex-none">
                                         <span class="w-24">Mapel</span>
                                         <span class="w-5">:</span>
@@ -168,6 +172,35 @@
                 <div class="bg-white rounded-md shadow-md px-10 py-2">
                     <p class="text-center">Anda belum mempunyai jadwal mengajar yang terdaftar.</p>
                 </div>
+            </div>
+        @endif
+
+        @if (count($pickets) > 0)
+            <h1
+                class="md:text-lg max-md:text-base font-poppins text-hitam md:font-bold max-md:font-semibold drop-shadow-lg mb-3 px-10 py-3 rounded-md shadow-md bg-white w-max uppercase border-2">
+                Jadwal Piket :
+            </h1>
+            <div class="w-full grid md:grid-cols-2 max-md:grid-cols-1 md:gap-5 max-md:gap-y-3 text-hitam">
+                @foreach ($pickets as $day => $items)
+                    <section
+                        class="col-span-1 p-5 border-2 rounded-lg shadow-lg {{ strtolower($day) === strtolower($action) ? 'bg-gradient-to-tr from-[#098666] to-[#1e1f1e] text-white' : 'bg-white' }}">
+                        <h1 class="md:text-xl max-md:text-lg md:font-bold max-md:font-semibold">{{ $day }} :</h1>
+                        @foreach ($items as $item)
+                            <div class="w-full flex flex-col space-y-2 mt-3">
+                                <p class="flex flex-none">
+                                    <span class="w-24">Piket</span>
+                                    <span class="w-5">:</span>
+                                    <span>{{ $item->teacher->name }}</span>
+                                </p>
+                                <p class="flex flex-none">
+                                    <span class="w-24">Pengganti</span>
+                                    <span class="w-5">:</span>
+                                    <span>{{ $item->substitute_picket_teacher_id ? $item->substitute->name : '-' }}</span>
+                                </p>
+                            </div>
+                        @endforeach
+                    </section>
+                @endforeach
             </div>
         @endif
     @endhasrole

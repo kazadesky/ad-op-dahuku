@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>@yield('title') | Darul Huda Kutacane</title>
+    <title>Darul Huda Kutacane</title>
     <link rel="shortcut icon" href="{{ asset('img/logo.jpg') }}" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,20 +19,24 @@
     @vite(['resources/js/app.js', 'resources/css/app.css'])
 </head>
 
-<body class="w-full h-screen overflow-hidden font-inter bg-background">
-    @include('components.sidebar')
-    <div class="w-full absolute top-0 left-0 h-48 bg-gradient-to-tr from-elf-green to-hitam"></div>
+<body
+    class="w-full h-screen flex items-center justify-center font-inter bg-gradient-to-tr from-elf-green to-hitam overflow-hidden">
 
-    <main id="content" class="relative z-10 w-full md:max-w-[80.5%] md:ml-[19.5%] h-full overflow-x-hidden md:px-5 max-md:px-3">
-        @include('components.navbar')
-        <section class="w-full min-h-screen pb-10">
-            @yield('content')
-        </section>
-        @include('components.footer')
-    </main>
+    <figure class="w-full flex justify-center items-center flex-col space-y-5">
+        <img src="{{ asset('img/logo.jpg') }}" alt="logo dahuku"
+            class="welcome-fade size-64 rounded-full drop-shadow-lg">
+        <figcaption
+            class="title-load text-3xl font-bold text-white-text drop-shadow-lg font-poppins flex items-center space-x-2">
+            <span class="custom-loader"></span>
+            <span>Darul Huda Kutacane</span>
+        </figcaption>
+    </figure>
 
-    <script src="{{ asset('js/main.js') }}"></script>
-    @stack('script')
+    <script>
+        setTimeout(() => {
+            window.location.href = "{{ route('login') }}";
+        }, 5000);
+    </script>
 </body>
 
 </html>

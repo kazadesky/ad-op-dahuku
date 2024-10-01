@@ -37,41 +37,24 @@ class TeacherPresenceController extends Controller
         $years = range(2020, 2032);
 
         if ($role == 'admin') {
+            $query = TeacherPresence::with("teacherPicket", "teacher", "lesson", "day", "time", "classRoom", "updatedBy", "substituteTeacher");
+
             if ($month && $year) {
-                if ($search) {
-                    $presences = TeacherPresence::with("teacherPicket", "teacher", "lesson", "day", "time", "classRoom", "updatedBy", "substituteTeacher")
-                        ->whereHas("teacher", function ($query) use ($search) {
-                            $query->where("name", "like", "%" . $search . "%");
-                        })
-                        ->whereMonth('created_at', $month)
-                        ->whereYear('created_at', $year)
-                        ->latest()
-                        ->paginate(25);
-                } else {
-                    $presences = TeacherPresence::with("teacherPicket", "teacher", "lesson", "day", "time", "classRoom", "updatedBy", "substituteTeacher")
-                        ->whereMonth('created_at', $month)
-                        ->whereYear('created_at', $year)
-                        ->latest()
-                        ->paginate(50);
-                }
+                $query->whereMonth('created_at', $month)
+                    ->whereYear('created_at', $year);
             } else {
-                if ($search) {
-                    $presences = TeacherPresence::with("teacherPicket", "teacher", "lesson", "day", "time", "classRoom", "updatedBy", "substituteTeacher")
-                        ->whereHas("teacher", function ($query) use ($search) {
-                            $query->where("name", "like", "%" . $search . "%");
-                        })
-                        ->whereMonth('created_at', $currentMonth)
-                        ->whereYear('created_at', $currentYear)
-                        ->latest()
-                        ->paginate(25);
-                } else {
-                    $presences = TeacherPresence::with("teacherPicket", "teacher", "lesson", "day", "time", "classRoom", "updatedBy", "substituteTeacher")
-                        ->whereMonth('created_at', $currentMonth)
-                        ->whereYear('created_at', $currentYear)
-                        ->latest()
-                        ->paginate(50);
-                }
+                $query->whereMonth('created_at', $currentMonth)
+                    ->whereYear('created_at', $currentYear);
             }
+
+            if ($search) {
+                $query->whereHas("teacher", function ($query) use ($search) {
+                    $query->where("name", "like", "%" . $search . "%");
+                });
+            }
+
+            $presences = $query->latest()->paginate(50);
+
             return view("pages.teacher-presence.index", compact(
                 "title",
                 "presences",
@@ -79,20 +62,16 @@ class TeacherPresenceController extends Controller
                 "years",
             ));
         } elseif ($role == 'teacher') {
+            $query = TeacherPresence::with("teacherPicket", "teacher", "lesson", "day", "time", "classRoom", "updatedBy", "substituteTeacher")
+                ->where("teacher_picket_id", $user->id);
+
             if ($search) {
-                $presences = TeacherPresence::with("teacherPicket", "teacher", "lesson", "day", "time", "classRoom", "updatedBy", "substituteTeacher")
-                    ->whereHas("teacher", function ($query) use ($search) {
-                        $query->where("name", "like", "%" . $search . "%");
-                    })
-                    ->where("teacher_picket_id", $user->id)
-                    ->latest()
-                    ->paginate(50);
-            } else {
-                $presences = TeacherPresence::with("teacherPicket", "teacher", "lesson", "day", "time", "classRoom", "updatedBy", "substituteTeacher")
-                    ->where("teacher_picket_id", $user->id)
-                    ->latest()
-                    ->paginate(50);
+                $query->whereHas("teacher", function ($query) use ($search) {
+                    $query->where("name", "like", "%" . $search . "%");
+                });
             }
+
+            $presences = $query->latest()->paginate(50);
 
             $action = TeacherPicket::with("teacher", "substitute", "day")
                 ->where("teacher_id", $user->id)
@@ -218,6 +197,7 @@ class TeacherPresenceController extends Controller
             "time_id" => "required",
             "status" => "required|in:Hadir,Tidak Hadir,Izin",
             "substitute_teacher_id" => "nullable|different:teacher_id", // "different" digunakan agar inputan tidak boleh sama atau kebalikan dari "same"
+            "updated_by" => "nullable",
         ]);
 
         $presence = TeacherPresence::with("teacherPicket", "teacher", "lesson", "classRoom", "day", "time", "substituteTeacher")->findOrFail($id);
@@ -225,7 +205,6 @@ class TeacherPresenceController extends Controller
         $role = $user->roles->pluck('name')->first();
         if ($role == 'admin') {
             $presence->update([
-                "teacher_picket_id" => $request->teacher_picket_id,
                 "teacher_id" => $request->teacher_id,
                 "lesson_id" => $request->lesson_id,
                 "class_id" => $request->class_id,
@@ -236,7 +215,7 @@ class TeacherPresenceController extends Controller
                 "updated_by" => $user->id,
             ]);
 
-            return redirect()->route("admin.teacher-presence.index")->with("success", "");
+            return redirect()->route("admin.teacher-presence.index")->with("success", "Absensi atas nama " . $presence->teacher->name . " telah diupdate.");
         } elseif ($role == 'teacher') {
             $presence->update([
                 "teacher_picket_id" => $user->id,
@@ -248,7 +227,7 @@ class TeacherPresenceController extends Controller
                 "status" => $request->status,
                 "substitute_teacher_id" => $request->substitute_teacher_id,
             ]);
-            return redirect()->route("teacher.teacher-presence.index")->with("success", "");
+            return redirect()->route("teacher.teacher-presence.index")->with("success", "Absensi atas nama " . $presence->teacher->name . " telah diupdate.");
         }
     }
 
@@ -260,6 +239,6 @@ class TeacherPresenceController extends Controller
         $presence = TeacherPresence::with("teacherPicket", "teacher", "lesson", "classRoom", "day", "time", "substituteTeacher", "updatedBy")->findOrFail($id);
         $presence->delete();
 
-        return redirect()->back()->with("success", "");
+        return redirect()->back()->with("success", "Absensi atas nama " . $presence->teacher->name . " telah dihapus.");
     }
 }

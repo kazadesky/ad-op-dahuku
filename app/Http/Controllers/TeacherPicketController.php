@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Day;
 use App\Models\TeacherPicket;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TeacherPicketController extends Controller
 {
@@ -16,22 +18,18 @@ class TeacherPicketController extends Controller
     {
         $title = "Guru Piket";
         $days = Day::all();
-        $pickets = TeacherPicket::with("teacher", "substitute", "day")->latest()->get();
-        $senin = TeacherPicket::with("teacher", "substitute", "day")->where("day_id", $days->find(1)->id)->get();
-        $selasa = TeacherPicket::with("teacher", "substitute", "day")->where("day_id", $days->find(2)->id)->get();
-        $rabu = TeacherPicket::with("teacher", "substitute", "day")->where("day_id", $days->find(3)->id)->get();
-        $kamis = TeacherPicket::with("teacher", "substitute", "day")->where("day_id", $days->find(4)->id)->get();
-        $jumat = TeacherPicket::with("teacher", "substitute", "day")->where("day_id", $days->find(5)->id)->get();
-        $sabtu = TeacherPicket::with("teacher", "substitute", "day")->where("day_id", $days->find(6)->id)->get();
+        $picket = TeacherPicket::with("teacher", "substitute", "day")->orderBy("day_id", "asc")->get();
+        $pickets = $picket->groupBy(function ($day) {
+            return $day->day->name;
+        });
+
+        Carbon::setLocale("id");
+        $action = Carbon::now()->setTimezone("Asia/Jakarta")->isoFormat("dddd");
+
         return view("pages.teacher-picket.index", compact(
             "title",
             "pickets",
-            "senin",
-            "selasa",
-            "rabu",
-            "kamis",
-            "jumat",
-            "sabtu",
+            "action",
         ));
     }
 
@@ -58,12 +56,19 @@ class TeacherPicketController extends Controller
         $fields = $request->validate([
             "teacher_id" => "required",
             "day_id" => "required",
-            "substitute_picket_teacher_id" => "nullable",
+            "substitute_picket_teacher_id" => "nullable|different:teacher_id",
         ]);
 
         $teacher = TeacherPicket::create($fields);
 
-        return redirect()->route('admin.teacher-picket.index')->with('success', 'Guru piket atas nama ' . $teacher->teacher->name . ' berhasil ditambah.');
+        $role = Auth::user()->roles->pluck('name')->first();
+        if ($role == 'super_admin') {
+            return redirect()->route('sa.teacher-picket.index')->with('success', 'Guru piket atas nama ' . $teacher->teacher->name . ' berhasil ditambah.');
+        } elseif ($role == 'admin') {
+            return redirect()->route('admin.teacher-picket.index')->with('success', 'Guru piket atas nama ' . $teacher->teacher->name . ' berhasil ditambah.');
+        } elseif ($role == 'operator') {
+            return redirect()->route('operator.teacher-picket.index')->with('success', 'Guru piket atas nama ' . $teacher->teacher->name . ' berhasil ditambah.');
+        }
     }
 
     /**
@@ -115,7 +120,15 @@ class TeacherPicketController extends Controller
             "substitute_picket_teacher_id" => $request->substitute_picket_teacher_id,
         ]);
 
-        return redirect()->route('admin.teacher-picket.index')->with('success', 'Guru piket atas nama ' . $teacher->teacher->name . ' berhasil diupdate.');
+        $role = Auth::user()->roles->pluck('name')->first();
+        if ($role == 'super_admin') {
+            return redirect()->route('sa.teacher-picket.index')->with('success', 'Guru piket atas nama ' . $teacher->teacher->name . ' berhasil diupdate.');
+        } elseif ($role == 'admin') {
+            return redirect()->route('admin.teacher-picket.index')->with('success', 'Guru piket atas nama ' . $teacher->teacher->name . ' berhasil diupdate.');
+        } elseif ($role == 'operator') {
+            return redirect()->route('operator.teacher-picket.index')->with('success', 'Guru piket atas nama ' . $teacher->teacher->name . ' berhasil diupdate.');
+        }
+
     }
 
     /**

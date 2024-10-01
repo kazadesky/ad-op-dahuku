@@ -80,6 +80,12 @@
                                 {{ $achievement->achievement }}
                             </td>
                             <td class="px-6 py-2 flex items-center min-h-[1rem] space-x-2 text-white-text">
+                                <a href="{{ route('teacher.student-achievement.show', $achievement->id) }}"
+                                    class="outline-none size-10 flex items-center justify-center bg-sky-600 rounded-md transition duration-300 hover:bg-sky-700 focus:bg-sky-700">
+                                    <span class="material-symbols-outlined md:text-[21px] max-md:text-[20px]">
+                                        visibility
+                                    </span>
+                                </a>
                                 <a href="{{ route('teacher.student-achievement.edit', $achievement->id) }}"
                                     class="outline-none size-10 flex items-center justify-center bg-orange-600 rounded-md transition duration-300 hover:bg-orange-700 focus:bg-orange-700">
                                     <span class="material-symbols-outlined md:text-[21px] max-md:text-[20px]">
@@ -87,7 +93,7 @@
                                     </span>
                                 </a>
                                 <form action="{{ route('teacher.student-achievement.destroy', $achievement->id) }}"
-                                    method="POST">
+                                    onsubmit="return confirm('Apakah anda ingin menghapus pencapaian ini?')" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit"

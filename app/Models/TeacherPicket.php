@@ -23,7 +23,7 @@ class TeacherPicket extends Model
 
     public function substitute(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'subtitute_picket_teacher_id');
+        return $this->belongsTo(User::class, 'substitute_picket_teacher_id');
     }
 
     public function day(): BelongsTo

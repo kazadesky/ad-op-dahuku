@@ -12,7 +12,12 @@ class TeacherController extends Controller
     {
         $title = "Data Guru";
         $search = $request->input("search");
-        $teachers = User::role("teacher")->latest()->get();
+
+        if ($search) {
+            $teachers = User::role("teacher")->where("name", "like", "%" . $search . "%")->latest()->get();
+        }else{
+            $teachers = User::role("teacher")->latest()->get();
+        }
 
         return view("pages.teachers.index", compact(
             "teachers",
@@ -44,13 +49,10 @@ class TeacherController extends Controller
 
         $teacher = User::role("teacher")->findOrFail($id);
         $teacher->update([
-            "teacher_status" => $request->teacher_status,
+            "teacher_status" => $request->input("teacher_status"),
         ]);
 
-        // Hapus role yang sebelumnya
         $teacher->roles()->detach();
-
-        // Tambahkan role yang baru
         $teacher->assignRole($request->input("roles"));
 
         return redirect()->route("admin.teacher.index")->with("success", "Status akun " . $teacher->name . " telah diupdate.");

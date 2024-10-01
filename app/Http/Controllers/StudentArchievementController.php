@@ -62,7 +62,10 @@ class StudentArchievementController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $title = "Pencapaian";
+        $achievement = StudentAchievement::with("teacher", "student", "updatedBy")->findOrFail($id);
+
+        return view("pages.student-achievement.show", compact('title', 'achievement'));
     }
 
     /**
@@ -130,14 +133,19 @@ class StudentArchievementController extends Controller
         $student = Student::with("classRoom")->findOrFail($studentId);
 
         $achievement->update([
-            "teacher_id" => $achievement->teacher_id,
-            "student_id" => $achievement->student_id,
             "achievement" => ucfirst($request->achievement),
             "updated_by" => $user->id,
         ]);
 
-        return redirect()->route("admin.student.show", $student->id)
-            ->with("success", "Pencapaian atas nama " . $achievement->student->name . " telah diupdate.");
+        $role = $user->roles->pluck('name')->first();
+        if ($role == 'super_admin') {
+            return redirect()->route("sa.student.show", $student->id)
+                ->with("achievement", "Pencapaian atas nama " . $achievement->student->name . " telah diupdate.");
+        } elseif ($role == 'admin') {
+            return redirect()->route("admin.student.show", $student->id)
+                ->with("achievement", "Pencapaian atas nama " . $achievement->student->name . " telah diupdate.");
+        }
+
     }
 
     /**
