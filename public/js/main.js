@@ -96,3 +96,41 @@ const modalGetPayment = (event) => {
         modalFilter.classList.add("hidden");
     }
 }
+
+const showChangePhoto = (event) => {
+    event.preventDefault();
+
+    const modalChange = document.getElementById("modal-change-photo");
+    const modalAccount = document.getElementById("modal-change-profile");
+    const dropdown = document.getElementById('dropdown-nav');
+    const sidebar = document.getElementById('sidebar');
+    if (modalChange.classList.contains("hidden")) {
+        modalChange.classList.remove("hidden");
+        modalChange.classList.add("flex");
+        modalAccount.classList.add("hidden");
+        dropdown.classList.add("hidden");
+        sidebar.classList.remove("active");
+    } else {
+        modalChange.classList.remove("flex");
+        modalChange.classList.add("hidden");
+    }
+}
+
+const showChangeProfile = (event) => {
+    event.preventDefault();
+
+    const modalAccount = document.getElementById("modal-change-profile");
+    const modalChange = document.getElementById("modal-change-photo");
+    const dropdown = document.getElementById('dropdown-nav');
+    const sidebar = document.getElementById('sidebar');
+    if (modalAccount.classList.contains("hidden")) {
+        modalAccount.classList.remove("hidden");
+        modalAccount.classList.add("flex");
+        modalChange.classList.add("hidden");
+        dropdown.classList.add("hidden");
+        sidebar.classList.remove("active");
+    } else {
+        modalAccount.classList.remove("flex");
+        modalAccount.classList.add("hidden");
+    }
+}
