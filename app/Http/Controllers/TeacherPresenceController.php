@@ -11,6 +11,7 @@ use App\Models\TeacherPicket;
 use App\Models\TeacherPresence;
 use App\Models\Time;
 use App\Models\User;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -36,7 +37,7 @@ class TeacherPresenceController extends Controller
         $moons = Moon::all();
         $years = range(2020, 2032);
 
-        if ($role == 'admin') {
+        if ($role == 'super_admin' || $role == 'admin') {
             $query = TeacherPresence::with("teacherPicket", "teacher", "lesson", "day", "time", "classRoom", "updatedBy", "substituteTeacher");
 
             if ($month && $year) {
@@ -240,5 +241,71 @@ class TeacherPresenceController extends Controller
         $presence->delete();
 
         return redirect()->back()->with("success", "Absensi atas nama " . $presence->teacher->name . " telah dihapus.");
+    }
+
+    public function export(Request $request)
+    {
+        $currentMonth = Carbon::now()->month;
+        $currentYear = Carbon::now()->year;
+
+        $month = $request->input('month');
+        $year = $request->input('year');
+
+        $moons = Moon::all();
+        $years = range(2020, 2032);
+
+        $teacherPresence = TeacherPresence::with(
+            "teacherPicket",
+            "teacher",
+            "lesson",
+            "day",
+            "time",
+            "classRoom",
+            "updatedBy",
+            "substituteTeacher"
+        )
+            ->orderBy('created_at', 'asc');
+
+        if ($month && $year) {
+            $teacherPresences = $teacherPresence
+                ->whereMonth('created_at', $month)
+                ->whereYear('created_at', $year)
+                ->get();
+
+            $pdf = Pdf::loadView('pages.pdf.teacher-presence', compact([
+                'teacherPresences',
+                'month',
+                'year'
+            ]))
+                ->setPaper('A4', 'landscape');
+
+            return $pdf->stream('daftar-absensi-bulan-' . $month . '-tahun-' . $year . '.pdf');
+        } elseif ($year) {
+            $teacherPresences = $teacherPresence
+                ->whereYear('created_at', $year)
+                ->get();
+
+            $pdf = Pdf::loadView('pages.pdf.teacher-presence', compact([
+                'teacherPresences',
+                'month',
+                'year'
+            ]))
+                ->setPaper('A4', 'landscape');
+
+            return $pdf->stream('daftar-absensi-bulanan-tahun-' . $year . '.pdf');
+        } else {
+            $teacherPresences = $teacherPresence
+                ->whereYear('created_at', $currentYear)
+                ->get();
+
+            $pdf = Pdf::loadView('pages.pdf.teacher-presence', compact([
+                'teacherPresences',
+                'month',
+                'year'
+            ]))
+                ->setPaper('A4', 'landscape');
+
+            return $pdf->stream('daftar-absensi-bulanan-tahun-' . $currentYear . '.pdf');
+        }
     }
 }

@@ -14,12 +14,18 @@ class TeacherController extends Controller
         $search = $request->input("search");
 
         if ($search) {
+            $sa_teachers = User::role(["admin", "operator", "teacher"])->where("name", "like", "%" . $search . "%")->latest()->get();
+            $ad_teachers = User::role(["teacher", "operator"])->where("name", "like", "%" . $search . "%")->latest()->get();
             $teachers = User::role("teacher")->where("name", "like", "%" . $search . "%")->latest()->get();
-        }else{
+        } else {
+            $sa_teachers = User::role(["admin", "operator", "teacher"])->latest()->get();
+            $ad_teachers = User::role(["teacher", "operator"])->latest()->get();
             $teachers = User::role("teacher")->latest()->get();
         }
 
         return view("pages.teachers.index", compact(
+            "sa_teachers",
+            "ad_teachers",
             "teachers",
             "title",
         ));
@@ -28,12 +34,14 @@ class TeacherController extends Controller
     public function edit(string $id)
     {
         $title = "Edit Status Akun";
-        $teacher = User::role("teacher")->findOrFail($id);
+        $sa_teacher = User::role(["teacher", "admin", "operator"])->findOrFail($id);
+        $teacher = User::role(["teacher", "operator"])->findOrFail($id);
         $roles = Role::where('name', '!=', 'super_admin')->pluck("name");
         $status = ["Guru Dayah", "Guru Umum"];
 
         return view("pages.teachers.edit", compact(
             "title",
+            "sa_teacher",
             "teacher",
             "roles",
             "status",

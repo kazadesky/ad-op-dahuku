@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ClassRoom;
+use App\Models\Lesson;
+use App\Models\Student;
+use App\Models\StudentReport;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class StudentReportController extends Controller
 {
@@ -11,7 +16,14 @@ class StudentReportController extends Controller
      */
     public function index()
     {
-        //
+        $title = "Raport";
+        $user = Auth::user();
+        $reports = StudentReport::with("teacher", "student", "classRoom", "lesson")
+            ->where("teacher_id", $user->id)
+            ->latest()
+            ->paginate(50);
+
+        return view("pages.student-report.index", compact("title", "reports"));
     }
 
     /**
@@ -19,7 +31,17 @@ class StudentReportController extends Controller
      */
     public function create()
     {
-        //
+        $title = "Raport";
+        $students = Student::with('classRoom')->orderBy('name', 'asc')->get();
+        $classRooms = ClassRoom::orderBy('name', 'asc')->get();
+        $lessons = Lesson::orderBy('name', 'asc')->get();
+
+        return view("pages.student-report.create", compact(
+            'title',
+            'students',
+            'classRooms',
+            'lessons',
+        ));
     }
 
     /**
@@ -27,7 +49,20 @@ class StudentReportController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'student_id' => 'required|exists:students,id',
+            'class_id' => 'required|exists:class_rooms,id',
+            'lesson_id' => 'required|exists:lessons,id',
+        ]);
+
+        $report = StudentReport::create([
+            'teacher_id' => Auth::user()->id,
+            'student_id' => $request->student_id,
+            'class_id' => $request->class_id,
+            'lesson_id' => $request->lesson_id,
+        ]);
+
+        return redirect()->route('teacher.student-report.index')->with('success', 'Nilai santri atas nama ' . $report->student->name . ' telah dibuat.');
     }
 
     /**
@@ -43,7 +78,19 @@ class StudentReportController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $title = "Raport";
+        $report = StudentReport::with("teacher", "student", "classRoom", "lesson")->findOrFail($id);
+        $students = Student::with('classRoom')->orderBy('name', 'asc')->get();
+        $classRooms = ClassRoom::orderBy('name', 'asc')->get();
+        $lessons = Lesson::orderBy('name', 'asc')->get();
+
+        return view("pages.student-report.create", compact(
+            'title',
+            'report',
+            'students',
+            'classRooms',
+            'lessons',
+        ));
     }
 
     /**
@@ -51,7 +98,22 @@ class StudentReportController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'teacher_id' => 'required|exists:users,id' . Auth::user()->id,
+            'student_id' => 'required|exists:students,id',
+            'class_id' => 'required|exists:class_rooms,id',
+            'lesson_id' => 'required|exists:lessons,id',
+        ]);
+
+        $report = StudentReport::with("teacher", "student", "classRoom", "lesson")->findOrFail($id);
+        $report->update([
+            'teacher_id' => Auth::user()->id,
+            'student_id' => $request->student_id,
+            'class_id' => $request->class_id,
+            'lesson_id' => $request->lesson_id,
+        ]);
+
+        return redirect()->route('teacher.student-report.index')->with('success', 'Nilai santri atas nama ' . $report->student->name . ' telah diubah.');
     }
 
     /**
@@ -59,6 +121,9 @@ class StudentReportController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $report = StudentReport::with("teacher", "student", "classRoom", "lesson")->findOrFail($id);
+        $report->delete();
+
+        return redirect()->route('teacher.student-report.index')->with('success', 'Nilai santri atas nama ' . $report->student->name . ' telah dihapus.');
     }
 }

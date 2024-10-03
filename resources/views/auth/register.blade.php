@@ -19,7 +19,7 @@
             <label for="profile" class="block md:mb-2 max-md:mb-1 font-medium">Foto Profil</label>
             <input type="file" name="profile" onchange="profilePreview(event)" id="profile"
                 class="outline-none w-full rounded-md md:h-12 max-md:h-11 border-2 transition duration-300 focus:border-green-500 focus:shadow-sm focus:ring-2 focus:ring-green-300 file:outline-none file:h-full file:border-none file:cursor-pointer file:hover:bg-gray-200 file:transition file:duration-300 file:active:bg-gray-200 file:rounded-l-md @error('profile') border-red-500 @enderror"
-                value="{{ old('profile') }}">
+                value="{{ old('profile') }}" accept=".jpg, .jpeg, .png">
             @error('profile')
                 <small class="text-red-500">{{ $message }}</small>
             @enderror

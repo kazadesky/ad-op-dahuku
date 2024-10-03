@@ -20,12 +20,12 @@
 </head>
 
 <body
-    class="w-full flex items-center flex-col font-inter bg-gradient-to-tr from-elf-green to-hitam {{ request()->routeIs('login') ? 'overflow-hidden justify-center h-screen' : 'overflow-x-hidden min-h-screen' }}">
+    class="w-full flex items-center flex-col font-inter bg-gradient-to-tr from-elf-green to-hitam {{ request()->routeIs('login') ? 'overflow-hidden justify-center h-screen' : 'overflow-x-hidden min-h-screen max-md:pb-10' }}">
 
     @include('components.alert')
 
     <section
-        class="w-full max-md:max-w-sm sm:max-w-md z-10 max-md:px-3 {{ request()->routeIs('register') ? 'md:py-10' : 'flex flex-col space-y-3 items-center' }}">
+        class="faded-show w-full max-md:max-w-sm sm:max-w-md z-10 max-md:px-3 {{ request()->routeIs('register') ? 'md:py-10' : 'flex flex-col space-y-3 items-center' }}">
         @yield('content')
     </section>
 

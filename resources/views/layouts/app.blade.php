@@ -23,9 +23,11 @@
     @include('components.sidebar')
     <div class="w-full absolute top-0 left-0 h-48 bg-gradient-to-tr from-elf-green to-hitam"></div>
 
-    <main id="content" class="relative z-10 w-full md:max-w-[80.5%] md:ml-[19.5%] h-full overflow-x-hidden md:px-5 max-md:px-3">
+    <main id="content"
+        class="relative z-10 w-full md:max-w-[80.5%] md:ml-[19.5%] h-full overflow-x-hidden md:px-5 max-md:px-3">
         @include('components.navbar')
-        <section class="w-full min-h-screen pb-10">
+        <section
+            class="w-full min-h-screen pb-10 {{ request()->routeIs(['sa.dashboard', 'admin.dashboard', 'operator.dashboard', 'teacher.dashboard']) ? 'faded-out' : '' }}">
             @yield('content')
         </section>
         @include('components.footer')

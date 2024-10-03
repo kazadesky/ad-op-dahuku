@@ -22,13 +22,14 @@ class StudentController extends Controller
 
         if ($search) {
             $students = Student::with('classRoom')
-                ->where(function ($query) use ($search) {
-                    $query->where('name', 'LIKE', '%' . $search . '%')
-                        ->orWhere('nis', 'LIKE', '%' . $search . '%');
-                })
+                ->where('name', 'LIKE', '%' . $search . '%')
+                ->orWhere('nis', 'LIKE', '%' . $search . '%')
+                ->orderBy('name', 'desc')
                 ->paginate(15);
         } else {
-            $students = Student::with('classRoom')->paginate(25);
+            $students = Student::with('classRoom')
+                ->orderBy('name', 'asc')
+                ->paginate(25);
         }
 
         return view("pages.students.index", compact("students", "title"));
