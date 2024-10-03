@@ -21,7 +21,7 @@
     @endhasrole
 
     @hasrole('admin')
-        <div class="w-full flex items-center justify-between mb-3 max-md:text-sm">
+        {{-- <div class="w-full flex items-center justify-between mb-3 max-md:text-sm">
             <a href="{{ route('admin.student.create') }}"
                 class="outline-none flex items-center justify-center md:w-36 max-md:w-28 h-10 rounded-md shadow bg-blue-500 transition duration-300 hover:bg-blue-600 focus:bg-blue-600 text-white">
                 <span class="material-symbols-outlined">
@@ -126,7 +126,7 @@
 
         <section class="w-full h-10 mt-3">
             {{ $studentGuardians->links() }}
-        </section>
+        </section> --}}
     @endhasrole
 
     @hasrole('operator')

@@ -5,6 +5,7 @@ use App\Http\Controllers\ArchiveController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ClassRoomController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\EmailVerifyController;
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\LessonTimetableController;
 use App\Http\Controllers\MonthlyPaymentController;
@@ -17,6 +18,7 @@ use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\TeacherPicketController;
 use App\Http\Controllers\TeacherPresenceController;
 use App\Http\Controllers\TimeController;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware("guest")->group(function () {
@@ -35,8 +37,13 @@ Route::middleware("guest")->group(function () {
 });
 
 Route::middleware("auth")->group(function () {
-    Route::get("email-verify", 'EmailVerifyController@verify')->name('email-verify');
-    Route::post("email-verify/resend", "EmailVerifyController@resendVerify")->name("resend-verify");
+    Route::get("email-verify", [EmailVerifyController::class, 'verify'])->name('verification.notice');
+    Route::post("email-verify/resend", [EmailVerifyController::class, 'resendVerify'])->name("resend-verify");
+
+    Route::get("/email/verify/{id}/{hash}", function (EmailVerificationRequest $request) {
+        $request->fulfill();
+        return redirect()->route('teacher.dashboard');
+    })->middleware('signed')->name('verification.verify');
 });
 
 Route::middleware(["auth", "auth.session", "verified"])->group(function () {

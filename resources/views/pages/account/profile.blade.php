@@ -176,7 +176,7 @@
             </figure>
         </section>
         <section class="col-span-2">
-            <div class="w-full flex items-center justify-between">
+            <div class="w-full flex items-center justify-between max-md:space-x-3">
                 <p class="text-gray-500">Selamat datang diprofil akun anda <span
                         class="font-medium italic">{{ $user->name }}.</span></p>
                 <button type="button" onclick="showChangeProfile(event)"
