@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Laporan Pembayaran Bulanan</title>
+    <title>Laporan Kehadiran Guru</title>
     <link rel="shortcut icon" href="{{ asset('img/logo.jpg') }}" type="image/x-icon">
     <style>
         body {
@@ -17,21 +17,21 @@
 
         .header {
             text-align: center;
-            font-size: 16pt;
+            font-size: 18pt;
             font-weight: bold;
             margin-bottom: 20px;
         }
 
         .table {
-            border-collapse: collapse;
             width: 100%;
+            border-collapse: collapse;
             margin-bottom: 20px;
         }
 
         .table th,
         .table td {
             border: 1px solid #dddddd;
-            padding: 8px;
+            padding: 10px;
             text-align: left;
         }
 
@@ -77,11 +77,11 @@
 <body>
     <div class="header">
         @if ($month && $year)
-            Laporan Pembayaran Bulan {{ $month }} Tahun {{ $year }}
-        @elseif($year)
-            Laporan Pembayaran Bulanan Tahun {{ $year }}
+            Laporan Kehadiran Guru Bulan {{ $month }} Tahun {{ $year }}
+        @elseif ($year)
+            Laporan Kehadiran Guru Tahun {{ $year }}
         @else
-            Laporan Pembayaran Bulanan Tahun {{ \Carbon\Carbon::now()->year }}
+            Laporan Kehadiran Guru Tahun {{ \Carbon\Carbon::now()->year }}
         @endif
     </div>
 
@@ -89,24 +89,32 @@
         <thead>
             <tr>
                 <th>No.</th>
-                <th>Nama Santri</th>
+                <th>Guru Piket</th>
+                <th>Guru</th>
+                <th>Pelajaran</th>
                 <th>Kelas</th>
-                <th>Bulan</th>
-                <th>Tahun</th>
-                <th>Jumlah</th>
-                <th>Status</th>
+                <th>Hari, Tanggal</th>
+                <th>Jam</th>
+                <th>Status Kehadiran</th>
+                <th>Guru Pengganti</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($monthlyPayments as $index => $payment)
+            @foreach ($teacherPresences as $index => $presence)
                 <tr>
                     <td>{{ $index + 1 }}.</td>
-                    <td>{{ $payment->student->name }}</td>
-                    <td>{{ $payment->student->classRoom->name }}</td>
-                    <td>{{ $payment->moon->name }}</td>
-                    <td>{{ $payment->year }}</td>
-                    <td>Rp. {{ number_format($payment->price, 0, ',', '.') }}</td>
-                    <td>{{ $payment->status }}</td>
+                    <td>{{ $presence->teacherPicket->name }}</td>
+                    <td>{{ $presence->teacher->name }}</td>
+                    <td>{{ $presence->lesson->name }}</td>
+                    <td>{{ $presence->classRoom->name }}</td>
+                    <td>{{ $presence->day->name }},
+                        {{ \Carbon\Carbon::parse($presence->updated_at)->format('d-m-Y') }}
+                    </td>
+                    <td>{{ \Carbon\Carbon::parse($presence->time->start)->format('H:i') }} -
+                        {{ \Carbon\Carbon::parse($presence->time->finish)->format('H:i') }}
+                    </td>
+                    <td>{{ $presence->status }}</td>
+                    <td>{{ $presence->substituteTeacher ? $presence->substituteTeacher->name : '-' }}</td>
                 </tr>
             @endforeach
         </tbody>

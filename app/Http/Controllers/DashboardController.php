@@ -28,7 +28,8 @@ class DashboardController extends Controller
         $timetables = LessonTimetable::all()->count();
         $classRoom = ClassRoom::all()->count();
         $studentGuardian = StudentGuardian::all()->count();
-        $archives = Archive::all()->count();
+        $sa_archive = Archive::all()->count();
+        $archive = Archive::where('user_id', Auth::user()->id)->count();
 
         $user = Auth::user();
         $schedules = LessonTimetable::with("teacher", "lesson", "classRoom", "day", "time")
@@ -58,7 +59,8 @@ class DashboardController extends Controller
             "timetable" => $timetables,
             "room" => $classRoom,
             "guardian" => $studentGuardian,
-            "archive" => $archives,
+            "archive" => $archive,
+            "sa_archive" => $sa_archive,
             "schedules" => $groupedSchedules,
             "action" => $action,
             "pickets" => $groupedPickets,

@@ -49,7 +49,7 @@ const showMenu = (event) => {
     if (sidebar) {
         sidebar.classList.add('active');
         dropdown.classList.add('hidden');
-        modalFilter.classList.add('hidden');
+        // modalFilter.classList.add('hidden');
     }
 }
 
@@ -66,7 +66,7 @@ const toggleDropdown = (event) => {
         dropdown.classList.remove('hidden');
         dropdown.classList.add('flex');
         sidebar.classList.remove('active');
-        modalFilter.classList.add('hidden');
+        // modalFilter.classList.add('hidden');
     } else {
         dropdown.classList.remove('flex');
         dropdown.classList.add('hidden');
@@ -84,16 +84,54 @@ const modalGetPayment = (event) => {
     event.preventDefault();
 
     const modalFilter = document.getElementById("modal-filter");
+    const modalExport = document.getElementById("modal-export");
     const dropdown = document.getElementById('dropdown-nav');
     const sidebar = document.getElementById('sidebar');
     if (modalFilter.classList.contains("hidden")) {
         modalFilter.classList.remove("hidden");
         modalFilter.classList.add("flex");
+        modalExport.classList.add("hidden");
         dropdown.classList.add("hidden");
         sidebar.classList.remove("active");
     } else {
         modalFilter.classList.remove("flex");
         modalFilter.classList.add("hidden");
+    }
+}
+
+const modalGetExport = (event) => {
+    event.preventDefault();
+
+    const modalExport = document.getElementById("modal-export");
+    const modalFilter = document.getElementById("modal-filter");
+    const dropdown = document.getElementById('dropdown-nav');
+    const sidebar = document.getElementById('sidebar');
+    if (modalExport.classList.contains("hidden")) {
+        modalExport.classList.remove("hidden");
+        modalExport.classList.add("flex");
+        modalFilter.classList.add("hidden");
+        dropdown.classList.add("hidden");
+        sidebar.classList.remove("active");
+    } else {
+        modalExport.classList.remove("flex");
+        modalExport.classList.add("hidden");
+    }
+}
+
+const showModalArchive = (event) => {
+    event.preventDefault();
+
+    const modalArchive = document.getElementById("modal-archive");
+    const dropdown = document.getElementById('dropdown-nav');
+    const sidebar = document.getElementById('sidebar');
+    if (modalArchive.classList.contains("hidden")) {
+        modalArchive.classList.remove("hidden");
+        modalArchive.classList.add("flex");
+        dropdown.classList.add("hidden");
+        sidebar.classList.remove("active");
+    } else {
+        modalArchive.classList.remove("flex");
+        modalArchive.classList.add("hidden");
     }
 }
 

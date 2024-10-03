@@ -3,6 +3,11 @@
     transition: all 1s ease-in-out;
 }
 
+.faded-out {
+    animation: fade-show 1.5s ease-in-out;
+    transition: all 1s ease-in-out;
+}
+
 @keyframes fade-show {
     0% {
         opacity: 0;

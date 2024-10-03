@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\MonthlyPayment;
 use App\Models\Moon;
 use App\Models\Student;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -167,5 +168,50 @@ class MonthlyPaymentController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function export(Request $request)
+    {
+        $currentMonth = Carbon::now()->month;
+        $currentYear = Carbon::now()->year;
+
+        $month = $request->input('month');
+        $year = $request->input('year');
+
+        $moons = Moon::all();
+        $years = range(2020, 2032);
+
+        if ($month && $year) {
+            $monthlyPayments = MonthlyPayment::with("student", "moon")
+                ->where('moon_id', $month)
+                ->where('year', $year)
+                ->orderBy('updated_at', 'asc')
+                ->get();
+
+            $pdf = Pdf::loadView('pages.pdf.monthly-payment', compact('monthlyPayments', 'month', 'year'))
+                ->setPaper('A4', 'landscape');
+
+            return $pdf->stream('laporan-pembayaran-bulan-' . $month . '-tahun-' . $year . '.pdf');
+        } elseif ($year) {
+            $monthlyPayments = MonthlyPayment::with("student", "moon")
+                ->where('year', $year)
+                ->orderBy('moon_id', 'asc')
+                ->get();
+
+            $pdf = Pdf::loadView('pages.pdf.monthly-payment', compact('monthlyPayments', 'month', 'year'))
+                ->setPaper('A4', 'landscape');
+
+            return $pdf->stream('laporan-pembayaran-bulanan-tahun-' . $currentYear . '.pdf');
+        } else {
+            $monthlyPayments = MonthlyPayment::with("student", "moon")
+                ->where('year', $currentYear)
+                ->orderBy('moon_id', 'asc')
+                ->get();
+
+            $pdf = Pdf::loadView('pages.pdf.monthly-payment', compact('monthlyPayments', 'month', 'year'))
+                ->setPaper('A4', 'landscape');
+
+            return $pdf->stream('laporan-pembayaran-bulanan-tahun-' . $currentYear . '.pdf');
+        }
     }
 }

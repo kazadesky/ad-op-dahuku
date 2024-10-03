@@ -12,6 +12,7 @@ use App\Http\Controllers\StudentArchievementController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\StudentGuardianController;
 use App\Http\Controllers\StudentMisconductController;
+use App\Http\Controllers\StudentReportController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\TeacherPicketController;
 use App\Http\Controllers\TeacherPresenceController;
@@ -46,7 +47,7 @@ Route::middleware(["auth", "auth.session", "verified"])->group(function () {
 
         Route::resource("student", StudentController::class);
         Route::resource("student-guardian", StudentGuardianController::class);
-        Route::resource("monthly-payment", MonthlyPaymentController::class);
+        Route::resource("monthly-payment", MonthlyPaymentController::class)->only('index');
 
         Route::get("achievement/{id}/student/{studentId}", [StudentArchievementController::class, 'editFromAdmin'])->name("student-achievement.edit");
         Route::patch("achievement/{id}/student/{studentId}", [StudentArchievementController::class, 'updateFromAdmin'])->name("student-achievement.update");
@@ -63,7 +64,7 @@ Route::middleware(["auth", "auth.session", "verified"])->group(function () {
         Route::resource("lesson", LessonController::class);
         Route::resource("time", TimeController::class)->except('show');
         Route::resource("lesson-timetable", LessonTimetableController::class);
-        Route::resource("archive", ArchiveController::class)->only(['index', 'post', 'delete']);
+        Route::resource("archive", ArchiveController::class)->only('index');
 
         Route::prefix("profile/")->group(function () {
             Route::get("{id}/edit", [AccountController::class, "profile"])->name("profile");
@@ -72,6 +73,10 @@ Route::middleware(["auth", "auth.session", "verified"])->group(function () {
             Route::delete("{id}/delete", [AccountController::class, "deleteAccount"])->name("profile.delete");
         });
     });
+
+    Route::resource("archive", ArchiveController::class)->only('store');
+    Route::get("monthly-payment/export", [MonthlyPaymentController::class, 'export'])->name('monthly-payment.export');
+    Route::get("teacher-presence/export", [TeacherPresenceController::class, 'export'])->name('teacher-presence.export');
 
     Route::prefix("admin")->name("admin.")->middleware("role:admin")->group(function () {
         Route::get("dashboard", [DashboardController::class, 'index'])->name('dashboard');
@@ -87,7 +92,6 @@ Route::middleware(["auth", "auth.session", "verified"])->group(function () {
         Route::get("misconduct/{id}/student/{studentId}", [StudentMisconductController::class, 'editFromAdmin'])->name("student-misconduct.edit");
         Route::patch("misconduct/{id}/student/{studentId}", [StudentMisconductController::class, 'updateFromAdmin'])->name("student-misconduct.update");
 
-
         Route::resource("teacher", TeacherController::class)->only(['index', 'edit', 'update']);
         Route::resource("teacher-picket", TeacherPicketController::class);
         Route::resource("teacher-presence", TeacherPresenceController::class);
@@ -96,7 +100,7 @@ Route::middleware(["auth", "auth.session", "verified"])->group(function () {
         Route::resource("lesson", LessonController::class);
         Route::resource("time", TimeController::class)->except('show');
         Route::resource("lesson-timetable", LessonTimetableController::class);
-        Route::resource("archive", ArchiveController::class)->only(['index', 'post', 'delete']);
+        Route::resource("archive", ArchiveController::class)->only(['index', 'destroy']);
 
         Route::prefix("profile/")->group(function () {
             Route::get("{id}/edit", [AccountController::class, "profile"])->name("profile");
@@ -112,13 +116,14 @@ Route::middleware(["auth", "auth.session", "verified"])->group(function () {
         Route::patch("teacher-picket/{id}/action", [TeacherPicketController::class, 'action'])->name("teacher-picket.action");
 
         Route::resource("student", StudentController::class);
-        Route::resource("teacher-picket", TeacherPicketController::class)->except(['delete', 'edit', 'update']);
+        Route::resource("teacher", TeacherController::class)->only('index');
+        Route::resource("teacher-picket", TeacherPicketController::class)->only('index');
 
         Route::resource("class-room", ClassRoomController::class)->except("show");
         Route::resource("lesson", LessonController::class)->except('show');
         Route::resource("time", TimeController::class)->except('show');
         Route::resource("lesson-timetable", LessonTimetableController::class);
-        Route::resource("archive", ArchiveController::class)->only(['index', 'post', 'delete']);
+        Route::resource("archive", ArchiveController::class)->only(['index', 'destroy']);
 
         Route::prefix("profile/")->group(function () {
             Route::get("{id}/edit", [AccountController::class, "profile"])->name("profile");
@@ -135,7 +140,8 @@ Route::middleware(["auth", "auth.session", "verified"])->group(function () {
         Route::resource("student-misconduct", StudentMisconductController::class);
 
         Route::resource("teacher-presence", TeacherPresenceController::class);
-        Route::resource("archive", ArchiveController::class)->only(['index', 'post']);
+        Route::resource("student-report", StudentReportController::class)->except('show');
+        Route::resource("archive", ArchiveController::class)->only(['index', 'destroy']);
 
         Route::prefix("profile/")->group(function () {
             Route::get("{id}/edit", [AccountController::class, "profile"])->name("profile");

@@ -52,7 +52,7 @@
                 <a href="{{ route('sa.student.index') }}"
                     class="
                     outline-none w-full h-10 flex items-center px-3 rounded space-x-1
-                    {{ request()->routeIs(['sa.student.*', 'sa.student-achievement.edit']) ? 'bg-elf-green shadow-sm' : '' }}
+                    {{ request()->routeIs(['sa.student.*', 'sa.student-achievement.edit', 'sa.student-misconduct.edit']) ? 'bg-elf-green shadow-sm' : '' }}
                     ">
                     <span class="material-symbols-outlined">
                         Description
@@ -204,7 +204,7 @@
                 <a href="{{ route('admin.student.index') }}"
                     class="
                     outline-none w-full h-10 flex items-center px-3 rounded space-x-1
-                    {{ request()->routeIs(['admin.student.*', 'admin.student-achievement.edit']) ? 'bg-elf-green shadow-sm' : '' }}
+                    {{ request()->routeIs(['admin.student.*', 'admin.student-achievement.edit', 'admin.student-misconduct.edit']) ? 'bg-elf-green shadow-sm' : '' }}
                     ">
                     <span class="material-symbols-outlined">
                         Description
@@ -352,7 +352,102 @@
             </li>
 
             <span class="font-semibold uppercase text-[11px]">content</span>
-            <li class="mt-2"></li>
+            <li class="mt-2">
+                <a href="{{ route('operator.student.index') }}"
+                    class="
+                    outline-none w-full h-10 flex items-center px-3 rounded space-x-1
+                    {{ request()->routeIs('operator.student.*') ? 'bg-elf-green shadow-sm' : '' }}
+                    ">
+                    <span class="material-symbols-outlined">
+                        Description
+                    </span>
+                    <span>Data Santri</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('operator.teacher.index') }}"
+                    class="
+                    outline-none w-full h-10 flex items-center px-3 rounded space-x-1
+                    {{ request()->routeIs('operator.teacher.*') ? 'bg-elf-green shadow-sm' : '' }}
+                    ">
+                    <span class="material-symbols-outlined">
+                        Description
+                    </span>
+                    <span>Daftar Guru</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('operator.class-room.index') }}"
+                    class="
+                    outline-none w-full h-10 flex items-center px-3 rounded space-x-1
+                    {{ request()->routeIs('operator.class-room.*') ? 'bg-elf-green shadow-sm' : '' }}
+                    ">
+                    <span class="material-symbols-outlined">
+                        list
+                    </span>
+                    <span>Daftar Kelas</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('operator.lesson.index') }}"
+                    class="
+                    outline-none w-full h-10 flex items-center px-3 rounded space-x-1
+                    {{ request()->routeIs('operator.lesson.*') ? 'bg-elf-green shadow-sm' : '' }}
+                    ">
+                    <span class="material-symbols-outlined">
+                        local_library
+                    </span>
+                    <span>Mata Pelajaran</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('operator.time.index') }}"
+                    class="
+                    outline-none w-full h-10 flex items-center px-3 rounded space-x-1
+                    {{ request()->routeIs('operator.time.*') ? 'bg-elf-green shadow-sm' : '' }}
+                    ">
+                    <span class="material-symbols-outlined">
+                        schedule
+                    </span>
+                    <span>Jam Masuk</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('operator.lesson-timetable.index') }}"
+                    class="
+                    outline-none w-full h-10 flex items-center px-3 rounded space-x-1
+                    {{ request()->routeIs('operator.lesson-timetable.*') ? 'bg-elf-green shadow-sm' : '' }}
+                    ">
+                    <span class="material-symbols-outlined">
+                        date_range
+                    </span>
+                    <span>Jadwal Pelajaran</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('operator.teacher-picket.index') }}"
+                    class="
+                    outline-none w-full h-10 flex items-center px-3 rounded space-x-1
+                    {{ request()->routeIs('operator.teacher-picket.*') ? 'bg-elf-green shadow-sm' : '' }}
+                    ">
+                    <span class="material-symbols-outlined">
+                        List
+                    </span>
+                    <span>Guru Piket</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('operator.archive.index') }}"
+                    class="
+                    outline-none w-full h-10 flex items-center px-3 rounded space-x-1
+                    {{ request()->routeIs('operator.archive.*') ? 'bg-elf-green shadow-sm' : '' }}
+                    ">
+                    <span class="material-symbols-outlined">
+                        Bookmark
+                    </span>
+                    <span>Arsip Data</span>
+                </a>
+            </li>
         </ul>
     @endhasrole
 
@@ -409,6 +504,18 @@
                         note_alt
                     </span>
                     <span>Pelanggaran Santri</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('teacher.student-report.index') }}"
+                    class="
+                    outline-none w-full h-10 flex items-center px-3 rounded space-x-1
+                    {{ request()->routeIs('teacher.student-report.*') ? 'bg-elf-green shadow-sm' : '' }}
+                    ">
+                    <span class="material-symbols-outlined">
+                        Edit_Note
+                    </span>
+                    <span>Raport Santri</span>
                 </a>
             </li>
             <li>
