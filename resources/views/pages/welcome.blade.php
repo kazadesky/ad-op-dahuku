@@ -15,7 +15,7 @@
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
-    {{-- <link rel="stylesheet" href="{{ asset('build/css/app.css') }}"> --}}
+    {{-- <link rel="stylesheet" href="{{ asset('build/assets/app.css') }}"> --}}
     @vite(['resources/js/app.js', 'resources/css/app.css'])
 </head>
 

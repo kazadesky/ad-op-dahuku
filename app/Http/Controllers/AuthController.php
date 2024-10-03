@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -30,7 +31,6 @@ class AuthController extends Controller
 
         $request->session()->regenerate();
 
-        // Gunakan parameter remember dari request
         // Auth::login($checkAuth, $request->remember);
         Auth::login($checkAuth, true);
 
@@ -70,21 +70,21 @@ class AuthController extends Controller
         $profileName = strtolower(str_replace(' ', '_', $request->name)) . '_' . time() . '.' . $profileFile->getClientOriginalExtension();
         $profileFile->storeAs('profile', $profileName, 'public');
 
-        $userData = [
+        $user = User::create([
             'name' => ucwords($request->name),
             'email' => $request->email,
             'nomor_telepon' => $request->nomor_telepon,
             'password' => Hash::make($request->password),
             'profile' => $profileName,
             'teacher_status' => $request->teacher_status,
-        ];
-
-        $user = User::create($userData);
+        ]);
         $user->assignRole("teacher");
 
+        event(new Registered($user));
+        $user->sendEmailVerificationNotification();
         Auth::login($user, true);
 
-        return redirect()->route("teacher.dashboard");
+        return redirect()->route("verification.notice");
     }
 
     public function logout(Request $request)

@@ -99,6 +99,24 @@ const modalGetPayment = (event) => {
     }
 }
 
+const showModalSearch = (event) => {
+    event.preventDefault();
+
+    const modalSearch = document.getElementById("modal-search");
+    const modalFilter = document.getElementById("modal-filter");
+    const dropdown = document.getElementById('dropdown-nav');
+    const sidebar = document.getElementById('sidebar');
+    if (modalSearch.classList.contains("hidden")) {
+        modalSearch.classList.remove("hidden");
+        modalSearch.classList.add("flex");
+        modalFilter.classList.add("hidden");
+        dropdown.classList.add("hidden");
+        sidebar.classList.remove("active");
+    } else {
+        modalSearch.classList.remove("flex");
+        modalSearch.classList.add("hidden");
+    }
+}
 const modalGetExport = (event) => {
     event.preventDefault();
 

@@ -20,6 +20,35 @@
     @hasrole('super_admin')
         @include('components.modal-export')
         @include('components.modal-filter')
+        <div id="modal-search"
+            class="animation-fade hidden fixed z-50 w-full md:max-w-screen-lg max-md:w-screen justify-center max-md:px-3 max-md:-ml-3">
+            <form action="{{ route('admin.student.index') }}" method="GET" enctype="multipart/form-data"
+                class="w-full md:max-w-md max-md:w-full rounded-md shadow-md p-5 bg-white max-sm:text-sm">
+                <h1 class="mb-3 font-poppins md:text-xl max-md:text-lg capitalize font-bold flex items-center">
+                    <span class="material-symbols-outlined text-3xl -ml-2">
+                        search
+                    </span>
+                    <span>Pencarian</span>
+                </h1>
+
+                <section class="w-full md:mb-4 max-md:mb-3">
+                    <input type="text" name="search" id="search"
+                        class="outline-none w-full rounded-md md:h-12 max-md:h-11 px-3 border-2 transition duration-300 focus:border-green-500 focus:shadow-sm focus:ring-2 focus:ring-green-300 @error('search') border-red-500 @enderror"
+                        placeholder="Cari berdasarkan nama atau nis">
+                    @error('search')
+                        <small class="text-red-500">{{ $message }}</small>
+                    @enderror
+                </section>
+
+                <section class="flex flex-col md:space-y-3 max-md:space-y-2">
+                    <button type="submit"
+                        class="outline-none text-white-text w-full md:h-11 max-md:h-10 flex items-center justify-center font-medium bg-elf-green rounded shadow-sm transition duration-300 hover:bg-dark-elf focus:bg-dark-elf">Search</button>
+                    <a href="" onclick="showModalSearch(event)"
+                        class="text-center outline-none text-slate-800 underline underline-offset-2 transition duration-300 active:text-elf-green">Close</a>
+                </section>
+            </form>
+        </div>
+
         <div class="w-full flex items-center justify-between mb-3 max-md:text-sm">
             <section class="flex items-center md:space-x-3 max-md:space-x-2">
                 <button type="button" onclick="modalGetPayment(event)"
@@ -44,7 +73,7 @@
                     class="w-full md:h-11 max-md:h-10 max-md:hidden rounded px-3 outline-none transition duration-300 border-2 border-white focus:border-green-500 ring-2 ring-white focus:ring-green-200"
                     placeholder="Cari berdasarkan nama santri">
             </form>
-            <button type="button" onclick=""
+            <button type="button" onclick="showModalSearch(event)"
                 class="outline-none flex items-center justify-center md:w-32 md:h-10 max-md:size-10 md:rounded-md max-md:rounded-lg shadow bg-white transition duration-300 md:hidden hover:bg-gray-200 focus:bg-gray-200 text-hitam">
                 <span class="material-symbols-outlined">
                     search
@@ -132,6 +161,35 @@
     @hasrole('admin')
         @include('components.modal-filter')
         @include('components.modal-export')
+        <div id="modal-search"
+            class="animation-fade hidden fixed z-50 w-full md:max-w-screen-lg max-md:w-screen justify-center max-md:px-3 max-md:-ml-3">
+            <form action="{{ route('admin.student.index') }}" method="GET" enctype="multipart/form-data"
+                class="w-full md:max-w-md max-md:w-full rounded-md shadow-md p-5 bg-white max-sm:text-sm">
+                <h1 class="mb-3 font-poppins md:text-xl max-md:text-lg capitalize font-bold flex items-center">
+                    <span class="material-symbols-outlined text-3xl -ml-2">
+                        search
+                    </span>
+                    <span>Pencarian</span>
+                </h1>
+
+                <section class="w-full md:mb-4 max-md:mb-3">
+                    <input type="text" name="search" id="search"
+                        class="outline-none w-full rounded-md md:h-12 max-md:h-11 px-3 border-2 transition duration-300 focus:border-green-500 focus:shadow-sm focus:ring-2 focus:ring-green-300 @error('search') border-red-500 @enderror"
+                        placeholder="Cari berdasarkan nama">
+                    @error('search')
+                        <small class="text-red-500">{{ $message }}</small>
+                    @enderror
+                </section>
+
+                <section class="flex flex-col md:space-y-3 max-md:space-y-2">
+                    <button type="submit"
+                        class="outline-none text-white-text w-full md:h-11 max-md:h-10 flex items-center justify-center font-medium bg-elf-green rounded shadow-sm transition duration-300 hover:bg-dark-elf focus:bg-dark-elf">Search</button>
+                    <a href="" onclick="showModalSearch(event)"
+                        class="text-center outline-none text-slate-800 underline underline-offset-2 transition duration-300 active:text-elf-green">Close</a>
+                </section>
+            </form>
+        </div>
+
         <div class="w-full flex items-center justify-between mb-3 max-md:text-sm">
             <section class="flex items-center md:space-x-3 max-md:space-x-2">
                 <a href="{{ route('admin.monthly-payment.create') }}"
@@ -163,7 +221,7 @@
                     class="w-full md:h-11 max-md:h-10 max-md:hidden rounded px-3 outline-none transition duration-300 border-2 border-white focus:border-green-500 ring-2 ring-white focus:ring-green-200"
                     placeholder="Cari berdasarkan nama santri">
             </form>
-            <button type="button" onclick=""
+            <button type="button" onclick="showModalSearch(event)"
                 class="outline-none flex items-center justify-center md:w-32 md:h-10 max-md:size-10 md:rounded-md max-md:rounded-lg shadow bg-white transition duration-300 md:hidden hover:bg-gray-200 focus:bg-gray-200 text-hitam">
                 <span class="material-symbols-outlined">
                     search
@@ -240,7 +298,7 @@
                     </tbody>
                 </table>
             @else
-                <p class="text-center text-hitam">Belum ada transaksi yang dilakukan pada bulan ini.</p>
+                <p class="text-center text-hitam max-md:text-sm max-md:leading-snug">Belum ada transaksi yang dilakukan pada bulan ini.</p>
             @endif
         </div>
         <section class="w-full h-10 mt-3">

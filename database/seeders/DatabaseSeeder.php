@@ -18,10 +18,8 @@ class DatabaseSeeder extends Seeder
             RandomSeeder::class,
         ]);
 
-        // Membuat 250 siswa dan secara otomatis mengaitkan mereka dengan kelas secara acak
-        Student::factory()->count(250)->create();
+        // Student::factory()->count(250)->create();
 
-        // Membuat pengguna dengan peran yang telah ditentukan
         $superAdminSeeder = User::factory()->create([
             'email' => 'superadmin@example.com',
         ]);
@@ -37,22 +35,22 @@ class DatabaseSeeder extends Seeder
         ]);
         $operatorSeeder->assignRole('operator');
 
-        $teacherSeeder = User::factory()->create([
-            'email' => 'teacher@example.com',
-            'teacher_status' => 'Guru Dayah',
-        ]);
-        $teacherSeeder->assignRole('teacher');
+        // $teacherSeeder = User::factory()->create([
+        //     'email' => 'teacher@example.com',
+        //     'teacher_status' => 'Guru Dayah',
+        // ]);
+        // $teacherSeeder->assignRole('teacher');
 
-        $teacher1Seeder = User::factory()->create([
-            'email' => 'teacher1@example.com',
-            'teacher_status' => 'Guru Umum',
-        ]);
-        $teacher1Seeder->assignRole('teacher');
+        // $teacher1Seeder = User::factory()->create([
+        //     'email' => 'teacher1@example.com',
+        //     'teacher_status' => 'Guru Umum',
+        // ]);
+        // $teacher1Seeder->assignRole('teacher');
 
-        $teacher2Seeder = User::factory()->create([
-            'email' => 'teacher2@example.com',
-            'teacher_status' => 'Guru Dayah',
-        ]);
-        $teacher2Seeder->assignRole('teacher');
+        // $teacher2Seeder = User::factory()->create([
+        //     'email' => 'teacher2@example.com',
+        //     'teacher_status' => 'Guru Dayah',
+        // ]);
+        // $teacher2Seeder->assignRole('teacher');
     }
 }

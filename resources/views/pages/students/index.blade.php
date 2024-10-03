@@ -18,6 +18,35 @@
 
 @section('content')
     @hasrole('super_admin')
+        <div id="modal-search"
+            class="animation-fade hidden fixed z-50 w-full md:max-w-screen-lg max-md:w-screen justify-center max-md:px-3 max-md:-ml-3">
+            <form action="{{ route('admin.student.index') }}" method="GET" enctype="multipart/form-data"
+                class="w-full md:max-w-md max-md:w-full rounded-md shadow-md p-5 bg-white max-sm:text-sm">
+                <h1 class="mb-3 font-poppins md:text-xl max-md:text-lg capitalize font-bold flex items-center">
+                    <span class="material-symbols-outlined text-3xl -ml-2">
+                        search
+                    </span>
+                    <span>Pencarian</span>
+                </h1>
+
+                <section class="w-full md:mb-4 max-md:mb-3">
+                    <input type="text" name="search" id="search"
+                        class="outline-none w-full rounded-md md:h-12 max-md:h-11 px-3 border-2 transition duration-300 focus:border-green-500 focus:shadow-sm focus:ring-2 focus:ring-green-300 @error('search') border-red-500 @enderror"
+                        placeholder="Cari berdasarkan nama atau nis">
+                    @error('search')
+                        <small class="text-red-500">{{ $message }}</small>
+                    @enderror
+                </section>
+
+                <section class="flex flex-col md:space-y-3 max-md:space-y-2">
+                    <button type="submit"
+                        class="outline-none text-white-text w-full md:h-11 max-md:h-10 flex items-center justify-center font-medium bg-elf-green rounded shadow-sm transition duration-300 hover:bg-dark-elf focus:bg-dark-elf">Search</button>
+                    <a href="" onclick="showModalSearch(event)"
+                        class="text-center outline-none text-slate-800 underline underline-offset-2 transition duration-300 active:text-elf-green">Close</a>
+                </section>
+            </form>
+        </div>
+
         <div class="w-full flex items-center justify-between mb-3 max-md:text-sm">
             <a href="{{ route('sa.student.create') }}"
                 class="outline-none flex items-center justify-center md:w-40 max-md:w-28 h-10 rounded-md shadow bg-blue-600 transition duration-300 hover:bg-blue-700 focus:bg-blue-700 text-white-text">
@@ -31,7 +60,7 @@
                     class="w-full md:h-11 max-md:h-10 rounded px-3 outline-none transition duration-300 border-2 border-white focus:border-green-500 ring-2 ring-white focus:ring-green-200 max-md:hidden"
                     placeholder="Cari berdasarkan nama atau nis">
             </form>
-            <button type="button" onclick=""
+            <button type="button" onclick="showModalSearch(event)"
                 class="outline-none flex items-center justify-center md:w-32 md:h-10 max-md:size-10 md:rounded-md max-md:rounded-lg shadow bg-white transition duration-300 md:hidden hover:bg-gray-200 focus:bg-gray-200 text-hitam">
                 <span class="material-symbols-outlined">
                     search
@@ -123,6 +152,35 @@
     @endhasrole
 
     @hasrole('admin')
+        <div id="modal-search"
+            class="animation-fade hidden fixed z-50 w-full md:max-w-screen-lg max-md:w-screen justify-center max-md:px-3 max-md:-ml-3">
+            <form action="{{ route('admin.student.index') }}" method="GET" enctype="multipart/form-data"
+                class="w-full md:max-w-md max-md:w-full rounded-md shadow-md p-5 bg-white max-sm:text-sm">
+                <h1 class="mb-3 font-poppins md:text-xl max-md:text-lg capitalize font-bold flex items-center">
+                    <span class="material-symbols-outlined text-3xl -ml-2">
+                        search
+                    </span>
+                    <span>Pencarian</span>
+                </h1>
+
+                <section class="w-full md:mb-4 max-md:mb-3">
+                    <input type="text" name="search" id="search"
+                        class="outline-none w-full rounded-md md:h-12 max-md:h-11 px-3 border-2 transition duration-300 focus:border-green-500 focus:shadow-sm focus:ring-2 focus:ring-green-300 @error('search') border-red-500 @enderror"
+                        placeholder="Cari berdasarkan nama atau nis">
+                    @error('search')
+                        <small class="text-red-500">{{ $message }}</small>
+                    @enderror
+                </section>
+
+                <section class="flex flex-col md:space-y-3 max-md:space-y-2">
+                    <button type="submit"
+                        class="outline-none text-white-text w-full md:h-11 max-md:h-10 flex items-center justify-center font-medium bg-elf-green rounded shadow-sm transition duration-300 hover:bg-dark-elf focus:bg-dark-elf">Search</button>
+                    <a href="" onclick="showModalSearch(event)"
+                        class="text-center outline-none text-slate-800 underline underline-offset-2 transition duration-300 active:text-elf-green">Close</a>
+                </section>
+            </form>
+        </div>
+
         <div class="w-full flex items-center justify-between mb-3 max-md:text-sm">
             <a href="{{ route('admin.student.create') }}"
                 class="outline-none flex items-center justify-center md:w-40 max-md:w-28 h-10 rounded-md shadow bg-blue-600 transition duration-300 hover:bg-blue-700 focus:bg-blue-700 text-white-text">
@@ -136,7 +194,7 @@
                     class="w-full md:h-11 max-md:h-10 rounded px-3 outline-none transition duration-300 border-2 border-white focus:border-green-500 ring-2 ring-white focus:ring-green-200 max-md:hidden"
                     placeholder="Cari berdasarkan nama atau nis">
             </form>
-            <button type="button" onclick=""
+            <button type="button" onclick="showModalSearch(event)"
                 class="outline-none flex items-center justify-center md:w-32 md:h-10 max-md:size-10 md:rounded-md max-md:rounded-lg shadow bg-white transition duration-300 md:hidden hover:bg-gray-200 focus:bg-gray-200 text-hitam">
                 <span class="material-symbols-outlined">
                     search
@@ -198,7 +256,8 @@
                                         </span>
                                     </a>
                                     <form action="{{ route('admin.student.destroy', $student->id) }}"
-                                        onsubmit="return confirm('Apakah anda yakin ingin menghapus data ini?')" method="POST">
+                                        onsubmit="return confirm('Apakah anda yakin ingin menghapus data ini?')"
+                                        method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit"
@@ -228,6 +287,35 @@
     @endhasrole
 
     @hasrole('operator')
+        <div id="modal-search"
+            class="animation-fade hidden fixed z-50 w-full md:max-w-screen-lg max-md:w-screen justify-center max-md:px-3 max-md:-ml-3">
+            <form action="{{ route('operator.student.index') }}" method="GET" enctype="multipart/form-data"
+                class="w-full md:max-w-md max-md:w-full rounded-md shadow-md p-5 bg-white max-sm:text-sm">
+                <h1 class="mb-3 font-poppins md:text-xl max-md:text-lg capitalize font-bold flex items-center">
+                    <span class="material-symbols-outlined text-3xl -ml-2">
+                        search
+                    </span>
+                    <span>Pencarian</span>
+                </h1>
+
+                <section class="w-full md:mb-4 max-md:mb-3">
+                    <input type="text" name="search" id="search"
+                        class="outline-none w-full rounded-md md:h-12 max-md:h-11 px-3 border-2 transition duration-300 focus:border-green-500 focus:shadow-sm focus:ring-2 focus:ring-green-300 @error('search') border-red-500 @enderror"
+                        placeholder="Cari berdasarkan nama atau nis">
+                    @error('search')
+                        <small class="text-red-500">{{ $message }}</small>
+                    @enderror
+                </section>
+
+                <section class="flex flex-col md:space-y-3 max-md:space-y-2">
+                    <button type="submit"
+                        class="outline-none text-white-text w-full md:h-11 max-md:h-10 flex items-center justify-center font-medium bg-elf-green rounded shadow-sm transition duration-300 hover:bg-dark-elf focus:bg-dark-elf">Search</button>
+                    <a href="" onclick="showModalSearch(event)"
+                        class="text-center outline-none text-slate-800 underline underline-offset-2 transition duration-300 active:text-elf-green">Close</a>
+                </section>
+            </form>
+        </div>
+
         <div class="w-full flex items-center justify-between mb-3 max-md:text-sm">
             <a href="{{ route('operator.student.create') }}"
                 class="outline-none flex items-center justify-center md:w-40 max-md:w-28 h-10 rounded-md shadow bg-blue-600 transition duration-300 hover:bg-blue-700 focus:bg-blue-700 text-white-text">
@@ -241,7 +329,7 @@
                     class="w-full md:h-11 max-md:h-10 rounded px-3 outline-none transition duration-300 border-2 border-white focus:border-green-500 ring-2 ring-white focus:ring-green-200 max-md:hidden"
                     placeholder="Cari berdasarkan nama atau nis">
             </form>
-            <button type="button" onclick=""
+            <button type="button" onclick="showModalSearch(event)"
                 class="outline-none flex items-center justify-center md:w-32 md:h-10 max-md:size-10 md:rounded-md max-md:rounded-lg shadow bg-white transition duration-300 md:hidden hover:bg-gray-200 focus:bg-gray-200 text-hitam">
                 <span class="material-symbols-outlined">
                     search
