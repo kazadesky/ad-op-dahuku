@@ -25,7 +25,7 @@
     @include('components.alert')
 
     <section
-        class="faded-show w-full max-md:max-w-sm sm:max-w-md z-10 max-md:px-3 {{ request()->routeIs('register') ? 'md:py-10' : 'flex flex-col space-y-3 items-center' }}">
+        class="faded-show w-full max-md:max-w-sm sm:max-w-md z-10 max-md:px-5 {{ request()->routeIs('register') ? 'md:py-10' : 'flex flex-col space-y-3 items-center' }}">
         @yield('content')
     </section>
 

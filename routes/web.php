@@ -18,7 +18,6 @@ use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\TeacherPicketController;
 use App\Http\Controllers\TeacherPresenceController;
 use App\Http\Controllers\TimeController;
-use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware("guest")->group(function () {
@@ -40,10 +39,7 @@ Route::middleware("auth")->group(function () {
     Route::get("email-verify", [EmailVerifyController::class, 'verify'])->name('verification.notice');
     Route::post("email-verify/resend", [EmailVerifyController::class, 'resendVerify'])->name("resend-verify");
 
-    Route::get("/email/verify/{id}/{hash}", function (EmailVerificationRequest $request) {
-        $request->fulfill();
-        return redirect()->route('teacher.dashboard');
-    })->middleware('signed')->name('verification.verify');
+    Route::get("/email/verify/{id}/{hash}", [EmailVerifyController::class, 'emailVerify'])->middleware('signed')->name('verification.verify');
 });
 
 Route::middleware(["auth", "auth.session", "verified"])->group(function () {
@@ -65,7 +61,7 @@ Route::middleware(["auth", "auth.session", "verified"])->group(function () {
 
         Route::resource("teacher", TeacherController::class)->only(['index', 'edit', 'update']);
         Route::resource("teacher-picket", TeacherPicketController::class);
-        Route::resource("teacher-presence", TeacherPresenceController::class);
+        Route::resource("teacher-presence", TeacherPresenceController::class)->only(['index', 'show']);
 
         Route::resource("class-room", ClassRoomController::class)->except("show");
         Route::resource("lesson", LessonController::class);
@@ -101,7 +97,7 @@ Route::middleware(["auth", "auth.session", "verified"])->group(function () {
 
         Route::resource("teacher", TeacherController::class)->only(['index', 'edit', 'update']);
         Route::resource("teacher-picket", TeacherPicketController::class);
-        Route::resource("teacher-presence", TeacherPresenceController::class);
+        Route::resource("teacher-presence", TeacherPresenceController::class)->except(['create', 'store', 'destroy']);
 
         Route::resource("class-room", ClassRoomController::class)->except("show");
         Route::resource("lesson", LessonController::class);

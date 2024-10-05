@@ -20,8 +20,8 @@
     @hasrole('super_admin')
         <div class="w-full flex items-center justify-between mb-3 max-md:text-sm">
             <a href="{{ route('sa.teacher-picket.create') }}"
-                class="outline-none flex items-center justify-center md:w-32 max-md:w-28 h-10 rounded-md shadow bg-blue-600 transition duration-300 hover:bg-blue-700 focus:bg-blue-700 text-white-text">
-                <span class="material-symbols-outlined">
+                class="outline-none flex items-center justify-center md:w-32 max-md:w-28 md:h-10 max-md:h-9 rounded-md shadow bg-blue-600 transition duration-300 hover:bg-blue-700 focus:bg-blue-700 text-white-text">
+                <span class="material-symbols-outlined max-md:text-[21px]">
                     add
                 </span>
                 <span>Tambah</span>
@@ -74,7 +74,7 @@
                                         <form action="{{ route('sa.teacher-picket.action', $item->id) }}" method="POST">
                                             @csrf
                                             @method('PATCH')
-                                            <input type="hidden" name="action" value="{{ $item->action === 0 ? 1 : 0 }}">
+                                            <input type="hidden" name="action" value="{{ $item->action }}">
                                             <button type="submit"
                                                 class="outline-none text-white-text size-9 rounded flex items-center justify-center bg-indigo-600 transition duration-300 hover:bg-indigo-700 focus:bg-indigo-700 active:bg-indigo-800">
                                                 <span class="material-symbols-outlined md:text-[21px] max-md:text-[20px]">
@@ -101,8 +101,8 @@
     @hasrole('admin')
         <div class="w-full flex items-center justify-between mb-3 max-md:text-sm">
             <a href="{{ route('admin.teacher-picket.create') }}"
-                class="outline-none flex items-center justify-center md:w-32 max-md:w-28 h-10 rounded-md shadow bg-blue-600 transition duration-300 hover:bg-blue-700 focus:bg-blue-700 text-white-text">
-                <span class="material-symbols-outlined">
+                class="outline-none flex items-center justify-center md:w-32 max-md:w-28 md:h-10 max-md:h-9 rounded-md shadow bg-blue-600 transition duration-300 hover:bg-blue-700 focus:bg-blue-700 text-white-text">
+                <span class="material-symbols-outlined max-md:text-[21px]">
                     add
                 </span>
                 <span>Tambah</span>
@@ -155,7 +155,7 @@
                                         <form action="{{ route('admin.teacher-picket.action', $item->id) }}" method="POST">
                                             @csrf
                                             @method('PATCH')
-                                            <input type="hidden" name="action" value="{{ $item->action === 0 ? 1 : 0 }}">
+                                            <input type="hidden" name="action" value="{{ $item->action }}">
                                             <button type="submit"
                                                 class="outline-none text-white-text size-9 rounded flex items-center justify-center bg-indigo-600 transition duration-300 hover:bg-indigo-700 focus:bg-indigo-700 active:bg-indigo-800">
                                                 <span class="material-symbols-outlined md:text-[21px] max-md:text-[20px]">
@@ -209,7 +209,7 @@
                                         <form action="{{ route('operator.teacher-picket.action', $item->id) }}" method="POST">
                                             @csrf
                                             @method('PATCH')
-                                            <input type="hidden" name="action" value="{{ $item->action === 0 ? 1 : 0 }}">
+                                            <input type="hidden" name="action" value="{{ $item->action }}">
                                             <button type="submit"
                                                 class="outline-none text-white-text size-9 rounded flex items-center justify-center bg-indigo-600 transition duration-300 hover:bg-indigo-700 focus:bg-indigo-700 active:bg-indigo-800 space-x-1">
                                                 <span class="material-symbols-outlined md:text-[21px] max-md:text-[20px]">

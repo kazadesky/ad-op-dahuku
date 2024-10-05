@@ -91,7 +91,8 @@
                     <select name="class_id" id="class_id"
                         class="outline-none w-full rounded-md md:h-12 max-md:h-11 px-3 border-2 transition duration-300 focus:border-green-500 focus:shadow-sm focus:ring-2 focus:ring-green-300 @error('class_id') border-red-500 @enderror">
                         @foreach ($classRooms as $room)
-                            <option value="{{ $room->id }}" {{ $room->id === $timetable->class_id }}>{{ $room->name }}
+                            <option value="{{ $room->id }}" {{ $room->id === $timetable->class_id ? 'selected' : '' }}>
+                                {{ $room->name }}
                             </option>
                         @endforeach
                     </select>
@@ -111,7 +112,7 @@
                     <select name="time_id" id="time_id"
                         class="outline-none w-full rounded-md md:h-12 max-md:h-11 px-3 border-2 transition duration-300 focus:border-green-500 focus:shadow-sm focus:ring-2 focus:ring-green-300 @error('time_id') border-red-500 @enderror">
                         @foreach ($times as $time)
-                            <option value="{{ $time->id }}" {{ $time->id === $timetable->time_id }}>
+                            <option value="{{ $time->id }}" {{ $time->id === $timetable->time_id ? 'selected' : '' }}>
                                 {{ $time->start }} - {{ $time->finish }}
                             </option>
                         @endforeach
@@ -209,7 +210,8 @@
                     <select name="class_id" id="class_id"
                         class="outline-none w-full rounded-md md:h-12 max-md:h-11 px-3 border-2 transition duration-300 focus:border-green-500 focus:shadow-sm focus:ring-2 focus:ring-green-300 @error('class_id') border-red-500 @enderror">
                         @foreach ($classRooms as $room)
-                            <option value="{{ $room->id }}" {{ $room->id === $timetable->class_id }}>{{ $room->name }}
+                            <option value="{{ $room->id }}" {{ $room->id === $timetable->class_id ? 'selected' : '' }}>
+                                {{ $room->name }}
                             </option>
                         @endforeach
                     </select>
@@ -229,7 +231,7 @@
                     <select name="time_id" id="time_id"
                         class="outline-none w-full rounded-md md:h-12 max-md:h-11 px-3 border-2 transition duration-300 focus:border-green-500 focus:shadow-sm focus:ring-2 focus:ring-green-300 @error('time_id') border-red-500 @enderror">
                         @foreach ($times as $time)
-                            <option value="{{ $time->id }}" {{ $time->id === $timetable->time_id }}>
+                            <option value="{{ $time->id }}" {{ $time->id === $timetable->time_id ? 'selected' : '' }}>
                                 {{ $time->start }} - {{ $time->finish }}
                             </option>
                         @endforeach
@@ -328,7 +330,8 @@
                     <select name="class_id" id="class_id"
                         class="outline-none w-full rounded-md md:h-12 max-md:h-11 px-3 border-2 transition duration-300 focus:border-green-500 focus:shadow-sm focus:ring-2 focus:ring-green-300 @error('class_id') border-red-500 @enderror">
                         @foreach ($classRooms as $room)
-                            <option value="{{ $room->id }}" {{ $room->id === $timetable->class_id }}>{{ $room->name }}
+                            <option value="{{ $room->id }}" {{ $room->id === $timetable->class_id ? 'selected' : '' }}>
+                                {{ $room->name }}
                             </option>
                         @endforeach
                     </select>
@@ -348,7 +351,7 @@
                     <select name="time_id" id="time_id"
                         class="outline-none w-full rounded-md md:h-12 max-md:h-11 px-3 border-2 transition duration-300 focus:border-green-500 focus:shadow-sm focus:ring-2 focus:ring-green-300 @error('time_id') border-red-500 @enderror">
                         @foreach ($times as $time)
-                            <option value="{{ $time->id }}" {{ $time->id === $timetable->time_id }}>
+                            <option value="{{ $time->id }}" {{ $time->id === $timetable->time_id ? 'selected' : '' }}>
                                 {{ $time->start }} - {{ $time->finish }}
                             </option>
                         @endforeach

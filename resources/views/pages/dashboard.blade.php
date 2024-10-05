@@ -221,7 +221,7 @@
 
     @hasrole('teacher')
         <h1
-            class="md:text-lg max-md:text-base font-poppins text-hitam md:font-bold max-md:font-semibold drop-shadow-lg mb-3 px-10 py-3 rounded-md shadow-md bg-white w-max uppercase border-2">
+            class="md:text-lg max-md:text-base font-poppins text-hitam md:font-bold max-md:font-semibold drop-shadow-lg mb-3 md:px-10 md:py-3 max-md:px-8 max-md:py-2 rounded-md shadow-md bg-white w-max uppercase border-2">
             Jadwal mengajar :
         </h1>
         @if (count($schedules) > 0)
@@ -266,7 +266,7 @@
 
         @if (count($pickets) > 0)
             <h1
-                class="md:text-lg max-md:text-base font-poppins text-hitam md:font-bold max-md:font-semibold drop-shadow-lg mb-3 px-10 py-3 rounded-md shadow-md bg-white w-max uppercase border-2">
+                class="md:text-lg max-md:text-base font-poppins text-hitam md:font-bold max-md:font-semibold drop-shadow-lg mb-3 md:px-10 md:py-3 max-md:px-8 max-md:py-2 rounded-md shadow-md bg-white w-max uppercase border-2">
                 Jadwal Piket :
             </h1>
             <div class="w-full grid md:grid-cols-2 max-md:grid-cols-1 md:gap-5 max-md:gap-y-3 text-hitam">

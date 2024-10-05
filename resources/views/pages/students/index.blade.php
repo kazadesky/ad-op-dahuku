@@ -19,8 +19,8 @@
 @section('content')
     @hasrole('super_admin')
         <div id="modal-search"
-            class="animation-fade hidden fixed z-50 w-full md:max-w-screen-lg max-md:w-screen justify-center max-md:px-3 max-md:-ml-3">
-            <form action="{{ route('admin.student.index') }}" method="GET" enctype="multipart/form-data"
+            class="animation-fade hidden fixed z-50 w-full md:max-w-screen-lg max-md:max-w-screen justify-center max-md:px-3 max-md:-ml-5">
+            <form action="{{ route('sa.student.index') }}" method="GET" enctype="multipart/form-data"
                 class="w-full md:max-w-md max-md:w-full rounded-md shadow-md p-5 bg-white max-sm:text-sm">
                 <h1 class="mb-3 font-poppins md:text-xl max-md:text-lg capitalize font-bold flex items-center">
                     <span class="material-symbols-outlined text-3xl -ml-2">
@@ -49,8 +49,8 @@
 
         <div class="w-full flex items-center justify-between mb-3 max-md:text-sm">
             <a href="{{ route('sa.student.create') }}"
-                class="outline-none flex items-center justify-center md:w-40 max-md:w-28 h-10 rounded-md shadow bg-blue-600 transition duration-300 hover:bg-blue-700 focus:bg-blue-700 text-white-text">
-                <span class="material-symbols-outlined">
+                class="outline-none flex items-center justify-center md:w-40 max-md:w-28 md:h-10 max-md:h-9 rounded-md shadow bg-blue-600 transition duration-300 hover:bg-blue-700 focus:bg-blue-700 text-white-text">
+                <span class="material-symbols-outlined max-md:text-[21px]">
                     add
                 </span>
                 <span>Tambah</span>
@@ -61,8 +61,8 @@
                     placeholder="Cari berdasarkan nama atau nis">
             </form>
             <button type="button" onclick="showModalSearch(event)"
-                class="outline-none flex items-center justify-center md:w-32 md:h-10 max-md:size-10 md:rounded-md max-md:rounded-lg shadow bg-white transition duration-300 md:hidden hover:bg-gray-200 focus:bg-gray-200 text-hitam">
-                <span class="material-symbols-outlined">
+                class="outline-none flex items-center justify-center md:w-32 md:h-10 max-md:size-9 md:rounded-md max-md:rounded-lg shadow bg-white transition duration-300 md:hidden hover:bg-gray-200 focus:bg-gray-200 text-hitam">
+                <span class="material-symbols-outlined max-md:text-[21px]">
                     search
                 </span>
             </button>
@@ -108,15 +108,16 @@
                                 <td class="px-6 py-4">
                                     {{ $student->classRoom->name }}
                                 </td>
-                                <td class="px-6 py-2 flex items-center min-h-[1rem] space-x-2 text-white-text">
+                                <td
+                                    class="px-6 py-2 flex items-center min-h-[1rem] md:space-x-2 max-md:space-x-1 text-white-text">
                                     <a href="{{ route('sa.student.show', $student->id) }}"
-                                        class="outline-none size-10 flex items-center justify-center bg-sky-600 rounded-md transition duration-300 hover:bg-sky-700 focus:bg-sky-700">
+                                        class="outline-none md:size-10 max-md:size-9 flex items-center justify-center bg-sky-600 rounded-md transition duration-300 hover:bg-sky-700 focus:bg-sky-700">
                                         <span class="material-symbols-outlined md:text-[21px] max-md:text-[20px]">
                                             visibility
                                         </span>
                                     </a>
                                     <a href="{{ route('sa.student.edit', $student->id) }}"
-                                        class="outline-none size-10 flex items-center justify-center bg-orange-600 rounded-md transition duration-300 hover:bg-orange-700 focus:bg-orange-700">
+                                        class="outline-none md:size-10 max-md:size-9 flex items-center justify-center bg-orange-600 rounded-md transition duration-300 hover:bg-orange-700 focus:bg-orange-700">
                                         <span class="material-symbols-outlined md:text-[21px] max-md:text-[20px]">
                                             border_color
                                         </span>
@@ -126,7 +127,7 @@
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit"
-                                            class="outline-none size-10 flex items-center justify-center bg-red-600 rounded-md transition duration-300 hover:bg-red-700 focus:bg-red-700">
+                                            class="outline-none md:size-10 max-md:size-9 flex items-center justify-center bg-red-600 rounded-md transition duration-300 hover:bg-red-700 focus:bg-red-700">
                                             <span class="material-symbols-outlined md:text-[21px] max-md:text-[20px]">
                                                 delete
                                             </span>
@@ -153,7 +154,7 @@
 
     @hasrole('admin')
         <div id="modal-search"
-            class="animation-fade hidden fixed z-50 w-full md:max-w-screen-lg max-md:w-screen justify-center max-md:px-3 max-md:-ml-3">
+            class="animation-fade hidden fixed z-50 w-full md:max-w-screen-lg max-md:max-w-screen justify-center max-md:px-3 max-md:-ml-5">
             <form action="{{ route('admin.student.index') }}" method="GET" enctype="multipart/form-data"
                 class="w-full md:max-w-md max-md:w-full rounded-md shadow-md p-5 bg-white max-sm:text-sm">
                 <h1 class="mb-3 font-poppins md:text-xl max-md:text-lg capitalize font-bold flex items-center">
@@ -183,8 +184,8 @@
 
         <div class="w-full flex items-center justify-between mb-3 max-md:text-sm">
             <a href="{{ route('admin.student.create') }}"
-                class="outline-none flex items-center justify-center md:w-40 max-md:w-28 h-10 rounded-md shadow bg-blue-600 transition duration-300 hover:bg-blue-700 focus:bg-blue-700 text-white-text">
-                <span class="material-symbols-outlined">
+                class="outline-none flex items-center justify-center md:w-40 max-md:w-28 md:h-10 max-md:h-9 rounded-md shadow bg-blue-600 transition duration-300 hover:bg-blue-700 focus:bg-blue-700 text-white-text">
+                <span class="material-symbols-outlined max-md:text-[21px]">
                     add
                 </span>
                 <span>Tambah</span>
@@ -195,8 +196,8 @@
                     placeholder="Cari berdasarkan nama atau nis">
             </form>
             <button type="button" onclick="showModalSearch(event)"
-                class="outline-none flex items-center justify-center md:w-32 md:h-10 max-md:size-10 md:rounded-md max-md:rounded-lg shadow bg-white transition duration-300 md:hidden hover:bg-gray-200 focus:bg-gray-200 text-hitam">
-                <span class="material-symbols-outlined">
+                class="outline-none flex items-center justify-center md:w-32 md:h-10 max-md:size-9 md:rounded-md max-md:rounded-lg shadow bg-white transition duration-300 md:hidden hover:bg-gray-200 focus:bg-gray-200 text-hitam">
+                <span class="material-symbols-outlined max-md:text-[21px]">
                     search
                 </span>
             </button>
@@ -242,15 +243,16 @@
                                 <td class="px-6 py-4">
                                     {{ $student->classRoom->name }}
                                 </td>
-                                <td class="px-6 py-2 flex items-center min-h-[1rem] space-x-2 text-white-text">
+                                <td
+                                    class="px-6 py-2 flex items-center min-h-[1rem] md:space-x-2 max-md:space-x-1 text-white-text">
                                     <a href="{{ route('admin.student.show', $student->id) }}"
-                                        class="outline-none size-10 flex items-center justify-center bg-sky-600 rounded-md transition duration-300 hover:bg-sky-700 focus:bg-sky-700">
+                                        class="outline-none md:size-10 max-md:size-9 flex items-center justify-center bg-sky-600 rounded-md transition duration-300 hover:bg-sky-700 focus:bg-sky-700">
                                         <span class="material-symbols-outlined md:text-[21px] max-md:text-[20px]">
                                             visibility
                                         </span>
                                     </a>
                                     <a href="{{ route('admin.student.edit', $student->id) }}"
-                                        class="outline-none size-10 flex items-center justify-center bg-orange-600 rounded-md transition duration-300 hover:bg-orange-700 focus:bg-orange-700">
+                                        class="outline-none md:size-10 max-md:size-9 flex items-center justify-center bg-orange-600 rounded-md transition duration-300 hover:bg-orange-700 focus:bg-orange-700">
                                         <span class="material-symbols-outlined md:text-[21px] max-md:text-[20px]">
                                             border_color
                                         </span>
@@ -261,7 +263,7 @@
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit"
-                                            class="outline-none size-10 flex items-center justify-center bg-red-600 rounded-md transition duration-300 hover:bg-red-700 focus:bg-red-700">
+                                            class="outline-none md:size-10 max-md:size-9 flex items-center justify-center bg-red-600 rounded-md transition duration-300 hover:bg-red-700 focus:bg-red-700">
                                             <span class="material-symbols-outlined md:text-[21px] max-md:text-[20px]">
                                                 delete
                                             </span>
@@ -288,7 +290,7 @@
 
     @hasrole('operator')
         <div id="modal-search"
-            class="animation-fade hidden fixed z-50 w-full md:max-w-screen-lg max-md:w-screen justify-center max-md:px-3 max-md:-ml-3">
+            class="animation-fade hidden fixed z-50 w-full md:max-w-screen-lg max-md:max-w-screen justify-center max-md:px-3 max-md:-ml-5">
             <form action="{{ route('operator.student.index') }}" method="GET" enctype="multipart/form-data"
                 class="w-full md:max-w-md max-md:w-full rounded-md shadow-md p-5 bg-white max-sm:text-sm">
                 <h1 class="mb-3 font-poppins md:text-xl max-md:text-lg capitalize font-bold flex items-center">
@@ -318,7 +320,7 @@
 
         <div class="w-full flex items-center justify-between mb-3 max-md:text-sm">
             <a href="{{ route('operator.student.create') }}"
-                class="outline-none flex items-center justify-center md:w-40 max-md:w-28 h-10 rounded-md shadow bg-blue-600 transition duration-300 hover:bg-blue-700 focus:bg-blue-700 text-white-text">
+                class="outline-none flex items-center justify-center md:w-40 max-md:w-28 md:h-10 max-md:h-9 rounded-md shadow bg-blue-600 transition duration-300 hover:bg-blue-700 focus:bg-blue-700 text-white-text">
                 <span class="material-symbols-outlined">
                     add
                 </span>
@@ -330,8 +332,8 @@
                     placeholder="Cari berdasarkan nama atau nis">
             </form>
             <button type="button" onclick="showModalSearch(event)"
-                class="outline-none flex items-center justify-center md:w-32 md:h-10 max-md:size-10 md:rounded-md max-md:rounded-lg shadow bg-white transition duration-300 md:hidden hover:bg-gray-200 focus:bg-gray-200 text-hitam">
-                <span class="material-symbols-outlined">
+                class="outline-none flex items-center justify-center md:w-32 md:h-10 max-md:size-9 md:rounded-md max-md:rounded-lg shadow bg-white transition duration-300 md:hidden hover:bg-gray-200 focus:bg-gray-200 text-hitam">
+                <span class="material-symbols-outlined max-md:text-[21px]">
                     search
                 </span>
             </button>
@@ -377,15 +379,16 @@
                                 <td class="px-6 py-4">
                                     {{ $student->classRoom->name }}
                                 </td>
-                                <td class="px-6 py-2 flex items-center min-h-[1rem] space-x-2 text-white-text">
+                                <td
+                                    class="px-6 py-2 flex items-center min-h-[1rem] md:space-x-2 max-md:space-x-1 text-white-text">
                                     <a href="{{ route('operator.student.show', $student->id) }}"
-                                        class="outline-none size-10 flex items-center justify-center bg-sky-600 rounded-md transition duration-300 hover:bg-sky-700 focus:bg-sky-700">
+                                        class="outline-none md:size-10 max-md:size-9 flex items-center justify-center bg-sky-600 rounded-md transition duration-300 hover:bg-sky-700 focus:bg-sky-700">
                                         <span class="material-symbols-outlined md:text-[21px] max-md:text-[20px]">
                                             visibility
                                         </span>
                                     </a>
                                     <a href="{{ route('operator.student.edit', $student->id) }}"
-                                        class="outline-none size-10 flex items-center justify-center bg-orange-600 rounded-md transition duration-300 hover:bg-orange-700 focus:bg-orange-700">
+                                        class="outline-none md:size-10 max-md:size-9 flex items-center justify-center bg-orange-600 rounded-md transition duration-300 hover:bg-orange-700 focus:bg-orange-700">
                                         <span class="material-symbols-outlined md:text-[21px] max-md:text-[20px]">
                                             border_color
                                         </span>
@@ -396,7 +399,7 @@
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit"
-                                            class="outline-none size-10 flex items-center justify-center bg-red-600 rounded-md transition duration-300 hover:bg-red-700 focus:bg-red-700">
+                                            class="outline-none md:size-10 max-md:size-9 flex items-center justify-center bg-red-600 rounded-md transition duration-300 hover:bg-red-700 focus:bg-red-700">
                                             <span class="material-symbols-outlined md:text-[21px] max-md:text-[20px]">
                                                 delete
                                             </span>

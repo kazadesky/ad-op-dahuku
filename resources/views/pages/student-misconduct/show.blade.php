@@ -42,7 +42,7 @@
                 <div class="flex md:items-center max-md:items-start md:h-12 max-md:min-h-11">
                     <p class="md:font-bold max-md:font-semibold w-44">Diupdate Oleh</p>
                     <p class="w-5 font-bold">:</p>
-                    <p class="w-full">{{ $misconduct->updatedBy->name }}</p>
+                    <p class="w-full">{{ $misconduct->updatedBy ? $misconduct->updatedBy->name : '-' }}</p>
                 </div>
             @endif
         </div>

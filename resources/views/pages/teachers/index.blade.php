@@ -19,9 +19,14 @@
 @section('content')
     @hasrole('super_admin')
         <div class="w-full flex items-center justify-end mb-3 max-md:text-sm">
-            <form action="{{ route('sa.teacher.index') }}" method="GET" class="md:w-80 max-md:w-56">
-                <input type="search" name="search"
-                    class="w-full md:h-11 max-md:h-10 rounded px-3 outline-none transition duration-300 border-2 border-white focus:border-green-500 ring-2 ring-white focus:ring-green-200"
+            <form action="{{ route('sa.teacher.index') }}" method="GET" class="md:w-80 max-md:w-52 relative">
+                <label for="search" class="absolute top-2 left-2 text-gray-500 z-10">
+                    <span class="material-symbols-outlined max-md:text-[21px]">
+                        search
+                    </span>
+                </label>
+                <input type="search" name="search" id="search"
+                    class="w-full md:h-10 max-md:h-9 rounded pl-8 pr-3 outline-none transition duration-300 border-2 border-white focus:border-green-500 ring-2 ring-white focus:ring-green-200"
                     placeholder="Cari berdasarkan nama">
             </form>
         </div>
@@ -63,8 +68,10 @@
                                 {{ $loop->iteration }}.
                             </th>
                             <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                                <img src="{{ !$teacher->profile ? asset('img/icon/user.png') : url('storage/profile/', $teacher->profile) }}"
-                                    alt="profile {{ $teacher->name }}" class="md:size-20 max-md:size-12">
+                                <figure class="md:size-20 max-md:size-12 overflow-hidden rounded-full">
+                                    <img src="{{ !$teacher->profile ? asset('img/icon/user.png') : url('storage/profile/', $teacher->profile) }}"
+                                        alt="profile {{ $teacher->name }}" class="w-full">
+                                </figure>
                             </th>
                             <td class="px-6 py-4">
                                 {{ $teacher->name }}
@@ -86,7 +93,7 @@
                             </td>
                             <td class="px-6 py-4">
                                 <a href="{{ route('sa.teacher.edit', $teacher->id) }}"
-                                    class="outline-none text-white size-10 rounded flex items-center justify-center bg-orange-600 transition duration-300 hover:bg-orange-700 focus:bg-orange-700 active:bg-orange-800">
+                                    class="outline-none text-white md:size-10 max-md:size-9 rounded flex items-center justify-center bg-orange-600 transition duration-300 hover:bg-orange-700 focus:bg-orange-700 active:bg-orange-800">
                                     <span class="material-symbols-outlined md:text-[21px] max-md:text-[20px]">
                                         edit_square
                                     </span>
@@ -105,9 +112,14 @@
 
     @hasrole('admin')
         <div class="w-full flex items-center justify-end mb-3 max-md:text-sm">
-            <form action="{{ route('admin.teacher.index') }}" method="GET" class="md:w-80 max-md:w-56">
-                <input type="search" name="search"
-                    class="w-full md:h-11 max-md:h-10 rounded px-3 outline-none transition duration-300 border-2 border-white focus:border-green-500 ring-2 ring-white focus:ring-green-200"
+            <form action="{{ route('admin.teacher.index') }}" method="GET" class="md:w-80 max-md:w-52 relative">
+                <label for="search" class="absolute top-2 left-2 text-gray-500 z-10">
+                    <span class="material-symbols-outlined max-md:text-[21px]">
+                        search
+                    </span>
+                </label>
+                <input type="search" name="search" id="search"
+                    class="w-full md:h-10 max-md:h-9 rounded pl-8 pr-3 outline-none transition duration-300 border-2 border-white focus:border-green-500 ring-2 ring-white focus:ring-green-200"
                     placeholder="Cari berdasarkan nama">
             </form>
         </div>
@@ -149,8 +161,10 @@
                                 {{ $loop->iteration }}.
                             </th>
                             <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                                <img src="{{ !$teacher->profile ? asset('img/icon/user.png') : url('storage/profile/', $teacher->profile) }}"
-                                    alt="profile {{ $teacher->name }}" class="md:size-20 max-md:size-12">
+                                <figure class="md:size-20 max-md:size-12 rounded-full overflow-hidden">
+                                    <img src="{{ !$teacher->profile ? asset('img/icon/user.png') : url('storage/profile/', $teacher->profile) }}"
+                                        alt="profile {{ $teacher->name }}" class="w-full">
+                                </figure>
                             </th>
                             <td class="px-6 py-4">
                                 {{ $teacher->name }}
@@ -170,7 +184,7 @@
                             </td>
                             <td class="px-6 py-4">
                                 <a href="{{ route('admin.teacher.edit', $teacher->id) }}"
-                                    class="outline-none text-white size-10 rounded flex items-center justify-center bg-orange-600 transition duration-300 hover:bg-orange-700 focus:bg-orange-700 active:bg-orange-800">
+                                    class="outline-none text-white md:size-10 max-md:size-9 rounded flex items-center justify-center bg-orange-600 transition duration-300 hover:bg-orange-700 focus:bg-orange-700 active:bg-orange-800">
                                     <span class="material-symbols-outlined md:text-[21px] max-md:text-[20px]">
                                         edit_square
                                     </span>
@@ -189,9 +203,14 @@
 
     @hasrole('operator')
         <div class="w-full flex items-center justify-end mb-3 max-md:text-sm">
-            <form action="{{ route('operator.teacher.index') }}" method="GET" class="md:w-80 max-md:w-56">
-                <input type="search" name="search"
-                    class="w-full md:h-11 max-md:h-10 rounded px-3 outline-none transition duration-300 border-2 border-white focus:border-green-500 ring-2 ring-white focus:ring-green-200"
+            <form action="{{ route('operator.teacher.index') }}" method="GET" class="md:w-80 max-md:w-52 relative">
+                <label for="search" class="absolute top-2 left-2 text-gray-500 z-10">
+                    <span class="material-symbols-outlined max-md:text-[21px]">
+                        search
+                    </span>
+                </label>
+                <input type="search" name="search" id="search"
+                    class="w-full md:h-10 max-md:h-9 rounded pl-8 pr-3 outline-none transition duration-300 border-2 border-white focus:border-green-500 ring-2 ring-white focus:ring-green-200"
                     placeholder="Cari berdasarkan nama">
             </form>
         </div>
@@ -230,8 +249,10 @@
                                 {{ $loop->iteration }}.
                             </th>
                             <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                                <img src="{{ !$teacher->profile ? asset('img/icon/user.png') : url('storage/profile/', $teacher->profile) }}"
-                                    alt="profile {{ $teacher->name }}" class="md:size-20 max-md:size-12">
+                                <figure class="md:size-20 max-md:size-12 overflow-hidden rounded-full">
+                                    <img src="{{ !$teacher->profile ? asset('img/icon/user.png') : url('storage/profile/', $teacher->profile) }}"
+                                        alt="profile {{ $teacher->name }}" class="w-full">
+                                </figure>
                             </th>
                             <td class="px-6 py-4">
                                 {{ $teacher->name }}
