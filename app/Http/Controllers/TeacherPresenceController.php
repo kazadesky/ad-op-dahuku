@@ -35,7 +35,7 @@ class TeacherPresenceController extends Controller
         $search = $request->input("search");
 
         $moons = Moon::all();
-        $years = range(2020, 2032);
+        $years = range(2023, 2033);
 
         if ($role == 'super_admin' || $role == 'admin') {
             $query = TeacherPresence::with("teacherPicket", "teacher", "lesson", "day", "time", "classRoom", "updatedBy", "substituteTeacher");
@@ -139,12 +139,15 @@ class TeacherPresenceController extends Controller
             "substitute_teacher_id" => $request->substitute_teacher_id,
         ]);
 
-        $role = $user->roles->pluck('name')->first();
-        if ($role == 'admin') {
-            return redirect()->route("admin.teacher-presence.index")->with("success", "Absensi atas nama guru " . $presence->teacher->name . " telah ditambah.");
-        } elseif ($role == 'teacher') {
-            return redirect()->route("teacher.teacher-presence.index")->with("success", "Absensi atas nama guru " . $presence->teacher->name . " telah ditambah.");
-        }
+        // $role = $user->roles->pluck('name')->first();
+        // if ($role == 'super_admin') {
+        //     return redirect()->route("sa.teacher-presence.index")->with("success", "Absensi atas nama guru " . $presence->teacher->name . " telah ditambah.");
+        // } elseif ($role == 'admin') {
+        //     return redirect()->route("admin.teacher-presence.index")->with("success", "Absensi atas nama guru " . $presence->teacher->name . " telah ditambah.");
+        // } elseif ($role == 'teacher') {
+        //     return redirect()->route("teacher.teacher-presence.index")->with("success", "Absensi atas nama guru " . $presence->teacher->name . " telah ditambah.");
+        // }
+        return redirect()->route("teacher.teacher-presence.index")->with("success", "Absensi atas nama guru " . $presence->teacher->name . " telah ditambah.");
     }
 
     /**
@@ -198,7 +201,6 @@ class TeacherPresenceController extends Controller
             "time_id" => "required",
             "status" => "required|in:Hadir,Tidak Hadir,Izin",
             "substitute_teacher_id" => "nullable|different:teacher_id", // "different" digunakan agar inputan tidak boleh sama atau kebalikan dari "same"
-            "updated_by" => "nullable",
         ]);
 
         $presence = TeacherPresence::with("teacherPicket", "teacher", "lesson", "classRoom", "day", "time", "substituteTeacher")->findOrFail($id);
@@ -252,7 +254,7 @@ class TeacherPresenceController extends Controller
         $year = $request->input('year');
 
         $moons = Moon::all();
-        $years = range(2020, 2032);
+        $years = range(2023, 2033);
 
         $teacherPresence = TeacherPresence::with(
             "teacherPicket",

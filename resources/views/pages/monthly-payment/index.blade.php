@@ -22,7 +22,7 @@
         @include('components.modal-filter')
         <div id="modal-search"
             class="animation-fade hidden fixed z-50 w-full md:max-w-screen-lg max-md:w-screen justify-center max-md:px-3 max-md:-ml-3">
-            <form action="{{ route('admin.student.index') }}" method="GET" enctype="multipart/form-data"
+            <form action="{{ route('sa.monthly-payment.index') }}" method="GET" enctype="multipart/form-data"
                 class="w-full md:max-w-md max-md:w-full rounded-md shadow-md p-5 bg-white max-sm:text-sm">
                 <h1 class="mb-3 font-poppins md:text-xl max-md:text-lg capitalize font-bold flex items-center">
                     <span class="material-symbols-outlined text-3xl -ml-2">
@@ -52,15 +52,15 @@
         <div class="w-full flex items-center justify-between mb-3 max-md:text-sm">
             <section class="flex items-center md:space-x-3 max-md:space-x-2">
                 <button type="button" onclick="modalGetPayment(event)"
-                    class="outline-none flex items-center justify-center md:w-32 md:h-10 max-md:size-10 md:rounded-md max-md:rounded-lg shadow bg-violet-600 transition duration-300 hover:bg-violet-700 focus:bg-violet-700 text-white">
-                    <span class="material-symbols-outlined">
+                    class="outline-none flex items-center justify-center md:w-32 md:h-10 max-md:size-9 md:rounded-md max-md:rounded-lg shadow bg-violet-600 transition duration-300 hover:bg-violet-700 focus:bg-violet-700 text-white">
+                    <span class="material-symbols-outlined max-md:text-[21px]">
                         filter_alt
                     </span>
                     <span class="max-md:hidden">Filter</span>
                 </button>
                 <button type="button" onclick="modalGetExport(event)"
-                    class="outline-none flex items-center justify-center md:w-32 md:h-10 max-md:size-10 md:rounded-md max-md:rounded-lg shadow bg-red-600 transition duration-300 hover:bg-red-700 focus:bg-red-700 text-white">
-                    <span class="material-symbols-outlined">
+                    class="outline-none flex items-center justify-center md:w-32 md:h-10 max-md:size-9 md:rounded-md max-md:rounded-lg shadow bg-red-600 transition duration-300 hover:bg-red-700 focus:bg-red-700 text-white">
+                    <span class="material-symbols-outlined max-md:text-[21px]">
                         download
                     </span>
                     <span class="max-md:hidden">PDF</span>
@@ -74,8 +74,8 @@
                     placeholder="Cari berdasarkan nama santri">
             </form>
             <button type="button" onclick="showModalSearch(event)"
-                class="outline-none flex items-center justify-center md:w-32 md:h-10 max-md:size-10 md:rounded-md max-md:rounded-lg shadow bg-white transition duration-300 md:hidden hover:bg-gray-200 focus:bg-gray-200 text-hitam">
-                <span class="material-symbols-outlined">
+                class="outline-none flex items-center justify-center md:w-32 md:h-10 max-md:size-9 md:rounded-md max-md:rounded-lg shadow bg-white transition duration-300 md:hidden hover:bg-gray-200 focus:bg-gray-200 text-hitam">
+                <span class="material-symbols-outlined max-md:text-[21px]">
                     search
                 </span>
             </button>
@@ -163,7 +163,7 @@
         @include('components.modal-export')
         <div id="modal-search"
             class="animation-fade hidden fixed z-50 w-full md:max-w-screen-lg max-md:w-screen justify-center max-md:px-3 max-md:-ml-3">
-            <form action="{{ route('admin.student.index') }}" method="GET" enctype="multipart/form-data"
+            <form action="{{ route('admin.monthly-payment.index') }}" method="GET" enctype="multipart/form-data"
                 class="w-full md:max-w-md max-md:w-full rounded-md shadow-md p-5 bg-white max-sm:text-sm">
                 <h1 class="mb-3 font-poppins md:text-xl max-md:text-lg capitalize font-bold flex items-center">
                     <span class="material-symbols-outlined text-3xl -ml-2">
@@ -193,22 +193,22 @@
         <div class="w-full flex items-center justify-between mb-3 max-md:text-sm">
             <section class="flex items-center md:space-x-3 max-md:space-x-2">
                 <a href="{{ route('admin.monthly-payment.create') }}"
-                    class="outline-none flex items-center justify-center md:w-32 md:h-10 max-md:size-10 md:rounded-md max-md:rounded-lg shadow bg-blue-600 transition duration-300 hover:bg-blue-700 focus:bg-blue-700 text-white">
+                    class="outline-none flex items-center justify-center md:w-32 md:h-10 max-md:size-9 md:rounded-md max-md:rounded-lg shadow bg-blue-600 transition duration-300 hover:bg-blue-700 focus:bg-blue-700 text-white">
                     <span class="material-symbols-outlined">
                         add
                     </span>
                     <span class="max-md:hidden">Tambah</span>
                 </a>
                 <button type="button" onclick="modalGetPayment(event)"
-                    class="outline-none flex items-center justify-center md:w-32 md:h-10 max-md:size-10 md:rounded-md max-md:rounded-lg shadow bg-violet-600 transition duration-300 hover:bg-violet-700 focus:bg-violet-700 text-white">
-                    <span class="material-symbols-outlined">
+                    class="outline-none flex items-center justify-center md:w-32 md:h-10 max-md:size-9 md:rounded-md max-md:rounded-lg shadow bg-violet-600 transition duration-300 hover:bg-violet-700 focus:bg-violet-700 text-white">
+                    <span class="material-symbols-outlined max-md:text-[21px]">
                         filter_alt
                     </span>
                     <span class="max-md:hidden">Filter</span>
                 </button>
                 <button type="button" onclick="modalGetExport(event)"
-                    class="outline-none flex items-center justify-center md:w-32 md:h-10 max-md:size-10 md:rounded-md max-md:rounded-lg shadow bg-red-600 transition duration-300 hover:bg-red-700 focus:bg-red-700 text-white">
-                    <span class="material-symbols-outlined">
+                    class="outline-none flex items-center justify-center md:w-32 md:h-10 max-md:size-9 md:rounded-md max-md:rounded-lg shadow bg-red-600 transition duration-300 hover:bg-red-700 focus:bg-red-700 text-white">
+                    <span class="material-symbols-outlined max-md:text-[21px]">
                         download
                     </span>
                     <span class="max-md:hidden">PDF</span>
@@ -222,8 +222,8 @@
                     placeholder="Cari berdasarkan nama santri">
             </form>
             <button type="button" onclick="showModalSearch(event)"
-                class="outline-none flex items-center justify-center md:w-32 md:h-10 max-md:size-10 md:rounded-md max-md:rounded-lg shadow bg-white transition duration-300 md:hidden hover:bg-gray-200 focus:bg-gray-200 text-hitam">
-                <span class="material-symbols-outlined">
+                class="outline-none flex items-center justify-center md:w-32 md:h-10 max-md:size-9 md:rounded-md max-md:rounded-lg shadow bg-white transition duration-300 md:hidden hover:bg-gray-200 focus:bg-gray-200 text-hitam">
+                <span class="material-symbols-outlined max-md:text-[21px]">
                     search
                 </span>
             </button>
@@ -281,13 +281,25 @@
                                 <td class="px-6 py-4">
                                     {{ $payment->status }}
                                 </td>
-                                <td class="px-6 py-2 flex items-center min-h-[1rem] space-x-2 text-white">
+                                <td class="px-6 py-2 flex items-center min-h-[1rem] md:space-x-2 max-md:space-x-1 text-white">
                                     <a href="{{ route('admin.monthly-payment.edit', $payment->id) }}"
-                                        class="outline-none size-10 flex items-center justify-center rounded-md transition duration-300 {{ $payment->status === 'Lunas' ? 'bg-orange-400 hover:bg-orange-500 focus:bg-orange-500' : 'bg-orange-600 hover:bg-orange-700 focus:bg-orange-700' }}">
-                                        <span class="material-symbols-outlined text-[21px]">
+                                        class="outline-none md:size-10 max-md:size-9 flex items-center justify-center rounded-md transition duration-300 {{ $payment->status === 'Lunas' ? 'bg-orange-400 hover:bg-orange-500 focus:bg-orange-500' : 'bg-orange-600 hover:bg-orange-700 focus:bg-orange-700' }}">
+                                        <span class="material-symbols-outlined md:text-[21px] max-md:text-[20px]">
                                             border_color
                                         </span>
                                     </a>
+                                    <form action="{{ route('admin.monthly-payment.destroy', $payment->id) }}"
+                                        onsubmit="return confirm('Apakah anda yakin menghapus pembayaran ini?')"
+                                        method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit"
+                                            class="outline-none md:size-10 max-md:size-9 flex items-center justify-center rounded-md transition duration-300 {{ $payment->status === 'Lunas' ? 'bg-red-400 hover:bg-red-500 focus:bg-red-500' : 'bg-red-600 hover:bg-red-700 focus:bg-red-700' }}">
+                                            <span class="material-symbols-outlined md:text-[21px] max-md:text-[20px]">
+                                                delete
+                                            </span>
+                                        </button>
+                                    </form>
                                 </td>
                             </tr>
                         @empty
@@ -298,7 +310,8 @@
                     </tbody>
                 </table>
             @else
-                <p class="text-center text-hitam max-md:text-sm max-md:leading-snug">Belum ada transaksi yang dilakukan pada bulan ini.</p>
+                <p class="text-center text-hitam max-md:text-sm max-md:leading-snug">Belum ada transaksi yang dilakukan pada
+                    bulan ini.</p>
             @endif
         </div>
         <section class="w-full h-10 mt-3">

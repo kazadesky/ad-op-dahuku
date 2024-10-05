@@ -128,8 +128,8 @@ class StudentController extends Controller
 
         $request->validate([
             'name' => 'required|string|max:255',
-            'nis' => 'required|numeric|unique:students,nis' . $student->nis,
-            'nisn' => 'required|numeric|unique:students,nisn' . $student->nisn,
+            'nis' => 'required|numeric|unique:students,nis,' . $student->id, // Adjusted to check against the current student's ID
+            'nisn' => 'required|numeric|unique:students,nisn,' . $student->id, // Adjusted to check against the current student's ID
             'class_id' => 'required',
             'place_of_birth' => 'required|string|max:255',
             'date_of_birth' => 'required|date',
@@ -149,14 +149,24 @@ class StudentController extends Controller
         ]);
 
         $role = Auth::user()->roles->pluck('name')->first();
-        if ($role == 'super_admin') {
-            return redirect()->route("sa.student.index")->with("success", "Data santri atas nama " . $student->name . " telah diubah.");
-        } elseif ($role == 'admin') {
-            return redirect()->route("admin.student.index")->with("success", "Data santri atas nama " . $student->name . " telah diubah.");
-        } elseif ($role == 'operator') {
-            return redirect()->route("operator.student.index")->with("success", "Data santri atas nama " . $student->name . " telah diubah.");
+        $route = '';
+
+        switch ($role) {
+            case 'super_admin':
+                $route = 'sa.student.index';
+                break;
+            case 'admin':
+                $route = 'admin.student.index';
+                break;
+            case 'operator':
+                $route = 'operator.student.index';
+                break;
+            default:
+                // Handle unexpected roles if needed
+                break;
         }
 
+        return redirect()->route($route)->with("success", "Data santri atas nama " . $student->name . " telah diubah.");
     }
 
     /**

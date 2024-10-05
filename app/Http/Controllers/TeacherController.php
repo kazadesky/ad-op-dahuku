@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Role;
 
 class TeacherController extends Controller
@@ -34,17 +35,15 @@ class TeacherController extends Controller
     public function edit(string $id)
     {
         $title = "Edit Status Akun";
-        $sa_teacher = User::role(["teacher", "admin", "operator"])->findOrFail($id);
-        $teacher = User::role(["teacher", "operator"])->findOrFail($id);
+        $teacher = User::role(['admin', 'operator', 'teacher'])->findOrFail($id);
         $roles = Role::where('name', '!=', 'super_admin')->pluck("name");
         $status = ["Guru Dayah", "Guru Umum"];
 
         return view("pages.teachers.edit", compact(
             "title",
-            "sa_teacher",
             "teacher",
             "roles",
-            "status",
+            "status"
         ));
     }
 
@@ -55,14 +54,20 @@ class TeacherController extends Controller
             "roles" => "required|in:admin,operator,teacher",
         ]);
 
-        $teacher = User::role("teacher")->findOrFail($id);
+        $teacher = User::role(['admin', 'operator', 'teacher'])->findOrFail($id);
         $teacher->update([
             "teacher_status" => $request->input("teacher_status"),
         ]);
 
-        $teacher->roles()->detach();
-        $teacher->assignRole($request->input("roles"));
+        // Sync roles: detach old roles and assign new one
+        $teacher->syncRoles([$request->input("roles")]);
 
-        return redirect()->route("admin.teacher.index")->with("success", "Status akun " . $teacher->name . " telah diupdate.");
+        $role = Auth::user()->roles->pluck('name')->first();
+        if ($role == 'super_admin') {
+            return redirect()->route("sa.teacher.index")->with("success", "Status akun " . $teacher->name . " telah diupdate.");
+        } elseif ($role == 'admin') {
+            return redirect()->route("admin.teacher.index")->with("success", "Status akun " . $teacher->name . " telah diupdate.");
+        }
+
     }
 }

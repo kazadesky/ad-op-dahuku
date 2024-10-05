@@ -17,9 +17,6 @@
 @endsection
 
 @section('content')
-    @hasrole('super_admin')
-    @endhasrole
-
     @hasrole('admin')
         <form action="{{ route('admin.monthly-payment.store') }}" method="POST"
             class="w-full md:p-10 max-sm:p-6 rounded-lg bg-white text-hitam shadow-lg max-md:text-sm">
@@ -132,9 +129,6 @@
                     class="outline-none w-full md:h-11 max-md:h-10 flex items-center justify-center font-medium bg-elf-green rounded shadow-sm transition duration-300 hover:bg-dark-elf focus:bg-dark-elf max-md:mb-2">Tambah</button>
             </section>
         </form>
-    @endhasrole
-
-    @hasrole('operator')
     @endhasrole
 @endsection
 

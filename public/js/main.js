@@ -80,6 +80,13 @@ if (bannerAlert && !bannerAlert.classList.contains('hidden')) {
     }, 5000);
 }
 
+const alertDanger = document.querySelector('#alert-danger');
+if (alertDanger && !alertDanger.classList.contains('hidden')) {
+    setTimeout(() => {
+        alertDanger.classList.add('hidden');
+    }, 5000);
+}
+
 const modalGetPayment = (event) => {
     event.preventDefault();
 

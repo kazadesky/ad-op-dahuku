@@ -21,7 +21,7 @@ return new class extends Migration
                 ->constrained('moons')
                 ->cascadeOnDelete();
             $table->year('year');
-            $table->decimal('price', 15, 3);
+            $table->decimal('price', 15);
             $table->enum('status', ['Belum Bayar', 'Cicil', 'Lunas'])->default('Belum Bayar');
             $table->timestamps();
         });

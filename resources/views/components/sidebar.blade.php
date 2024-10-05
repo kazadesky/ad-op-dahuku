@@ -8,7 +8,7 @@
 @endphp
 
 <aside id="sidebar"
-    class="fixed sm:z-10 max-md:z-30 w-full max-md:-translate-x-[105%] [&.active]:max-md:translate-x-0 max-md:max-w-[65%] transition-all duration-300 ease-in-out sm:max-w-[18%] m-3 rounded-lg shadow-lg bg-hitam overflow-x-hidden max-md:p-3 sm:p-5 text-white-text">
+    class="fixed sm:z-10 max-md:z-30 w-full max-md:-translate-x-[105%] [&.active]:max-md:translate-x-0 max-md:max-w-[67%] transition-all duration-300 ease-in-out sm:max-w-[18%] m-3 rounded-lg shadow-lg bg-hitam overflow-x-hidden p-5 text-white-text">
     <section class="w-full h-16 border-b border-abu-muda mb-5">
         <h1 class="font-poppins uppercase font-semibold text-xl max-md:text-lg -mb-px">
             @if ($role == 'super_admin')
@@ -21,18 +21,18 @@
                 Guru
             @endif
         </h1>
-        <h1 class="font-poppins uppercase font-medium text-lg max-md:text-base">Darul Huda Kutacane</h1>
+        <h1 class="font-poppins uppercase font-medium text-lg max-md:text-base max-md:capitalize">Darul Huda Kutacane</h1>
     </section>
 
     <button type="button" onclick="hideMenu()"
-        class="md:hidden outline-none absolute top-2 right-0 -ml-10 bg-hitam size-10 rounded-full flex items-center justify-center">
-        <span class="material-symbols-outlined">
+        class="md:hidden outline-none absolute top-2 right-2 -ml-10 bg-hitam size-10 rounded-full flex items-center justify-center">
+        <span class="material-symbols-outlined text-[22px]">
             close
         </span>
     </button>
 
     @hasrole('super_admin')
-        <ul class="flex flex-col w-full">
+        <ul class="flex flex-col w-full max-md:text-sm">
             <span class="font-semibold uppercase text-[11px]">Dashboard</span>
             <li class="mt-2 mb-5">
                 <a href="{{ route('sa.dashboard') }}"
@@ -184,7 +184,7 @@
     @endhasrole
 
     @hasrole('admin')
-        <ul class="flex flex-col w-full">
+        <ul class="flex flex-col w-full max-md:text-sm">
             <span class="font-semibold uppercase text-[11px]">Dashboard</span>
             <li class="mt-2 mb-5">
                 <a href="{{ route('admin.dashboard') }}"
@@ -336,7 +336,7 @@
     @endhasrole
 
     @hasrole('operator')
-        <ul class="flex flex-col w-full">
+        <ul class="flex flex-col w-full max-md:text-sm">
             <span class="font-semibold uppercase text-[11px]">Dashboard</span>
             <li class="mt-2 mb-5">
                 <a href="{{ route('operator.dashboard') }}"
@@ -452,7 +452,7 @@
     @endhasrole
 
     @hasrole('teacher')
-        <ul class="flex flex-col w-full">
+        <ul class="flex flex-col w-full max-md:text-sm">
             <span class="font-semibold uppercase text-[11px]">Dashboard</span>
             <li class="mt-2 mb-5">
                 <a href="{{ route('teacher.dashboard') }}"

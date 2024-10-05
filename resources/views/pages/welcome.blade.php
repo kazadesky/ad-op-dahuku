@@ -24,7 +24,7 @@
 
     <figure class="w-full flex justify-center items-center flex-col space-y-5">
         <img src="{{ asset('img/logo.jpg') }}" alt="logo dahuku"
-            class="welcome-fade md:size-64 max-md:size-44 rounded-full drop-shadow-lg">
+            class="welcome-fade md:size-60 max-md:size-40 rounded-full drop-shadow-lg">
         <figcaption
             class="title-load md:text-3xl max-md:text-2xl font-bold text-white-text drop-shadow-lg font-poppins flex items-center max-md:justify-center space-x-2 max-md:text-center">
             <span class="custom-loader max-md:size-11"></span>

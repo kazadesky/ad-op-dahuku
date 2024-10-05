@@ -47,7 +47,7 @@ class AccountController extends Controller
     {
         $request->validate([
             "name" => "required|string|max:255",
-            "email" => "required|email|unique:users,email" . Auth::user()->id,
+            "email" => "required|email|unique:users,email," . Auth::user()->id,
             "nomor_telepon" => "required|numeric|min:10",
             "teacher_status" => "nullable|in:Guru Dayah,Guru Umum",
         ]);

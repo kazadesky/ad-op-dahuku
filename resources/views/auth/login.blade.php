@@ -56,12 +56,3 @@
         </section>
     </form>
 @endsection
-
-@push('script')
-    <script>
-        const alertDanger = document.querySelector('#alert-danger');
-        setTimeout(() => {
-            alertDanger.classList.add('hidden');
-        }, 5000);
-    </script>
-@endpush

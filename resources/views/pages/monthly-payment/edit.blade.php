@@ -17,9 +17,6 @@
 @endsection
 
 @section('content')
-    @hasrole('super_admin')
-    @endhasrole
-
     @hasrole('admin')
         <form action="{{ route('admin.monthly-payment.update', $payment->id) }}" method="POST"
             class="w-full md:p-10 max-sm:p-6 rounded-lg bg-white text-hitam shadow-lg max-md:text-sm">
@@ -139,9 +136,6 @@
             </section>
         </form>
     @endhasrole
-
-    @hasrole('operator')
-    @endhasrole
 @endsection
 
 @push('script')
@@ -169,7 +163,7 @@
                 let value = e.target.value;
                 formattedPriceInput.value = formatRupiah(value);
                 rawPriceInput.value = value.replace(/[^0-9]/g,
-                '');
+                    '');
             });
         });
     </script>

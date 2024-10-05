@@ -25,7 +25,7 @@ class MonthlyPaymentController extends Controller
         $search = $request->input("search");
 
         $moons = Moon::all();
-        $years = range(2020, 2032);
+        $years = range(2023, 2033);
 
         if ($month && $year) {
             if ($search) {
@@ -75,7 +75,7 @@ class MonthlyPaymentController extends Controller
         $title = "Pembayaran";
         $moons = Moon::all();
         $month = Carbon::now()->month;
-        $years = range(2020, 2032);
+        $years = range(2023, 2033);
         $year = Carbon::now()->year;
         $students = Student::orderBy("name", "ASC")->get();
         $status = ["Cicil", "Lunas"];
@@ -126,7 +126,7 @@ class MonthlyPaymentController extends Controller
         $title = "Pembayaran";
         $moons = Moon::all();
         $month = Carbon::now()->month;
-        $years = range(2020, 2032);
+        $years = range(2023, 2033);
         $year = Carbon::now()->year;
         $students = Student::orderBy("name", "ASC")->get();
         $status = ["Cicil", "Lunas"];
@@ -167,7 +167,10 @@ class MonthlyPaymentController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $payment = MonthlyPayment::with('student', 'moon')->findOrFail($id);
+        $payment->delete();
+
+        return redirect()->back()->with('success', 'Pembayaran atas nama ' . $payment->student->name . ' telah dihapus.');
     }
 
     public function export(Request $request)
@@ -179,7 +182,7 @@ class MonthlyPaymentController extends Controller
         $year = $request->input('year');
 
         $moons = Moon::all();
-        $years = range(2020, 2032);
+        $years = range(2023, 2033);
 
         if ($month && $year) {
             $monthlyPayments = MonthlyPayment::with("student", "moon")

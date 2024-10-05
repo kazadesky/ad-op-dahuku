@@ -161,11 +161,11 @@
     <div
         class="w-full grid md:grid-cols-3 max-md:grid-cols-1 md:gap-x-10 max-md:gap-y-3 mb-3 max-md:text-sm bg-white rounded-lg shadow-xl p-5">
         <section class="col-span-1 w-full flex items-center justify-center max-md:mb-3">
-            <figure class="relative md:size-72 max-md:size-52 rounded-full overflow-hidden group">
+            <figure class="relative md:size-72 max-md:size-44 rounded-full overflow-hidden group">
                 <img src="{{ !$user->profile ? asset('img/icon/user.png') : url('storage/profile/', $user->profile) }}"
-                    alt="{{ $user->name }}" class="md:size-72 max-md:size-52 rounded-full">
+                    alt="{{ $user->name }}" class="w-full">
                 <button type="button" onclick="showChangePhoto(event)"
-                    class="absolute -bottom-20 w-full md:h-16 max-md:h-14 bg-gray-500/60 flex items-center justify-center text-white-text transition-all duration-300 ease-in-out group-hover:bottom-0 group-active:bottom-0">
+                    class="absolute -bottom-20 w-full md:h-16 max-md:h-12 bg-gray-500/60 flex items-center justify-center text-white-text transition-all duration-300 ease-in-out group-hover:bottom-0 group-active:bottom-0">
                     <p class="flex items-center space-x-1">
                         <span class="material-symbols-outlined">
                             photo_camera
@@ -187,42 +187,44 @@
                     <span>Edit</span>
                 </button>
             </div>
-            <div class="w-full flex flex-col space-y-3 mt-8">
-                <p class="flex items-center pb-3 border-b-2">
-                    <span class="flex flex-none w-32 font-medium">Nama</span>
-                    <span class="flex flex-none w-5 font-medium">:</span>
-                    <span>{{ $user->name }}</span>
-                </p>
-                <p class="flex items-center pb-3 border-b-2">
-                    <span class="flex flex-none w-32 font-medium">Email</span>
-                    <span class="flex flex-none w-5 font-medium">:</span>
-                    <span>{{ $user->email }}</span>
-                </p>
-                <p class="flex items-center pb-3 border-b-2">
-                    <span class="flex flex-none w-32 font-medium">Nomor Telepon</span>
-                    <span class="flex flex-none w-5 font-medium">:</span>
-                    <span>{{ !$user->nomor_telepon ? '-' : $user->nomor_telepon }}</span>
-                </p>
-                <p class="flex items-center pb-3 border-b-2">
-                    <span class="flex flex-none w-32 font-medium">Status Guru</span>
-                    <span class="flex flex-none w-5 font-medium">:</span>
-                    <span>{{ !$user->teacher_status ? '-' : $user->teacher_status }}</span>
-                </p>
-                <p class="flex items-center pb-3 border-b-2">
-                    <span class="flex flex-none w-32 font-medium">Status Akun</span>
-                    <span class="flex flex-none w-5 font-medium">:</span>
-                    <span class="capitalize">
-                        @if ($role == 'super_admin')
-                            Super Admin
-                        @elseif($role == 'admin')
-                            Admin
-                        @elseif($role == 'operator')
-                            Operator
-                        @elseif($role == 'teacher')
-                            Guru
-                        @endif
-                    </span>
-                </p>
+            <div class="w-full flex flex-col space-y-3 mt-8 overflow-hidden">
+                <div class="w-full relative overflow-x-auto">
+                    <p class="flex items-center py-3 border-b-2">
+                        <span class="flex flex-none w-32 font-medium">Nama</span>
+                        <span class="flex flex-none w-5 font-medium">:</span>
+                        <span>{{ $user->name }}</span>
+                    </p>
+                    <p class="flex items-center py-3 border-b-2">
+                        <span class="flex flex-none w-32 font-medium">Email</span>
+                        <span class="flex flex-none w-5 font-medium">:</span>
+                        <span>{{ $user->email }}</span>
+                    </p>
+                    <p class="flex items-center py-3 border-b-2">
+                        <span class="flex flex-none w-32 font-medium">Nomor Telepon</span>
+                        <span class="flex flex-none w-5 font-medium">:</span>
+                        <span>{{ !$user->nomor_telepon ? '-' : $user->nomor_telepon }}</span>
+                    </p>
+                    <p class="flex items-center py-3 border-b-2">
+                        <span class="flex flex-none w-32 font-medium">Status Guru</span>
+                        <span class="flex flex-none w-5 font-medium">:</span>
+                        <span>{{ !$user->teacher_status ? '-' : $user->teacher_status }}</span>
+                    </p>
+                    <p class="flex items-center py-3 border-b-2">
+                        <span class="flex flex-none w-32 font-medium">Status Akun</span>
+                        <span class="flex flex-none w-5 font-medium">:</span>
+                        <span class="capitalize">
+                            @if ($role == 'super_admin')
+                                Super Admin
+                            @elseif($role == 'admin')
+                                Admin
+                            @elseif($role == 'operator')
+                                Operator
+                            @elseif($role == 'teacher')
+                                Guru
+                            @endif
+                        </span>
+                    </p>
+                </div>
                 @hasanyrole(['super_admin', 'admin'])
                     <div class="flex max-md:flex-col max-md:space-y-3 flex-none items-center justify-between mt-5">
                         <p class="text-gray-500 italic text-sm max-md:text-center"><span class="font-medium">Nb:</span> Hapus
