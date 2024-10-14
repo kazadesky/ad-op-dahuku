@@ -6,6 +6,7 @@ use App\Models\Student;
 use App\Models\StudentGuardian;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class StudentGuardianController extends Controller
 {
@@ -15,10 +16,10 @@ class StudentGuardianController extends Controller
     public function index(Request $request)
     {
         $title = "Akun Wali";
-        $seacrh = $request->input("search");
+        $search = $request->input("search");
 
-        if ($seacrh) {
-            $studentGuardians = StudentGuardian::where("name", "%", $seacrh, "%")->orWhere("nis", "%", $seacrh, "%")->latest()->paginate(15);
+        if ($search) {
+            $studentGuardians = StudentGuardian::where("name", "LIKE", "%" . $search . "%")->orWhere("nis", "LIKE", "%" . $search . "%")->latest()->paginate(15);
         } else {
             $studentGuardians = StudentGuardian::with("student")->latest()->paginate(25);
         }
@@ -35,7 +36,10 @@ class StudentGuardianController extends Controller
     public function create()
     {
         $title = "Tambah Akun";
-        $students = Student::with("student")->latest()->get();
+        $studentGuardian = StudentGuardian::pluck('student_id')->all();
+        $students = Student::with("classRoom")->whereNotIn('id', $studentGuardian)->get();
+        $students = $students->sortBy('name');
+
         return view("pages.student-guardian.create", compact([
             "title",
             "students",
@@ -50,20 +54,21 @@ class StudentGuardianController extends Controller
         $fields = $request->validate([
             "name" => "required|string|max:255",
             "nis" => "required|numeric",
-            "nisn" => "required|numeric",
-            "student_id" => "required",
-            "password" => "required|confirmed",
-            "password_confirmation" => "required",
+            "no_tel" => "nullable|numeric|min:10",
+            "student_id" => "required|exists:students,id",
         ]);
 
+        $student = Student::find($request->student_id);
         $fields["name"] = ucwords($request->name);
+        $fields["password"] = Hash::make(str_replace(" ", "", strtolower($student->name)));
+        // $fields["password"] = str_replace(" ", "", strtolower($student->name));
         $studentGuardiant = StudentGuardian::create($fields);
 
         $role = Auth::user()->roles->pluck('name')->first();
-        if($role == 'super_admin'){
-            return redirect()->route("sa.student-guardian.index")->with("success", "Akun atas nama " . $studentGuardiant . " berhasil ditambahkan.");
-        }elseif($role == 'admin'){
-            return redirect()->route("admin.student-guardian.index")->with("success", "Akun atas nama " . $studentGuardiant . " berhasil ditambahkan.");
+        if ($role == 'super_admin') {
+            return redirect()->route("sa.student-guardian.index")->with("success", "Akun atas nama " . $studentGuardiant->name . " berhasil ditambahkan.");
+        } elseif ($role == 'admin') {
+            return redirect()->route("admin.student-guardian.index")->with("success", "Akun atas nama " . $studentGuardiant->name . " berhasil ditambahkan.");
         }
     }
 
@@ -87,8 +92,10 @@ class StudentGuardianController extends Controller
     {
         $title = "Edit Akun";
         $studentGuardian = StudentGuardian::with("student")->findOrFail($id);
+        $students = Student::with("classRoom")->orderBy("name", "ASC")->get();
         return view("pages.student-guardian.edit", compact([
             "title",
+            "students",
             "studentGuardian",
         ]));
     }
@@ -101,20 +108,22 @@ class StudentGuardianController extends Controller
         $fields = $request->validate([
             "name" => "required|string|max:255",
             "nis" => "required|numeric",
-            "nisn" => "required|numeric",
+            "no_tel" => "nullable|numeric|min:10",
             "student_id" => "required",
-            "password" => "required|confirmed",
-            "password_confirmation" => "required",
+            // "password" => "required|confirmed",
+            // "password_confirmation" => "required",
         ]);
 
+        $student = Student::find($request->student_id);
         $fields["name"] = ucwords($request->name);
+        $fields["password"] = Hash::make(str_replace(" ", "", strtolower($student->name)));
         $studentGuardian = StudentGuardian::with("student")->findOrFail($id);
         $studentGuardian->update($fields);
 
         $role = Auth::user()->roles->pluck('name')->first();
-        if($role == 'super_admin'){
+        if ($role == 'super_admin') {
             return redirect()->route("sa.student-guardiant.index")->with("success", "Akun atas nama " . $studentGuardian->name . " telah diupdate.");
-        }elseif($role == 'admin'){
+        } elseif ($role == 'admin') {
             return redirect()->route("admin.student-guardian.index")->with("success", "Akun atas nama " . $studentGuardian->name . " telah diupdate.");
         }
     }

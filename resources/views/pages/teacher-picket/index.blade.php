@@ -46,37 +46,34 @@
                                             </li>
                                             <span>Pengganti :</span>
                                             <li class="ml-3">
-                                                <p class="font-medium">
-                                                    {{ $item->substitute ? $item->substitute->name : '-' }}
+                                                <p class="font-medium">{{ $item->substitute ? $item->substitute->name : '-' }}
                                                 </p>
                                             </li>
                                         </ul>
                                     </section>
-                                    <section class="flex items-center space-x-2 text-white-text">
-                                        <a href="{{ route('sa.teacher-picket.edit', $item->id) }}"
-                                            class="outline-none size-9 flex items-center justify-center bg-orange-600 rounded-md transition duration-300 hover:bg-orange-700 focus:bg-orange-700">
-                                            <span class="material-symbols-outlined md:text-[21px] max-md:text-[20px]">
-                                                border_color
-                                            </span>
+                                    <section class="flex items-center md:space-x-2 max-md:space-x-1 text-white-text">
+                                        <a href="{{ route('admin.teacher-picket.edit', $item->id) }}"
+                                            class="outline-none md:size-9 max-md:size-8 flex items-center justify-center bg-orange-600 rounded-md transition duration-300 hover:bg-orange-700 focus:bg-orange-700">
+                                            <span
+                                                class="material-symbols-outlined md:text-[21px] max-md:text-[20px]">border_color</span>
                                         </a>
-                                        <form action="{{ route('sa.teacher-picket.destroy', $item->id) }}"
+                                        <form action="{{ route('admin.teacher-picket.destroy', $item->id) }}"
                                             onsubmit="return confirm('Apakah anda ingin menghapus guru piket ini?')"
                                             method="POST">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit"
-                                                class="outline-none size-9 flex items-center justify-center bg-red-600 rounded-md transition duration-300 hover:bg-red-700 focus:bg-red-700">
-                                                <span class="material-symbols-outlined md:text-[21px] max-md:text-[20px]">
-                                                    delete
-                                                </span>
+                                                class="outline-none md:size-9 max-md:size-8 flex items-center justify-center bg-red-600 rounded-md transition duration-300 hover:bg-red-700 focus:bg-red-700">
+                                                <span
+                                                    class="material-symbols-outlined md:text-[21px] max-md:text-[20px]">delete</span>
                                             </button>
                                         </form>
-                                        <form action="{{ route('sa.teacher-picket.action', $item->id) }}" method="POST">
+                                        <form action="{{ route('admin.teacher-picket.action', $item->id) }}" method="POST">
                                             @csrf
                                             @method('PATCH')
-                                            <input type="hidden" name="action" value="{{ $item->action }}">
+                                            <input type="hidden" name="action" value="{{ !$item->action === 1 ? 0 : 1 }}">
                                             <button type="submit"
-                                                class="outline-none text-white-text size-9 rounded flex items-center justify-center bg-indigo-600 transition duration-300 hover:bg-indigo-700 focus:bg-indigo-700 active:bg-indigo-800">
+                                                class="outline-none text-white-text md:size-9 max-md:size-8 rounded flex items-center justify-center bg-indigo-600 transition duration-300 hover:bg-indigo-700 focus:bg-indigo-700 active:bg-indigo-800">
                                                 <span class="material-symbols-outlined md:text-[21px] max-md:text-[20px]">
                                                     {{ $item->action === 0 ? 'radio_button_unchecked' : 'radio_button_checked' }}
                                                 </span>
@@ -127,18 +124,16 @@
                                             </li>
                                             <span>Pengganti :</span>
                                             <li class="ml-3">
-                                                <p class="font-medium">
-                                                    {{ $item->substitute ? $item->substitute->name : '-' }}
+                                                <p class="font-medium">{{ $item->substitute ? $item->substitute->name : '-' }}
                                                 </p>
                                             </li>
                                         </ul>
                                     </section>
-                                    <section class="flex items-center space-x-2 text-white-text">
+                                    <section class="flex items-center md:space-x-2 max-md:space-x-1 text-white-text">
                                         <a href="{{ route('admin.teacher-picket.edit', $item->id) }}"
-                                            class="outline-none size-9 flex items-center justify-center bg-orange-600 rounded-md transition duration-300 hover:bg-orange-700 focus:bg-orange-700">
-                                            <span class="material-symbols-outlined md:text-[21px] max-md:text-[20px]">
-                                                border_color
-                                            </span>
+                                            class="outline-none md:size-9 max-md:size-8 flex items-center justify-center bg-orange-600 rounded-md transition duration-300 hover:bg-orange-700 focus:bg-orange-700">
+                                            <span
+                                                class="material-symbols-outlined md:text-[21px] max-md:text-[20px]">border_color</span>
                                         </a>
                                         <form action="{{ route('admin.teacher-picket.destroy', $item->id) }}"
                                             onsubmit="return confirm('Apakah anda ingin menghapus guru piket ini?')"
@@ -146,18 +141,17 @@
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit"
-                                                class="outline-none size-9 flex items-center justify-center bg-red-600 rounded-md transition duration-300 hover:bg-red-700 focus:bg-red-700">
-                                                <span class="material-symbols-outlined md:text-[21px] max-md:text-[20px]">
-                                                    delete
-                                                </span>
+                                                class="outline-none md:size-9 max-md:size-8 flex items-center justify-center bg-red-600 rounded-md transition duration-300 hover:bg-red-700 focus:bg-red-700">
+                                                <span
+                                                    class="material-symbols-outlined md:text-[21px] max-md:text-[20px]">delete</span>
                                             </button>
                                         </form>
                                         <form action="{{ route('admin.teacher-picket.action', $item->id) }}" method="POST">
                                             @csrf
                                             @method('PATCH')
-                                            <input type="hidden" name="action" value="{{ $item->action }}">
+                                            <input type="hidden" name="action" value="{{ !$item->action === 1 ? 0 : 1 }}">
                                             <button type="submit"
-                                                class="outline-none text-white-text size-9 rounded flex items-center justify-center bg-indigo-600 transition duration-300 hover:bg-indigo-700 focus:bg-indigo-700 active:bg-indigo-800">
+                                                class="outline-none text-white-text md:size-9 max-md:size-8 rounded flex items-center justify-center bg-indigo-600 transition duration-300 hover:bg-indigo-700 focus:bg-indigo-700 active:bg-indigo-800">
                                                 <span class="material-symbols-outlined md:text-[21px] max-md:text-[20px]">
                                                     {{ $item->action === 0 ? 'radio_button_unchecked' : 'radio_button_checked' }}
                                                 </span>
@@ -199,19 +193,34 @@
                                             </li>
                                             <span>Pengganti :</span>
                                             <li class="ml-3">
-                                                <p class="font-medium">
-                                                    {{ $item->substitute ? $item->substitute->name : '-' }}
+                                                <p class="font-medium">{{ $item->substitute ? $item->substitute->name : '-' }}
                                                 </p>
                                             </li>
                                         </ul>
                                     </section>
-                                    <section class="flex items-center space-x-2 text-white-text">
-                                        <form action="{{ route('operator.teacher-picket.action', $item->id) }}" method="POST">
+                                    <section class="flex items-center md:space-x-2 max-md:space-x-1 text-white-text">
+                                        <a href="{{ route('admin.teacher-picket.edit', $item->id) }}"
+                                            class="outline-none md:size-9 max-md:size-8 flex items-center justify-center bg-orange-600 rounded-md transition duration-300 hover:bg-orange-700 focus:bg-orange-700">
+                                            <span
+                                                class="material-symbols-outlined md:text-[21px] max-md:text-[20px]">border_color</span>
+                                        </a>
+                                        <form action="{{ route('admin.teacher-picket.destroy', $item->id) }}"
+                                            onsubmit="return confirm('Apakah anda ingin menghapus guru piket ini?')"
+                                            method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit"
+                                                class="outline-none md:size-9 max-md:size-8 flex items-center justify-center bg-red-600 rounded-md transition duration-300 hover:bg-red-700 focus:bg-red-700">
+                                                <span
+                                                    class="material-symbols-outlined md:text-[21px] max-md:text-[20px]">delete</span>
+                                            </button>
+                                        </form>
+                                        <form action="{{ route('admin.teacher-picket.action', $item->id) }}" method="POST">
                                             @csrf
                                             @method('PATCH')
-                                            <input type="hidden" name="action" value="{{ $item->action }}">
+                                            <input type="hidden" name="action" value="{{ !$item->action === 1 ? 0 : 1 }}">
                                             <button type="submit"
-                                                class="outline-none text-white-text size-9 rounded flex items-center justify-center bg-indigo-600 transition duration-300 hover:bg-indigo-700 focus:bg-indigo-700 active:bg-indigo-800 space-x-1">
+                                                class="outline-none text-white-text md:size-9 max-md:size-8 rounded flex items-center justify-center bg-indigo-600 transition duration-300 hover:bg-indigo-700 focus:bg-indigo-700 active:bg-indigo-800">
                                                 <span class="material-symbols-outlined md:text-[21px] max-md:text-[20px]">
                                                     {{ $item->action === 0 ? 'radio_button_unchecked' : 'radio_button_checked' }}
                                                 </span>

@@ -9,6 +9,7 @@ use App\Http\Controllers\EmailVerifyController;
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\LessonTimetableController;
 use App\Http\Controllers\MonthlyPaymentController;
+use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\StudentArchievementController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\StudentGuardianController;
@@ -29,10 +30,10 @@ Route::middleware("guest")->group(function () {
     Route::post("/login", [AuthController::class, "loginProses"])->name("login.proses");
     Route::get("/register", [AuthController::class, "registerPage"])->name("register");
     Route::post("/register", [AuthController::class, "registerProses"])->name("register.proses");
-    Route::get("forgot-password", "ResetPasswordController@forgotPage")->name("forgot.page");
-    Route::post("forgot-password", "ResetPasswordController@forgotPassword")->name("forgot.password");
-    Route::get("reset-password/{token}", "ResetPasswordController@resetPage")->name("reset.page");
-    Route::post("reset-password", "ResetPasswordController@resetPassword")->name("reset.password");
+    Route::get("forgot-password", [ResetPasswordController::class, "forgotPage"])->name("password.request");
+    Route::post("forgot-password", [ResetPasswordController::class, "forgotPassword"])->name("password.email");
+    Route::get("reset-password/{token}", [ResetPasswordController::class, "resetPage"])->name("password.reset");
+    Route::post("reset-password", [ResetPasswordController::class, "resetPassword"])->name("password.update");
 });
 
 Route::middleware("auth")->group(function () {

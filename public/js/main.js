@@ -116,7 +116,7 @@ const showModalSearch = (event) => {
     if (modalSearch.classList.contains("hidden")) {
         modalSearch.classList.remove("hidden");
         modalSearch.classList.add("flex");
-        modalFilter.classList.add("hidden");
+        // !modalFilter.classList.contains("hidden") ? modalFilter.classList.add("hidden") : modalFilter.classList.remove("hidden") ;
         dropdown.classList.add("hidden");
         sidebar.classList.remove("active");
     } else {
