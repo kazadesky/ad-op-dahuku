@@ -26,7 +26,7 @@
         <div class="md:mb-4 max-md:mb-3">
             <div class="flex items-center justify-between md:mb-2 max-md:mb-1">
                 <label for="password" class="block font-medium">Password</label>
-                <a href="" onclick="return false"
+                <a href="{{ route('password.request') }}"
                     class="outline-none capitalize text-gray-600 md:text-sm max-md:text-xs underline underline-offset-2 active:text-elf-green focus:text-elf-green">forgot
                     password?</a>
             </div>
@@ -37,7 +37,7 @@
                     @enderror"
                     placeholder="******" value="{{ old('password') }}">
                 <button type="button" onclick="passwordShow(event)"
-                    class="absolute top-[0.30rem] right-2 text-gray-500 active:text-elf-green size-10 flex items-center justify-center outline-none focus:text-elf-green">
+                    class="absolute md:top-[0.30rem] max-md:top-[0.20rem] md:right-2 max-md:right-[4px] text-gray-500 active:text-elf-green size-10 flex items-center justify-center outline-none focus:text-elf-green">
                     <span id="icon_pass" class="material-symbols-outlined max-md:text-[22px]">
                         visibility
                     </span>

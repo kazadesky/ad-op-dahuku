@@ -257,7 +257,7 @@
                 @endforeach
             </div>
         @else
-            <div class="w-full flex justify-center md:max-screen-lg max-md:text-sm">
+            <div class="w-full flex justify-center md:max-screen-lg max-md:text-sm mb-10">
                 <div class="bg-white rounded-md shadow-md px-10 py-2">
                     <p class="text-center">Anda belum mempunyai jadwal mengajar yang terdaftar.</p>
                 </div>

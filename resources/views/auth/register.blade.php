@@ -60,7 +60,7 @@
                     @enderror"
                     placeholder="******" value="{{ old('password') }}">
                 <button type="button" onclick="passwordShow(event)"
-                    class="absolute top-[0.30rem] right-2 text-gray-500 active:text-elf-green w-10 h-10 flex items-center justify-center outline-none focus:text-elf-green">
+                    class="absolute md:top-[0.30rem] max-md:top-[0.20rem] md:right-2 max-md:right-[4px] text-gray-500 active:text-elf-green w-10 h-10 flex items-center justify-center outline-none focus:text-elf-green">
                     <span id="icon_pass" class="material-symbols-outlined">
                         visibility
                     </span>
@@ -79,7 +79,7 @@
                     @enderror"
                     placeholder="******" value="{{ old('password') }}">
                 <button type="button" onclick="passwordConfirmShow(event)"
-                    class="absolute top-[0.30rem] right-2 text-gray-500 active:text-elf-green w-10 h-10 flex items-center justify-center outline-none focus:text-elf-green">
+                    class="absolute md:top-[0.30rem] max-md:top-[0.20rem] md:right-2 max-md:right-[4px] text-gray-500 active:text-elf-green w-10 h-10 flex items-center justify-center outline-none focus:text-elf-green">
                     <span id="icon_confirm" class="material-symbols-outlined">
                         visibility
                     </span>

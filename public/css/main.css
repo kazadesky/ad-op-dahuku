@@ -123,19 +123,21 @@
     }
 }
 
-#sidebar::-webkit-scrollbar {
-    width: 10px;
-}
+@media screen and (min-width: 768px) {
+    #sidebar::-webkit-scrollbar {
+        width: 10px;
+    }
 
-#sidebar::-webkit-scrollbar-track {
-    background-color: #1e1f1e;
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
-}
+    #sidebar::-webkit-scrollbar-track {
+        background-color: #1e1f1e;
+        border-top-right-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
 
-#sidebar::-webkit-scrollbar-thumb {
-    background: linear-gradient(to bottom, #098666, #076c53, #1e1f1e);
-    border-radius: 5px;
-    /* border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px; */
+    #sidebar::-webkit-scrollbar-thumb {
+        background: linear-gradient(to bottom, #098666, #076c53, #1e1f1e);
+        border-radius: 5px;
+        /* border-top-right-radius: 10px;
+        border-bottom-right-radius: 10px; */
+    }
 }

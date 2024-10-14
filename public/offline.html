@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="title" content="InfyBonus">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error Page</title>
+    <style>
+        body {
+            margin: 0;
+            padding-block: 0;
+            padding-inline: 20px;
+            box-sizing: border-box;
+            height: 100vh;
+            width: 100%;
+            background: linear-gradient(45deg, #098666, #1e1f1e);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .error_container {
+            text-align: center;
+            padding: 20px 20px 40px 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            max-width: 90%;
+            width: 500px;
+            /* Maksimal lebar */
+        }
+
+        .error_heading {
+            color: transparent;
+            font-size: 10vw;
+            /* Responsif berdasarkan lebar viewport */
+            margin: 0;
+            font-weight: 900;
+            letter-spacing: 3px;
+            background: linear-gradient(90deg, #098666, #1e1f1e);
+            -webkit-background-clip: text;
+            background-clip: text;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 540px) {
+            .error_heading {
+                font-size: 20vw;
+                /* Ukuran lebih besar untuk perangkat kecil */
+                letter-spacing: 1px;
+                /* Mengurangi jarak huruf */
+            }
+
+            .error_message {
+                font-size: 5.5vw;
+            }
+        }
+
+        .error_btn {
+            background-color: #098666;
+            color: white;
+            border: none;
+            outline: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+
+        .error_btn:hover {
+            background-color: #076c53;
+        }
+
+        .error_message {
+            color: #1e1f1e;
+        }
+
+        .error_paragraph {
+            color: gray;
+            margin-top: -3px;
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="error_container">
+        <h1 class="error_heading">404</h1>
+        <h2 class="error_message">Boo! Server atau pengguna sedang offline</h2>
+        <p class="error_paragraph">Silakan periksa koneksi internet Anda dan coba lagi.</p>
+        <a href="/" class="error_btn">Kembali ke Halaman Utama</a>
+    </div>
+</body>
+
+</html>

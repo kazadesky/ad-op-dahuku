@@ -49,7 +49,7 @@
                         <span class="float-end max-md:hidden">:</span>
                     </label>
                     <select name="moon_id" id="moon_id" size="-1"
-                        class="outline-none w-full rounded-md md:h-12 max-md:h-11 px-3 border-2 transition duration-300 focus:border-green-500 focus:shadow-sm focus:ring-2 focus:ring-green-300 @error('name') border-red-500 @enderror">
+                        class="outline-none w-full rounded-md md:h-12 max-md:h-11 px-3 border-2 transition duration-300 focus:border-green-500 focus:shadow-sm focus:ring-2 focus:ring-green-300 @error('moon_id') border-red-500 @enderror">
                         @foreach ($moons as $moon)
                             <option value="{{ $moon->id }}" {{ $moon->id === $payment->moon_id ? 'selected' : '' }}>
                                 {{ $moon->name }}
@@ -72,7 +72,7 @@
                     <select name="year" id="year" size="-1"
                         class="outline-none w-full rounded-md md:h-12 max-md:h-11 px-3 border-2 transition duration-300 focus:border-green-500 focus:shadow-sm focus:ring-2 focus:ring-green-300 @error('year') border-red-500 @enderror">
                         @foreach ($years as $ye)
-                            <option value="{{ $ye }}" {{ $ye === $payment->year ? 'selected' : '' }}>
+                            <option value="{{ $ye }}" {{ intval($ye) === intval($payment->year) ? 'selected' : '' }}>
                                 {{ $ye }}
                             </option>
                         @endforeach
@@ -111,7 +111,7 @@
                         <span class="float-end max-md:hidden">:</span>
                     </label>
                     <select name="status" id="status" size="-1"
-                        class="outline-none w-full rounded-md md:h-12 max-md:h-11 px-3 border-2 transition duration-300 focus:border-green-500 focus:shadow-sm focus:ring-2 focus:ring-green-300 @error('name') border-red-500 @enderror">
+                        class="outline-none w-full rounded-md md:h-12 max-md:h-11 px-3 border-2 transition duration-300 focus:border-green-500 focus:shadow-sm focus:ring-2 focus:ring-green-300 @error('status') border-red-500 @enderror">
                         <option hidden>status pembayaran</option>
                         @foreach ($status as $sts)
                             <option value="{{ $sts }}" {{ $sts === $payment->status ? 'selected' : '' }}>

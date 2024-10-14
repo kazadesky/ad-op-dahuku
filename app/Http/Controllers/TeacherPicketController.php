@@ -144,21 +144,15 @@ class TeacherPicketController extends Controller
     public function action(Request $request, string $id)
     {
         $request->validate([
-            "action" => "boolean",
+            "action" => "required|boolean",
         ]);
 
-        $action = $request->action;
+        $picket = TeacherPicket::with("teacher", "substitute", "day")->findOrFail($id);
 
-        if ($action == 0) {
-            $picket = TeacherPicket::with("teacher", "substitute", "day")->findOrFail($id);
-            $picket->action = !$picket->action;
-            $picket->save();
-            return redirect()->back()->with("success", "Piket hari " . $picket->day->name . " atas nama " . $picket->teacher->name . " dinonaktifkan.");
-        } elseif ($action == 1) {
-            $picket = TeacherPicket::with("teacher", "substitute", "day")->findOrFail($id);
-            $picket->action = !$picket->action;
-            $picket->save();
-            return redirect()->back()->with("success", "Piket hari " . $picket->day->name . " atas nama " . $picket->teacher->name . " diaktifkan.");
-        }
+        $picket->action = !$picket->action;
+        $picket->save();
+
+        $status = $picket->action ? 'diaktifkan' : 'dinonaktifkan';
+        return redirect()->back()->with("success", "Piket hari " . $picket->day->name . " atas nama " . $picket->teacher->name . " $status.");
     }
 }
