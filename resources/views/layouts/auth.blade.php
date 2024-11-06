@@ -15,9 +15,15 @@
         rel="stylesheet">
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+    <!-- PWA  -->
+    <meta name="theme-color" content="#1e1f1e" />
+    <link rel="apple-touch-icon" href="{{ asset('img/logo.png') }}">
+    <link rel="manifest" href="{{ asset('/manifest.json') }}">
+
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
-    {{-- <link rel="stylesheet" href="{{ asset('build/assets/app.css') }}"> --}}
-    @vite(['resources/js/app.js', 'resources/css/app.css'])
+    <link rel="stylesheet" href="{{ asset('build/assets/app-DsV4i52r.css') }}">
+    {{-- @vite(['resources/js/app.js', 'resources/css/app.css']) --}}
 </head>
 
 <body
@@ -31,6 +37,23 @@
     </section>
 
     <script src="{{ asset('js/main.js') }}"></script>
+    <script src="{{ asset('sw.js') }}"></script>
+    <script>
+        if ("serviceWorker" in navigator) {
+            // Register a service worker hosted at the root of the
+            // site using the default scope.
+            navigator.serviceWorker.register("/sw.js").then(
+                (registration) => {
+                    console.log("Service worker registration succeeded:", registration);
+                },
+                (error) => {
+                    console.error(`Service worker registration failed: ${error}`);
+                },
+            );
+        } else {
+            console.error("Service workers are not supported.");
+        }
+    </script>
     @stack('script')
 </body>
 

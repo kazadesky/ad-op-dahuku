@@ -151,7 +151,7 @@
                                         download
                                     </span>
                                 </a>
-                                <form action="{{ route('teacher.archive.destroy', $archive->id) }}"
+                                <form action="{{ route('admin.archive.destroy', $archive->id) }}"
                                     onsubmit="return confirm('Apakah anda yakin menghapus arsip data ini?')" method="POST">
                                     @csrf
                                     @method('DELETE')
@@ -228,7 +228,7 @@
                                         download
                                     </span>
                                 </a>
-                                <form action="{{ route('teacher.archive.destroy', $archive->id) }}"
+                                <form action="{{ route('operator.archive.destroy', $archive->id) }}"
                                     onsubmit="return confirm('Apakah anda yakin menghapus arsip data ini?')" method="POST">
                                     @csrf
                                     @method('DELETE')

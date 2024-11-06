@@ -53,7 +53,7 @@
                     <p class="flex items-center py-3 border-b-2">
                         <span class="flex flex-none w-32 font-medium">NIS</span>
                         <span class="flex flex-none w-5 font-medium">:</span>
-                        <span>{{ $studentGuardian->student->nis }}</span>
+                        <span>{{ $studentGuardian->nis }}</span>
                     </p>
                     <p class="flex items-center py-3 border-b-2">
                         <span class="flex flex-none w-32 font-medium">NISN</span>
