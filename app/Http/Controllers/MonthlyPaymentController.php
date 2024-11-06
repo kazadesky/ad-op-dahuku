@@ -96,8 +96,8 @@ class MonthlyPaymentController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'student_id' => 'required',
-            'moon_id' => 'required',
+            'student_id' => 'required|exists:students,id',
+            'moon_id' => 'required|exists:moons,id',
             'year' => 'required',
             'price' => 'required|numeric',
             'status' => 'required|in:Cicil,Lunas',

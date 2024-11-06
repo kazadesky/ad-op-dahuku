@@ -52,12 +52,12 @@
                                         </ul>
                                     </section>
                                     <section class="flex items-center md:space-x-2 max-md:space-x-1 text-white-text">
-                                        <a href="{{ route('admin.teacher-picket.edit', $item->id) }}"
+                                        <a href="{{ route('sa.teacher-picket.edit', $item->id) }}"
                                             class="outline-none md:size-9 max-md:size-8 flex items-center justify-center bg-orange-600 rounded-md transition duration-300 hover:bg-orange-700 focus:bg-orange-700">
                                             <span
                                                 class="material-symbols-outlined md:text-[21px] max-md:text-[20px]">border_color</span>
                                         </a>
-                                        <form action="{{ route('admin.teacher-picket.destroy', $item->id) }}"
+                                        <form action="{{ route('sa.teacher-picket.destroy', $item->id) }}"
                                             onsubmit="return confirm('Apakah anda ingin menghapus guru piket ini?')"
                                             method="POST">
                                             @csrf
@@ -204,7 +204,7 @@
                                             <span
                                                 class="material-symbols-outlined md:text-[21px] max-md:text-[20px]">border_color</span>
                                         </a>
-                                        <form action="{{ route('admin.teacher-picket.destroy', $item->id) }}"
+                                        <form action="{{ route('operator.teacher-picket.destroy', $item->id) }}"
                                             onsubmit="return confirm('Apakah anda ingin menghapus guru piket ini?')"
                                             method="POST">
                                             @csrf
@@ -215,7 +215,7 @@
                                                     class="material-symbols-outlined md:text-[21px] max-md:text-[20px]">delete</span>
                                             </button>
                                         </form>
-                                        <form action="{{ route('admin.teacher-picket.action', $item->id) }}" method="POST">
+                                        <form action="{{ route('operator.teacher-picket.action', $item->id) }}" method="POST">
                                             @csrf
                                             @method('PATCH')
                                             <input type="hidden" name="action" value="{{ !$item->action === 1 ? 0 : 1 }}">
@@ -241,5 +241,4 @@
             </section>
         @endif
     @endhasrole
-
 @endsection

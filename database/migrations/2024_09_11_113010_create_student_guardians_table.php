@@ -20,6 +20,7 @@ return new class extends Migration {
                 ->constrained('students')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
+            $table->string('remember_token')->nullable();
             $table->string('password');
             $table->timestamps();
         });

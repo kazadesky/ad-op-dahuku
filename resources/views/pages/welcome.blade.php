@@ -5,10 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
     <!-- PWA  -->
-    {{-- <meta name="theme-color" content="#1e1f1e" />
-    <link rel="apple-touch-icon" href="{{ asset('img/pwa-logo.webp') }}">
-    <link rel="manifest" href="{{ asset('manifest.json') }}"> --}}
+    <meta name="theme-color" content="#1e1f1e" />
+    <link rel="apple-touch-icon" href="{{ asset('img/logo.png') }}">
+    <link rel="manifest" href="{{ asset('/manifest.json') }}">
 
     <title>Darul Huda Kutacane</title>
     <link rel="shortcut icon" href="{{ asset('img/favicon.webp') }}" type="image/x-icon">
@@ -20,8 +21,8 @@
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
-    {{-- <link rel="manifest" href="{{ asset('build/manifest.json') }}"> --}}
-    @vite(['resources/js/app.js', 'resources/css/app.css'])
+    <link rel="stylesheet" href="{{ asset('build/assets/app-DsV4i52r.css') }}">
+    {{-- @vite(['resources/js/app.js', 'resources/css/app.css']) --}}
 </head>
 
 <body
@@ -42,12 +43,11 @@
             window.location.href = "{{ route('login') }}";
         }, 5000);
     </script>
-    {{-- <script src="{{ asset('sw.js') }}"></script>
+
+    <script src="{{ asset('/sw.js') }}"></script>
     <script>
         if ("serviceWorker" in navigator) {
-            // Register a service worker hosted at the root of the
-            // site using the default scope.
-            navigator.serviceWorker.register("sw.js").then(
+            navigator.serviceWorker.register("/sw.js").then(
                 (registration) => {
                     console.log("Service worker registration succeeded:", registration);
                 },
@@ -58,7 +58,7 @@
         } else {
             console.error("Service workers are not supported.");
         }
-    </script> --}}
+    </script>
 </body>
 
 </html>
