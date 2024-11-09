@@ -47,8 +47,6 @@ Route::middleware(["auth", "auth.session", "verified"])->group(function () {
     Route::prefix("super-admin")->name("sa.")->middleware("role:super_admin")->group(function () {
         Route::get("dashboard", [DashboardController::class, 'index'])->name('dashboard');
 
-        Route::patch("teacher-picket/{id}/action", [TeacherPicketController::class, 'action'])->name("teacher-picket.action");
-
         Route::resource("student", StudentController::class);
         Route::resource("student-guardian", StudentGuardianController::class);
         Route::resource("monthly-payment", MonthlyPaymentController::class)->only('index');
@@ -74,7 +72,8 @@ Route::middleware(["auth", "auth.session", "verified"])->group(function () {
             Route::get("{id}/edit", [AccountController::class, "profile"])->name("profile");
             Route::put("{id}/update", [AccountController::class, "updateProfile"])->name("profile.update-image");
             Route::patch("{id}/update", [AccountController::class, "updateAccount"])->name("profile.update-account");
-            Route::delete("{id}/delete", [AccountController::class, "deleteAccount"])->name("profile.delete");
+            Route::get("{id}/password", [AccountController::class, "password"])->name("password");
+            Route::put("{id}/password", [AccountController::class, "updatePassword"])->name("password.update");
         });
     });
 
@@ -84,7 +83,6 @@ Route::middleware(["auth", "auth.session", "verified"])->group(function () {
 
     Route::prefix("admin")->name("admin.")->middleware("role:admin")->group(function () {
         Route::get("dashboard", [DashboardController::class, 'index'])->name('dashboard');
-        Route::patch("teacher-picket/{id}/action", [TeacherPicketController::class, 'action'])->name("teacher-picket.action");
 
         Route::resource("student", StudentController::class);
         Route::resource("student-guardian", StudentGuardianController::class);
@@ -110,14 +108,13 @@ Route::middleware(["auth", "auth.session", "verified"])->group(function () {
             Route::get("{id}/edit", [AccountController::class, "profile"])->name("profile");
             Route::put("{id}/update", [AccountController::class, "updateProfile"])->name("profile.update-image");
             Route::patch("{id}/update", [AccountController::class, "updateAccount"])->name("profile.update-account");
-            Route::delete("{id}/delete", [AccountController::class, "deleteAccount"])->name("profile.delete");
+            Route::get("{id}/password", [AccountController::class, "password"])->name("password");
+            Route::put("{id}/password", [AccountController::class, "updatePassword"])->name("password.update");
         });
     });
 
     Route::prefix("operator")->name("operator.")->middleware("role:operator")->group(function () {
         Route::get("dashboard", [DashboardController::class, 'index'])->name('dashboard');
-
-        Route::patch("teacher-picket/{id}/action", [TeacherPicketController::class, 'action'])->name("teacher-picket.action");
 
         Route::resource("student", StudentController::class);
         Route::resource("teacher", TeacherController::class)->only('index');
@@ -134,6 +131,8 @@ Route::middleware(["auth", "auth.session", "verified"])->group(function () {
             Route::put("{id}/update", [AccountController::class, "updateProfile"])->name("profile.update-image");
             Route::patch("{id}/update", [AccountController::class, "updateAccount"])->name("profile.update-account");
             Route::delete("{id}/delete", [AccountController::class, "deleteAccount"])->name("profile.delete");
+            Route::get("{id}/password", [AccountController::class, "password"])->name("password");
+            Route::put("{id}/password", [AccountController::class, "updatePassword"])->name("password.update");
         });
     });
 
@@ -151,6 +150,8 @@ Route::middleware(["auth", "auth.session", "verified"])->group(function () {
             Route::get("{id}/edit", [AccountController::class, "profile"])->name("profile");
             Route::put("{id}/update", [AccountController::class, "updateProfile"])->name("profile.update-image");
             Route::patch("{id}/update", [AccountController::class, "updateAccount"])->name("profile.update-account");
+            Route::get("{id}/password", [AccountController::class, "password"])->name("password");
+            Route::put("{id}/password", [AccountController::class, "updatePassword"])->name("password.update");
             Route::delete("{id}/delete", [AccountController::class, "deleteAccount"])->name("profile.delete");
         });
     });

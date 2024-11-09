@@ -22,8 +22,7 @@
     <link rel="manifest" href="{{ asset('/manifest.json') }}">
 
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
-    <link rel="stylesheet" href="{{ asset('build/assets/app-DsV4i52r.css') }}">
-    {{-- @vite(['resources/js/app.js', 'resources/css/app.css']) --}}
+    @vite(['resources/js/app.js', 'resources/css/app.css'])
 </head>
 
 <body

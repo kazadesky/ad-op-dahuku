@@ -13,6 +13,21 @@ const passwordShow = (event) => {
     }
 };
 
+const currentPassword = (event) => {
+    event.preventDefault();
+    const inputPassword = document.getElementById("current_password");
+    const iconInput = document.getElementById("icon_current");
+
+    if (inputPassword.type === "password") {
+        inputPassword.type = "text";
+        iconInput.innerText = "visibility_off";
+        event.classList = "text-sky-600";
+    } else {
+        inputPassword.type = "password";
+        iconInput.innerText = "visibility";
+    }
+};
+
 const passwordConfirmShow = (event) => {
     event.preventDefault();
     const inputPassword = document.getElementById("password_confirmation");
