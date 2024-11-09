@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 
 class AccountController extends Controller
 {
@@ -77,9 +78,12 @@ class AccountController extends Controller
         return redirect()->route("login")->with("delete", "Akun anda atas nama " . $user->name . " berhasil dihapus.");
     }
 
-    public function resetPassword(string $id)
+    public function password(string $id)
     {
+        $title = "Ganti Password";
+        $user = User::findOrFail($id);
 
+        return view("pages.account.reset-password", compact("title", "user"));
     }
 
     public function updatePassword(Request $request, string $id)
@@ -93,12 +97,15 @@ class AccountController extends Controller
         $user = User::findOrFail($id);
 
         if (!Hash::check($request->current_password, $user->password)) {
-            return redirect()->back()->with('error', 'Password saat ini tidak valid.');
+            return redirect()->back()->with('error', 'Password lama yang Anda masukkan tidak valid.');
         }
 
         $user->update([
             'password' => Hash::make($request->password),
         ]);
+
+        Log::info('User password updated', ['user_id' => $user->id]);
+
 
         Auth::logoutOtherDevices($request->current_password);
 

@@ -111,24 +111,34 @@ class TeacherPicketController extends Controller
             "teacher_id" => "required",
             "day_id" => "required",
             "substitute_picket_teacher_id" => "nullable|different:teacher_id",
+            "action" => "nullable|in:0,1",
         ]);
 
-        $teacher = TeacherPicket::with("teacher", "substitute", "day")->findOrFail($id);
-        $teacher->update([
+        $picket = TeacherPicket::with("teacher", "substitute", "day")->findOrFail($id);
+
+        $picket->update([
             "teacher_id" => $request->teacher_id,
             "day_id" => $request->day_id,
             "substitute_picket_teacher_id" => $request->substitute_picket_teacher_id,
+            "action" => $request->action,
         ]);
 
-        $role = Auth::user()->roles->pluck('name')->first();
-        if ($role == 'super_admin') {
-            return redirect()->route('sa.teacher-picket.index')->with('success', 'Guru piket atas nama ' . $teacher->teacher->name . ' berhasil diupdate.');
-        } elseif ($role == 'admin') {
-            return redirect()->route('admin.teacher-picket.index')->with('success', 'Guru piket atas nama ' . $teacher->teacher->name . ' berhasil diupdate.');
-        } elseif ($role == 'operator') {
-            return redirect()->route('operator.teacher-picket.index')->with('success', 'Guru piket atas nama ' . $teacher->teacher->name . ' berhasil diupdate.');
-        }
+        $status = $picket->action ? 'diaktifkan' : 'dinonaktifkan';
 
+        $message = "Piket hari " . $picket->day->name . " atas nama " . $picket->teacher->name . " telah diupdate dan $status.";
+
+        $role = Auth::user()->roles->pluck('name')->first();
+
+        switch ($role) {
+            case 'super_admin':
+                return redirect()->route('sa.teacher-picket.index')->with("success", $message);
+            case 'admin':
+                return redirect()->route('admin.teacher-picket.index')->with("success", $message);
+            case 'operator':
+                return redirect()->route('operator.teacher-picket.index')->with("success", $message);
+            default:
+                return redirect()->back()->with("error", "Role tidak dikenali.");
+        }
     }
 
     /**
@@ -139,20 +149,5 @@ class TeacherPicketController extends Controller
         $picket = TeacherPicket::with("teacher", "substitute", "day")->findOrFail($id);
         $picket->delete();
         return redirect()->route('admin.teacher-picket.index')->with('success', 'Guru piket atas nama ' . $picket->teacher->name . ' telah dihapus.');
-    }
-
-    public function action(Request $request, string $id)
-    {
-        $request->validate([
-            "action" => "required|boolean",
-        ]);
-
-        $picket = TeacherPicket::with("teacher", "substitute", "day")->findOrFail($id);
-
-        $picket->action = !$picket->action;
-        $picket->save();
-
-        $status = $picket->action ? 'diaktifkan' : 'dinonaktifkan';
-        return redirect()->back()->with("success", "Piket hari " . $picket->day->name . " atas nama " . $picket->teacher->name . " $status.");
     }
 }

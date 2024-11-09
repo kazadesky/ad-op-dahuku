@@ -10,14 +10,15 @@
         </div>
         <ul>
             <li class="mb-2">
-                <button type="button" onclick="toggleDropdown(event)" class="flex items-center md:space-x-3 max-md:space-x-2 outline-none">
+                <button type="button" onclick="toggleDropdown(event)"
+                    class="flex items-center md:space-x-3 max-md:space-x-2 outline-none">
                     <h1 class="uppercase font-bold text-sm max-md:hidden">{{ Auth::user()->name }}</h1>
                     <span class="material-symbols-outlined sm:hidden">
                         keyboard_arrow_down
                     </span>
                     <figure class="size-10 rounded-full overflow-hidden shadow-sm">
                         <img src="{{ !Auth::user()->profile ? asset('img/icon/user.png') : url('storage/profile/', Auth::user()->profile) }}"
-                        alt="user-icon" class="w-full">
+                            alt="user-icon" class="w-full">
                     </figure>
                 </button>
             </li>
@@ -48,13 +49,24 @@
                         <span>Profil</span>
                     </a>
                 </li>
-                <li class="border-b pb-1">
-                    <a href=""
-                        class="outline-none w-full flex items-center px-3 h-10 rounded space-x-1 transition duration-300 hover:bg-green-500/40">
+                <li class="border-y py-1">
+                    <a @hasrole('super_admin')
+                    href="{{ route('sa.password', Auth::user()->id) }}"
+                    @endhasrole
+                        @hasrole('admin')
+                    href="{{ route('admin.password', Auth::user()->id) }}"
+                    @endhasrole
+                        @hasrole('operator')
+                    href="{{ route('operator.password', Auth::user()->id) }}"
+                    @endhasrole
+                        @hasrole('teacher')
+                    href="{{ route('teacher.password', Auth::user()->id) }}"
+                    @endhasrole
+                        class="outline-none w-full flex items-center px-3 h-10 rounded space-x-1 transition duration-300 {{ request()->routeIs(['sa.password', 'admin.password', 'operator.password', 'teacher.password']) ? 'bg-elf-green hover:bg-dark-elf focus:bg-dark-elf' : 'hover:bg-green-500/40' }}">
                         <span class="material-symbols-outlined text-[22px]">
                             settings
                         </span>
-                        <span>Ubah Sandi</span>
+                        <span>Ganti Password</span>
                     </a>
                 </li>
                 <li class="pt-1">
